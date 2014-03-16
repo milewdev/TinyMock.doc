@@ -112,7 +112,7 @@ a:hover {
     font-family: "Palatino", serif;
     font-size: 130%;
     font-weight: 800;
-    margin-bottom: 0.4em;
+    margin-bottom: 0.6em;
 }
 
 .page-body-content h2 {
@@ -123,18 +123,13 @@ a:hover {
 .page-body-content p {
     line-height: 1.6em;
     word-spacing: 0.05em;
-    margin-top: 0.4em;
-    margin-bottom: 0.4em;
     text-align: justify;
 }
 
 .page-body-content pre {
-    margin: -1.6em;
-    margin-left: 2em;
-    margin-right: 2em;
     overflow: auto;     /* make it easy to select code with mouse for copy & paste */
     padding: 1em;
-    xpadding-left: 1.2em;
+    padding-left: 2em;
 }
 
 .page-body-content code {

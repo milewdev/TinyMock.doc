@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>TinyMockJS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="syntax.css">
+  </head>
+    
+  <body>
+    <div class="page-body-content fixed-width-800px">
+      <section>
+        
+        
+        <article>  
+          <header><h1><a name="what-is-it" href="#what-is-it">What is it?</a></h1></header>
+          <p>
+            TinyMockJS is a very small <a href="http://coffeescript.org">coffeescript</a> 
+            <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework. &nbsp; For example:
+          </p>
+          <p>
+<div class="highlight"><pre><code class="coffeescript"><span class="nv">chai   = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;chai&quot;</span><span class="p">)</span>
+<span class="nv">should = </span><span class="nx">chai</span><span class="p">.</span><span class="nx">should</span><span class="p">()</span>
+<span class="nv">mock   = </span><span class="nx">require</span><span class="p">(</span><span class="s">&quot;TinyMockJS&quot;</span><span class="p">).</span><span class="nx">mock</span>
+
+<span class="k">class</span> <span class="nx">Sut</span>
+  <span class="vi">@run: </span><span class="nf">(adder, x, y, z)-&gt;</span>
+    <span class="nx">adder</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span>
+    
+<span class="nx">describe</span> <span class="s">&quot;something&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+  <span class="nx">it</span> <span class="s">&quot;does something&quot;</span><span class="p">,</span> <span class="nf">-&gt;</span>
+    <span class="nx">mock</span> <span class="nf">(mocked_adder) -&gt;</span>
+      <span class="nx">mocked_adder</span><span class="p">.</span><span class="nx">expects</span><span class="p">(</span><span class="s">&quot;add&quot;</span><span class="p">).</span><span class="nx">args</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="nx">returns</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+      <span class="nx">Sut</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">mocked_adder</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">).</span><span class="nx">should</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</code></pre></div>
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#requirements" href="#requirements">Requirements</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#installation" href="#installation">Installation</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#quick-start" href="#quick-start">Quick Start</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#reference" href="#reference">Reference</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+      </section>
+    </div>
+  </body>
+  
+</html>
