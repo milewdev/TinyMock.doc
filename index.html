@@ -18,6 +18,7 @@
             <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework. &nbsp; For example:
           </p>
           <pre><code>
+{% highlight coffeescript %}
 chai   = require("chai")
 should = chai.should()
 mock   = require("TinyMockJS").mock
@@ -31,6 +32,7 @@ describe "something", ->
     mock (mocked_adder) ->
       mocked_adder.expects("add").args(1, 2, 3).returns(6)
       Sut.run(mocked_adder, 1, 2, 3).should.equal(6)
+{% endhighlight %}
           </code></pre>
         </article>
         
