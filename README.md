@@ -1,4 +1,4 @@
 TinyMockJS.doc
 ==============
 
-Documentation for TinyMockJS.
+[Documentation](http://milewgit.github.io/TinyMockJS.doc/) for TinyMockJS.
