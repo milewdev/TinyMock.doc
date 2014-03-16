@@ -1,0 +1,28 @@
+{
+  "name": "TinyMockJS.doc",
+  "version": "0.2.0",
+  "description": "documentation for TinyMockJS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/milewgit/TinyMockJS.doc.git"
+  },
+  "keywords": [
+    "test",
+    "mock",
+    "coffee-script",
+    "javascript"
+  ],
+  "author": "Michael Lewandowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/milewgit/TinyMockJS.doc/issues"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-sass": "^0.7.3",
+    "mocha": "^1.18.0",
+    "chai": "^1.9.0",
+    "coffee-script": "^1.7.1",
+    "grunt-cli": "^0.1.13"
+  }
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>TinyMockJS</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+    
+  <body>
+    <div class="page-body-content fixed-width-800px">
+      <section>
+        
+        
+        <article>  
+          <header><h1><a name="what-is-it" href="#what-is-it">What is it?</a></h1></header>
+          <p>
+            TinyMockJS is a very small <a href="http://coffeescript.org">coffeescript</a> 
+            <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework. &nbsp; For example:
+          </p>
+          <pre><code>
+chai   = require("chai")
+should = chai.should()
+mock   = require("TinyMockJS").mock
+
+class Sut
+  @run: (adder, x, y, z)->
+    adder.add(x, y, z)
+    
+describe "something", ->
+  it "does something", ->
+    mock (mocked_adder) ->
+      mocked_adder.expects("add").args(1, 2, 3).returns(6)
+      Sut.run(mocked_adder, 1, 2, 3).should.equal(6)
+          </code></pre>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#requirements" href="#requirements">Requirements</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#installation" href="#installation">Installation</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#quick-start" href="#quick-start">Quick Start</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+        <article>
+          <header><h1><a name="#reference" href="#reference">Reference</a></h1></header>
+          <p>
+            TODO
+          </p>
+        </article>
+        
+        
+      </section>
+    </div>
+  </body>
+  
+</html>
