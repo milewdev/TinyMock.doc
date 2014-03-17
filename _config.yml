@@ -1,1 +1,2 @@
 safe: true
+exclude: [ "Gemfile", "*.coffee", "LICENCE", "*.json", "*.md", "start-local-server" ]
