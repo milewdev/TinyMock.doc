@@ -9,7 +9,7 @@ module.exports = (grunt) ->
           style: 'compressed'
         expand: true
         cwd: './'
-        src: ['*.scss']
+        src: ['*.sass']
         dest: './'
         ext: '.css'
       dev:
@@ -19,7 +19,7 @@ module.exports = (grunt) ->
           lineNumbers: true
         expand: true
         cwd: './'
-        src: ['*.scss']
+        src: ['*.sass']
         dest: './'
         ext: '.css'
 
