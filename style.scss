@@ -1,0 +1,223 @@
+@import "reset.css";
+
+
+
+/*
+ * General.
+ */
+
+body {
+  font-family: "Optima", sans-serif;
+  font-size: 110%;
+  font-weight: 100;
+}
+
+/* link decorations */
+a, a:link, a:hover, a:visited, a:active {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* http://css-tricks.com/snippets/css/clear-fix/ */
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  content: "";
+  clear: both;
+  height: 0;
+}
+
+/* fixed-width page content */
+.fixed-width-800px {
+  margin: 0 auto;
+  width: 800px;
+}
+
+.center-content-horizontally {
+  width: inherit;
+
+  display: box;
+  box-pack: center;
+
+  display: -webkit-box;
+  -webkit-box-pack: center;
+
+  display: -moz-box;
+  -moz-box-pack: center;
+}
+
+.center-content-vertically {
+  height: inherit;
+
+  display: box;
+  box-align: center;
+
+  display: -webkit-box;
+  -webkit-box-align: center;
+
+  display:-moz-box;
+  -moz-box-align: center;
+}
+
+
+
+/*
+ * Page header.
+ */
+
+.page-header {
+  background-color: #c9bba3;
+}
+
+.page-header-content {
+  
+  height: 6em;  /* require a height so that .center-content-vertically works */
+  
+  .logo {
+    font-family: monospace;
+    font-size: 400%;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+  }
+
+  .version {
+    font-size: 80%;
+  }
+
+  img {
+    position: relative;
+    left: 700px;
+    top: -50px;
+  }
+
+}
+
+
+
+/*
+ * Page body.
+ */
+
+.page-body-content {
+  
+  margin-top: 4em;
+  margin-bottom: 4em;
+
+  article {
+    margin-bottom: 3em;
+  }
+
+  h1 {
+    font-family: "Palatino", serif;
+    font-size: 130%;
+    font-weight: 800;
+    margin-bottom: 0.6em;
+  }
+
+  h2 {
+    font-weight: 800;
+    margin-top: 4em;
+  }
+
+  p {
+    line-height: 1.6em;
+    word-spacing: 0.05em;
+    text-align: justify;
+  }
+
+  pre {
+    overflow: auto;   /* make it easy to select code with mouse for copy & paste */
+    padding: 1em;
+    padding-left: 2em;
+  }
+
+  code {
+    font-family: monospace;
+    font-size: 100%;
+  }
+
+  pre code {
+    line-height: 1.2;
+  }
+
+  figure {
+    border: 1px solid #d6d6d6;
+    box-shadow: 2px 2px 6px #b2b2b2;
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-top: 1.8em;
+    padding-bottom: 1em;
+    text-align: center;
+  }
+
+  ul {
+    line-height: 1.6em;
+    list-style: disc inside none;
+    margin-left: 0.2em;
+  }
+
+  ol {
+    
+    list-style: decimal inside none;
+    margin-left: 0.2em;
+
+    li {
+      margin-bottom: 3em;
+    }
+    
+  }
+}
+
+
+
+/*
+ * Page footer.
+ */
+
+.page-footer {
+  background-color: #ededed;
+}
+
+.page-footer-content {
+  
+  color: #6a6a6a;
+  font-size: 90%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  nav {
+    
+    div {
+      
+      line-height: 1.5;
+      padding-top: 2em;
+      padding-bottom: 2em;
+      margin-left: 2em;
+      margin-right: 2em;
+      width: 20em;
+      
+      h1 {
+        font-weight: 800;
+        margin-bottom: 0.4em;
+      }
+
+    }
+
+    div:first-child {
+      text-align: right;
+    }
+    
+  }
+
+  .copyright {
+    font-size: 75%;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    text-align: center;
+  }
+}
