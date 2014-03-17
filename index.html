@@ -20,23 +20,25 @@
             TinyMockJS is a very small <a href="http://coffeescript.org">coffeescript</a> 
             <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework. &nbsp; For example:
           </p>
-          <p>
+          <div class="code">
+            <pre><code>chai   = require("chai")
+should = chai.should()</code></pre>
 {% highlight coffeescript %}
-chai   = require("chai")
-should = chai.should()
 mock   = require("TinyMockJS").mock
-
+{% endhighlight %}
+            <pre class="code"><code>
 class Sut
   @run: (adder, x, y, z)->
     adder.add(x, y, z)
     
 describe "something", ->
-  it "does something", ->
+  it "does something", -></code></pre>
+{% highlight coffeescript %}
     mock (mocked_adder) ->
       mocked_adder.expects("add").args(1, 2, 3).returns(6)
       Sut.run(mocked_adder, 1, 2, 3).should.equal(6)
 {% endhighlight %}
-          </p>
+          </div>
         </article>
         
         

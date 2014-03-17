@@ -8,7 +8,7 @@
 
 body {
   font-family: "Optima", sans-serif;
-  font-size: 110%;
+  font-size: 100%;
   font-weight: 100;
 }
 
@@ -74,7 +74,7 @@ a:hover {
 
 .page-header-content {
   
-  height: 6em;  /* require a height so that .center-content-vertically works */
+  height: 6em;                        /* require a height so that .center-content-vertically works */
   
   .logo {
     font-family: monospace;
@@ -128,19 +128,19 @@ a:hover {
     text-align: justify;
   }
 
-  pre {
-    overflow: auto;   /* make it easy to select code with mouse for copy & paste */
-    padding: 1em;
-    padding-left: 2em;
-  }
-
   code {
     font-family: monospace;
-    font-size: 100%;
+  }
+  
+  div[class="code"] {
+    color: #bbbbbb;                   /* dim un-highlighted code */
+    line-height: 1.0;
+    overflow: auto;                   /* make it easy to select code with mouse for copy & paste */
+    padding: 1.6em;
   }
 
-  pre code {
-    line-height: 1.2;
+  div[class="highlight"] {
+    color: #000000;                   /* un-dim highlighted code */
   }
 
   figure {

@@ -4,7 +4,7 @@
  */
 body {
   font-family: "Optima", sans-serif;
-  font-size: 110%;
+  font-size: 100%;
   font-weight: 100; }
 
 /* link decorations */
@@ -87,16 +87,19 @@ a:hover {
     line-height: 1.6em;
     word-spacing: 0.05em;
     text-align: justify; }
-  .page-body-content pre {
+  .page-body-content code {
+    font-family: monospace; }
+  .page-body-content div[class="code"] {
+    color: #bbbbbb;
+    /* dim un-highlighted code */
+    line-height: 1.0;
     overflow: auto;
     /* make it easy to select code with mouse for copy & paste */
-    padding: 1em;
-    padding-left: 2em; }
-  .page-body-content code {
-    font-family: monospace;
-    font-size: 100%; }
-  .page-body-content pre code {
-    line-height: 1.2; }
+    padding: 1.6em;
+    padding-left: 1.6em; }
+  .page-body-content div[class="highlight"] {
+    color: #000000;
+    /* un-dim highlighted code */ }
   .page-body-content figure {
     border: 1px solid #d6d6d6;
     box-shadow: 2px 2px 6px #b2b2b2;
