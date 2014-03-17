@@ -18,7 +18,8 @@
     "url": "https://github.com/milewgit/TinyMockJS.doc/issues"
   },
   "scripts": {
-    "grunt": "grunt"
+    "grunt": "grunt",
+    "jekyll": "bundle exec jekyll serve --watch"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
