@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/milewgit/TinyMockJS.doc/issues"
   },
+  "scripts": {
+    "grunt": "grunt"
+  },
   "devDependencies": {
     "grunt": "^0.4.4",
     "grunt-contrib-sass": "^0.7.3",
