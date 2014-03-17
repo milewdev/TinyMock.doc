@@ -1,2 +1,2 @@
 safe: true
-exclude: [ "Gemfile", "*.coffee", "LICENCE", "*.json", "*.md", "node_modules" ]
+exclude: [ "node_modules", "Gemfile*", "LICENSE", "build", "run", "*.coffee", "*.json", "*.md", "*.scss" ]
