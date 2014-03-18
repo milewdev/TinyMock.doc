@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Start SASS in the background, in watch mode, and capture its PID
+sass --watch style.scss:style.css &
+sass_pid=$!
+
+# Start Jekyll in the background, in watch mode, and capture its PID
+bundle exec jekyll serve --watch &
+jekyll_pid=$!
+
+# When this shell exists, terminate SASS and Jekyll (BUG: will not work
+# if signal sent before we reach this line)
+trap "kill -15 $sass_pid $jekyll_pid ; sleep 1" EXIT
+
+# Wait until ^C
+wait $sass_pid $jekyll_pid
