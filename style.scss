@@ -145,11 +145,11 @@ a:hover {
   }
   
   span[class="dim"] {
-    color: #888888;                   /* dim un-highlighted code */
+    color: #aaa;                      /* dim un-highlighted code */
   }
 
   div[class="highlight"] {            /* inserted by {% highlight language %} */
-    color: #000000;                   /* un-dim highlighted code */
+    color: black;                     /* un-dim highlighted code */
   }
 
   figure {

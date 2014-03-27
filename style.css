@@ -101,11 +101,11 @@ a:hover {
     /* make it easy to select code with mouse for copy & paste */
     padding: 0.8em; }
   .page-body-content span[class="dim"] {
-    color: #888888;
+    color: #aaa;
     /* dim un-highlighted code */ }
   .page-body-content div[class="highlight"] {
     /* inserted by {% highlight language %} */
-    color: #000000;
+    color: black;
     /* un-dim highlighted code */ }
   .page-body-content figure {
     border: 1px solid #d6d6d6;
