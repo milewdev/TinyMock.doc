@@ -1,9 +1,10 @@
 ---
 ---
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   <head>
+    <meta charset="UTF-8">
     <title>TinyMockJS</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="syntax.css">
@@ -15,12 +16,12 @@
         
         
         <article>  
-          <header><h1><a name="what-is-it" href="#what-is-it">What is it?</a></h1></header>
+          <header><h1><a name="what-is-it" href="#what-is-it">What is TinyMockJS?</a></h1></header>
           <p>
             TinyMockJS is a very small <a href="http://coffeescript.org">coffeescript</a> 
             <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework. &nbsp; For example:
           </p>
-          <div class="code">
+          <pre class="code">
 {% highlight coffeescript %}
 chai   = require("chai")
 should = chai.should()
@@ -30,13 +31,12 @@ class Sut
   @run: (adder, x, y, z)->
     adder.add(x, y, z)
     
-describe "something", ->
-  it "does something", ->
+describe "Sut.run(adder, x, y, z)", ->
+  it "invokes adder.add() to add x, y, and z and returns the result", ->
     mock (mocked_adder) ->
       mocked_adder.expects("add").args(1, 2, 3).returns(6)
       Sut.run(mocked_adder, 1, 2, 3).should.equal(6)
-{% endhighlight %}
-          </div>
+{% endhighlight %}</pre>
         </article>
         
         
@@ -63,69 +63,27 @@ describe "something", ->
           
         </article>
 
-        <!--
-          chai   = require("chai")
-          should = chai.should()
-          mock   = require("TinyMockJS").mock
-          
-          class Logger
-          
-            constructor: (options) ->
-              @log_filename = options.get_log_filename()
-          
-            log: (message) ->
-              fs.appendFileSync(@log_filename, message)
-          
-          describe "Logger", ->
-          
-            describe "constructor(options)", ->
-          
-              it "retrieves the log file name from 'options'", ->
-                mock (options) ->
-                  options.expects("get_log_filename")
-                  logger = new Logger(options)
-          
-            describe "write(message)", ->
-          
-              before: ->
-                options = { get_log_filename: -> "log.txt" }
-                logger = new Logger(options)
-          
-              it "writes 'message' to 'log_filename' that was passed to the constructor", ->
-                mock ->
-                  fs.expects("appendFileSync").args("log.txt", "a message")
-                  logger.log("a message")
-          
-              it "does not eat exceptions thrown by fs.appendFileSync", ->
-                mock ->
-                  fs.expects("appendFileSync").args("log.txt", "a message").throws(new Error("an error"))
-                  (-> logger.log("a message") ).should.throw("a message")
-        -->
-        
         <article>
           <header><h1><a name="#quick-start" href="#quick-start">Quick Start</a></h1></header>
-          <ul>
+          <ol class="steps">
             
-            <li>
-              write simple logger class<br>
-              use mocha and chai<br>
-              assume nodejs, mocha, and chai installed
+            <li value="0">
+              Here we'll write a simplistic logger class, Logger, to get a sense of how to use TinyMockJS in a project.
+              We'll write our code in coffeescript and use <a href="http://nodejs.org">Node.js</a> to run it, 
+              and we'll use <a href="http://visionmedia.github.io/mocha/">mocha</a> and <a href="http://chaijs.com">chai</a> 
+              for our testing framework.  Ensure that you have <a href="http://nodejs.org">Node.js</a> installed 
+              before proceeding; mocha, chai, and coffeescript will be installed in the steps below.
             </li>
             
             <li>
-              Create an empty project:
-              <div class="code">
-{% highlight bash %}
-$ mkdir ~/work
-$ cd ~/work
-$ node init
-{% endhighlight %}
-              </div>
+              Create a project directory, and create subdirectories for source code and test code files:
+              <pre class="code">$ mkdir -p ~/quickstart/src ~/quickstart/test
+$ cd ~/quickstart</pre>
             </li>
             
             <li>
-              create a (minimal) Cakefile:
-              <div class="code">
+              Use your favorite editor to create a minimal Cakefile that uses mocha to run our tests:
+              <pre class="code">
 {% highlight coffeescript %}
 {exec} = require 'child_process'
 
@@ -137,13 +95,12 @@ task 'test', 'Run unit tests', ->
       --colors', (err, stdout, stderr) ->
     throw err if err
     console.log stdout + stderr
-{% endhighlight %}
-              </div>
+{% endhighlight %}</pre>
             </li>
             
             <li>
-              create a (minimal) package.json:
-              <div class="code">
+              Also create a minimal package.json:
+              <pre class="code">
 {% highlight json %}
 {
   "name": "TinyMockJS",
@@ -156,174 +113,176 @@ task 'test', 'Run unit tests', ->
     "coffee-script": "~1.6"
   }
 }
-{% endhighlight %}
-              </div>
+{% endhighlight %}</pre>
             </li>
             
             <li>
-              install dependencies:
-              <div class="code">
-{% highlight bash %}
-$ node install
-{% endhighlight %}
-              </div>
+              Use npm to install mocha, chai, and the coffee-script compiler:
+              <pre class="code">$ npm install
+...</pre>
             </li>
             
             <li>
-              create the file Logger.test.coffeescript to contain the test code:
-              <div class="code">
+              Create the file test/Logger.test.coffee to contain code for tests; start by requiring chai and mock (from TinyMockJS):
+              <pre class="code">
 {% highlight coffeescript %}
 chai   = require("chai")
 should = chai.should()
-mock   = require("../src/TinyMockJS").mock
-{% endhighlight %}
-              </div>
+mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+Logger = require("../src/Logger").Logger
+{% endhighlight %}</pre>
             </li>
             
             <li>
-              write a test for the constructor:
-              <div class="code">
-                <pre><code>chai   = require("chai")
+              Add a test for Logger's constructor to test/Logger.test.coffee:
+              <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("../src/TinyMockJS").mock
+mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+Logger = require("../src/Logger").Logger
 
-</code></pre>
-{% highlight bash %}
+</span>{% highlight coffeescript %}
 describe "Logger", ->
-
   describe "constructor(options)", ->
-
     it "retrieves the log file name from 'options'", ->
       mock (options) ->
         options.expects("get_log_filename")
         logger = new Logger(options)
-{% endhighlight %}
-              </div>
-              'mock' will create empty objects and pass them to the test function, in this case 'options'
+{% endhighlight %}</pre>
+              The mock() function takes a function argument.  mock() creates five mock objects and
+              then invokes the function argument, passing it the five mocks, which the function can
+              then choose to use as it sees fit.  In our code above, we use just one of the mocks
+              and we refer to it as 'options'.  Here's how you might use all five mocks:
+              <pre class="code">
+{% highlight coffeescript %}
+mock (store, inventory, book1, book2, customer) ->
+  store.expects("get_inventory").returns(inventory)
+  inventory.expects("get_books").returns( [book1, book2] )
+  customer.expects ...
+{% endhighlight %}</pre>
             </li>
             
             <li>
-              run the test:
-              <div class="code">
-{% highlight bash %}
-$ node test
-...
-{% endhighlight %}
-              </div>
-              and note that it fails as expected
+              Run our tests and they fail as expected, since we do not have a Logger class yet:
+              <pre class="code">$ npm test
+
+> TinyMockJS@ test /Users/vagrant/quickstart
+> cake test
+
+
+/Users/vagrant/quickstart/Cakefile:13
+        throw err;
+              ^
+Error: Command failed: 
+module.js:340
+    throw err;
+          ^
+Error: Cannot find module '../src/Logger'
+    at Function.Module._resolveFilename (module.js:338:15)
+      ...</pre>
             </li>
             
             <li>
-              write the file Logger.coffeescript to contain the source for the Logger class:
-              <div class="code">
+              Create the source code file src/Logger.coffee; start by implementing the constructor that our test is for:
+              <pre class="code">
 {% highlight coffeescript %}
 class Logger
 
   constructor: (options) ->
     @log_filename = options.get_log_filename()
-{% endhighlight %}
-              </div>
+    
+exports.Logger = Logger
+{% endhighlight %}</pre>
             </li>
             
             <li>
-              run the tests again:
-              <div class="code">
-{% highlight bash %}
-$ node test
-...
-{% endhighlight %}
-              </div>
-              this time the test passes
+              Run our tests again, and this time they pass:
+              <pre class="code">$ npm test
+
+> TinyMockJS@ test /Users/vagrant/quickstart
+> cake test
+
+
+
+  Logger
+    constructor(options)
+      ✓ retrieves the log file name from 'options' 
+
+
+  1 passing (13ms)
+
+</pre>
             </li>
             
             <li>
-              write a test for a 'log' method:
-              <div class="code">
-                <pre><code>chai   = require("chai")
+              Add a test for a Logger.log() method:
+              <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("../src/TinyMockJS").mock
+mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+Logger = require("../src/Logger").Logger
 
 describe "Logger", ->
-
   describe "constructor(options)", ->
-
     it "retrieves the log file name from 'options'", ->
       mock (options) ->
         options.expects("get_log_filename")
         logger = new Logger(options)        
-</code></pre>
-{% highlight bash %}
           
-  describe "write(message)", ->
-
+</span>{% highlight coffeescript %}
+  describe "log(message)", ->
     it "writes 'message' to 'log_filename' that was passed to the constructor", ->
       options = { get_log_filename: -> "log.txt" }
       logger = new Logger(options)
       mock ->
         fs.expects("appendFileSync").args("log.txt", "a message")
         logger.log("a message")
-{% endhighlight %}
-              </div>
-              this time instread of using an empty object created by mock, we use an existing
-              object, fs, and specify an expectation on it
+{% endhighlight %}</pre>
+              This time instead of using one of the mock objects created and passed in by mock(), we use an existing
+              object, fs, and specify an expectation on it.
             </li>
             
             <li>
-              run the test:
-              <div class="code">
-{% highlight bash %}
-$ node test
-...
-{% endhighlight %}
-              </div>
-              it fails, as expected
+              Run the test, and it fails:
+              <pre class="shell-code">$ node test
+...</pre>
             </li>
             
             <li>
               write the 'log' method of the Logger class:
-              <div class="code">
-                <pre><code>
-class Logger
+              <pre class="code">class Logger
 
   constructor: (options) ->
     @log_filename = options.get_log_filename()
-                </code></pre>
+
 {% highlight coffeescript %}
   log: (message) ->
     fs.appendFileSync(@log_filename, message)
 {% endhighlight %}
-              </div>
+    
+exports.Logger = Logger
+</pre>
             </li>
             
             <li>
-              run the test:
-              <div class="code">
-{% highlight bash %}
-$ node test
-...
-{% endhighlight %}
-              </div>
-              it passes
+              run the test, and it passes:
+              <pre class="shell-code">$ node test
+...</pre>
             </li>
             
             <li>
               the 'log' method should not eat exceptions thrown by fs.appendFileSync(), so write another test
-              <div class="code">
-                <pre><code>chai   = require("chai")
+              <pre class="code">chai   = require("chai")
 should = chai.should()
-mock   = require("../src/TinyMockJS").mock
+mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+Logger = require("../src/Logger").Logger
 
 describe "Logger", ->
-
   describe "constructor(options)", ->
-
     it "retrieves the log file name from 'options'", ->
       mock (options) ->
         options.expects("get_log_filename")
         logger = new Logger(options)        
           
-  describe "write(message)", ->
-
+  describe "log(message)", ->
     it "writes 'message' to 'log_filename' that was passed to the constructor", ->
       options = { get_log_filename: -> "log.txt" }
       logger = new Logger(options)
@@ -331,7 +290,6 @@ describe "Logger", ->
         fs.expects("appendFileSync").args("log.txt", "a message")
         logger.log("a message")
 
-</code></pre>
 {% highlight bash %}
     it "does not eat exceptions thrown by fs.appendFileSync", ->
       options = { get_log_filename: -> "log.txt" }
@@ -339,69 +297,55 @@ describe "Logger", ->
       mock ->
         fs.expects("appendFileSync").args("log.txt", "a message").throws(new Error("an error"))
         (-> logger.log("a message") ).should.throw("a message")
-{% endhighlight %}
-              </div>
+{% endhighlight %}</pre>
             </li>
             
             <li>
-              run the test:
-              <div class="code">
-{% highlight bash %}
-$ node test
-...
-{% endhighlight %}
-              </div>
-              it passes
+              run the test, and it passes:
+              <pre class="shell-code">$ node test
+...</pre>
             </li>
             
             <li>
               refactor the test to remove some duplication
-              <div class="code">
-                <pre><code>chai   = require("chai")
+              <pre class="code">chai   = require("chai")
 should = chai.should()
-mock   = require("../src/TinyMockJS").mock
+mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+Logger = require("../src/Logger").Logger
 
 describe "Logger", ->
-
   describe "constructor(options)", ->
-
     it "retrieves the log file name from 'options'", ->
       mock (options) ->
         options.expects("get_log_filename")
         logger = new Logger(options)        
           
   describe "write(message)", ->
-  
-</code></pre>
 {% highlight bash %}
     before: ->
       options = { get_log_filename: -> "log.txt" }
       logger = new Logger(options)
-{% endhighlight %}<pre><code>
-    it "writes 'message' to 'log_filename' that was passed to the constructor", ->
-</code></pre>
-{% highlight bash %}
-      # options = { get_log_filename: -> "log.txt" }
-      # logger = new Logger(options)
 {% endhighlight %}
-<pre><code>      mock ->
+    it "writes 'message' to 'log_filename' that was passed to the constructor", ->
+      mock ->
         fs.expects("appendFileSync").args("log.txt", "a message")
         logger.log("a message")
 
     it "does not eat exceptions thrown by fs.appendFileSync", ->
-</code></pre>
-{% highlight bash %}
-      # options = { get_log_filename: -> "log.txt" }
-      # logger = new Logger(options)
-{% endhighlight %}
-<pre><code>      mock ->
+      mock ->
         fs.expects("appendFileSync").args("log.txt", "a message").throws(new Error("an error"))
-        (-> logger.log("a message") ).should.throw("a message")
-</code></pre>
-              </div>
+        (-> logger.log("a message") ).should.throw("a message")</pre>
+            </li>
+            
+            <li>
+              run the test, and it continues to pass:
+              <pre class="shell-code">$ node test
+...</pre>
             </li>
             
           </ul>
+          
+          All files are [here](github/TinyMockJS.doc/quickstart).
 
         </article>
         

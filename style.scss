@@ -8,7 +8,7 @@
 
 body {
   font-family: "Optima", sans-serif;
-  font-size: 110%;
+  font-size: 100%;
   font-weight: 100;
 }
 
@@ -129,19 +129,25 @@ a:hover {
     text-align: justify;
     word-spacing: 0.05em;
   }
-
-  code {
+  
+  pre[class="code"] {
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 0px 6px #eee;
     font-family: monospace;
+    font-size: 90%;
+    line-height: 1.3;
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+    overflow: auto;                   /* make it easy to select code with mouse for copy & paste */
+    padding: 0.8em;
   }
   
-  div[class="code"] {
-    color: #cccccc;                   /* dim un-highlighted code */
-    line-height: 1.0;
-    overflow: auto;                   /* make it easy to select code with mouse for copy & paste */
-    padding: 1em;
+  span[class="dim"] {
+    color: #888888;                   /* dim un-highlighted code */
   }
 
-  div[class="highlight"] {
+  div[class="highlight"] {            /* inserted by {% highlight language %} */
     color: #000000;                   /* un-dim highlighted code */
   }
 
@@ -157,22 +163,31 @@ a:hover {
     text-align: center;
   }
 
-  ul {
-    line-height: 1.6em;
-    list-style: disc inside none;
-    margin-left: 0.2em;
-  }
-
-  ol {
-    
-    list-style: decimal inside none;
-    margin-left: 0.2em;
+  ul, ol {
+    line-height: 1.1em;
+    margin-left: 1.4em;
+    margin-right: 2em;
+    padding-bottom: 1em;
 
     li {
-      margin-bottom: 3em;
+      padding-top: 1em;
     }
-    
   }
+  
+  ul {
+    list-style: disc outside none;
+  }
+  
+  ol {
+    list-style: decimal outside none;
+  }
+
+  ul[class="steps"], ol[class="steps"] {
+    li {
+      margin-bottom: 1em;
+    }
+  }
+
 }
 
 
