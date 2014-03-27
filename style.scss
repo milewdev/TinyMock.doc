@@ -14,7 +14,7 @@ body {
 
 /* link decorations */
 a, a:link, a:hover, a:visited, a:active {
-  color: inherit;
+  color: #0000cc;
   text-decoration: none;
 }
 a:hover {
@@ -123,11 +123,12 @@ a:hover {
     padding-top: 0.8em;
     padding-bottom: 0.2em;
   }
-
-  p {
-    line-height: 1.6em;
-    text-align: justify;
-    word-spacing: 0.05em;
+  
+  /* the headers are links to themselves so that users can save links to specific sections on the page, but they look better as normal text color */
+  h1, h2 {
+    a, a:link, a:hover, a:visited, a:active {
+      color: inherit;
+    }
   }
   
   pre[class="code"] {
@@ -170,7 +171,7 @@ a:hover {
     padding-bottom: 1em;
 
     li {
-      padding-top: 1em;
+      padding-top: 0.4em;
     }
   }
   
@@ -184,7 +185,11 @@ a:hover {
 
   ul[class="steps"], ol[class="steps"] {
     li {
-      margin-bottom: 1em;
+      margin-bottom: 1.8em;
+
+      p {
+        margin-bottom: 0.6em;
+      }
     }
   }
 

@@ -9,7 +9,7 @@ body {
 
 /* link decorations */
 a, a:link, a:hover, a:visited, a:active {
-  color: inherit;
+  color: #0000cc;
   text-decoration: none; }
 
 a:hover {
@@ -73,7 +73,8 @@ a:hover {
  */
 .page-body-content {
   margin-top: 4em;
-  margin-bottom: 4em; }
+  margin-bottom: 4em;
+  /* the headers are links to themselves so that users can save links to specific sections on the page, but they look better as normal text color */ }
   .page-body-content article {
     margin-bottom: 3em; }
   .page-body-content h1 {
@@ -85,10 +86,8 @@ a:hover {
     font-weight: normal;
     padding-top: 0.8em;
     padding-bottom: 0.2em; }
-  .page-body-content p {
-    line-height: 1.6em;
-    text-align: justify;
-    word-spacing: 0.05em; }
+  .page-body-content h1 a, .page-body-content h1 a:link, .page-body-content h1 a:hover, .page-body-content h1 a:visited, .page-body-content h1 a:active, .page-body-content h2 a, .page-body-content h2 a:link, .page-body-content h2 a:hover, .page-body-content h2 a:visited, .page-body-content h2 a:active {
+    color: inherit; }
   .page-body-content pre[class="code"] {
     background-color: white;
     border: 1px solid #ddd;
@@ -124,13 +123,15 @@ a:hover {
     margin-right: 2em;
     padding-bottom: 1em; }
     .page-body-content ul li, .page-body-content ol li {
-      padding-top: 1em; }
+      padding-top: 0.4em; }
   .page-body-content ul {
     list-style: disc outside none; }
   .page-body-content ol {
     list-style: decimal outside none; }
   .page-body-content ul[class="steps"] li, .page-body-content ol[class="steps"] li {
-    margin-bottom: 1em; }
+    margin-bottom: 1.8em; }
+    .page-body-content ul[class="steps"] li p, .page-body-content ol[class="steps"] li p {
+      margin-bottom: 0.6em; }
 
 /*
  * Page footer.

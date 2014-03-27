@@ -64,21 +64,29 @@ describe "Sut.run(adder, x, y, z)", ->
         </article>
 
         <article>
-          <header><h1><a name="#quick-start" href="#quick-start">Quick Start</a></h1></header>
+          <header><h1><a name="#tutorial" href="#tutorial">Tutorial</a></h1></header>
           <ol class="steps">
             
             <li value="0">
-              Here we'll write a simplistic logger class, Logger, to get a sense of how to use TinyMockJS in a project.
-              We'll write our code in coffeescript and use <a href="http://nodejs.org">Node.js</a> to run it, 
+              <p>
+              We'll write a simplistic logger class, Logger, to get a sense of how to use TinyMockJS in a project.
+              We'll write our code in coffeescript, we'll use <a href="http://nodejs.org">Node.js</a> to run it, 
               and we'll use <a href="http://visionmedia.github.io/mocha/">mocha</a> and <a href="http://chaijs.com">chai</a> 
-              for our testing framework.  Ensure that you have <a href="http://nodejs.org">Node.js</a> installed 
+              for our testing framework.  
+              </p>
+              <p>
+              Ensure that you have <a href="http://nodejs.org">Node.js</a> installed 
               before proceeding; mocha, chai, and coffeescript will be installed in the steps below.
+              </p>
+              <p>
+              Note that all of the files for this tutorial can be found <a href="#TODO">here</a>.
+              </p>
             </li>
             
             <li>
               Create a project directory, and create subdirectories for source code and test code files:
-              <pre class="code">$ mkdir -p ~/quickstart/src ~/quickstart/test
-$ cd ~/quickstart</pre>
+              <pre class="code">$ mkdir -p ~/tutorial/src ~/tutorial/test
+$ cd ~/tutorial</pre>
             </li>
             
             <li>
@@ -123,7 +131,7 @@ task 'test', 'Run unit tests', ->
             </li>
             
             <li>
-              Create the file test/Logger.test.coffee to contain code for tests; start by requiring chai and mock (from TinyMockJS):
+              Create the file test/Logger.test.coffee to contain code for tests; start by requiring chai and mock:
               <pre class="code">
 {% highlight coffeescript %}
 chai   = require("chai")
@@ -165,11 +173,11 @@ mock (store, inventory, book1, book2, customer) ->
               Run our tests and they fail as expected, since we do not have a Logger class yet:
               <pre class="code">$ npm test
 
-> TinyMockJS@ test /Users/vagrant/quickstart
+> TinyMockJS@ test /Users/vagrant/tutorial
 > cake test
 
 
-/Users/vagrant/quickstart/Cakefile:13
+/Users/vagrant/tutorial/Cakefile:13
         throw err;
               ^
 Error: Command failed: 
@@ -198,7 +206,7 @@ exports.Logger = Logger
               Run our tests again, and this time they pass:
               <pre class="code">$ npm test
 
-> TinyMockJS@ test /Users/vagrant/quickstart
+> TinyMockJS@ test /Users/vagrant/tutorial
 > cake test
 
 
@@ -219,7 +227,7 @@ exports.Logger = Logger
 should = chai.should()
 mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
 Logger = require("../src/Logger").Logger
-
+</span>{% highlight coffeescript %}fs     = require("fs"){% endhighlight %}<span class="dim">
 describe "Logger", ->
   describe "constructor(options)", ->
     it "retrieves the log file name from 'options'", ->
@@ -241,31 +249,62 @@ describe "Logger", ->
             </li>
             
             <li>
-              Run the test, and it fails:
-              <pre class="shell-code">$ node test
-...</pre>
+              Run the tests, and they fail:
+              <pre class="code">$ node test
+
+> TinyMockJS@ test /Users/vagrant/tutorial
+> cake test
+
+
+/Users/vagrant/tutorial/Cakefile:13
+        throw err;
+              ^
+Error: Command failed:   1 failing
+
+  1) Logger log(message) writes 'message' to 'log_filename' that was passed to the constructor:
+     TypeError: Object #<Logger> has no method 'log'
+      at /Users/vagrant/tutorial/test/Logger.test.coffee:35:25
+      ...
+</pre>
             </li>
             
             <li>
-              write the 'log' method of the Logger class:
-              <pre class="code">class Logger
+              Add the log() method to the Logger class:
+              <pre class="code">{% highlight coffeescript %}
+fs = require("fs")
+{% endhighlight %}<span class="dim">
+class Logger
 
   constructor: (options) ->
     @log_filename = options.get_log_filename()
 
-{% highlight coffeescript %}
+</span>{% highlight coffeescript %}
   log: (message) ->
     fs.appendFileSync(@log_filename, message)
-{% endhighlight %}
-    
+{% endhighlight %}<span class="dim">
 exports.Logger = Logger
 </pre>
             </li>
             
             <li>
-              run the test, and it passes:
-              <pre class="shell-code">$ node test
-...</pre>
+              Run the tests, and they pass:
+              <pre class="code">$ node test
+
+> TinyMockJS@ test /Users/vagrant/tutorial
+> cake test
+
+
+
+  Logger
+    constructor(options)
+      ✓ retrieves the log file name from 'options' 
+    log(message)
+      ✓ writes 'message' to 'log_filename' that was passed to the constructor 
+
+
+  2 passing (10ms)
+
+</pre>
             </li>
             
             <li>
@@ -345,7 +384,7 @@ describe "Logger", ->
             
           </ul>
           
-          All files are [here](github/TinyMockJS.doc/quickstart).
+          All files are [here](github/TinyMockJS.doc/tutorial).
 
         </article>
         
