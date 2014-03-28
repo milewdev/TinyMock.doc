@@ -111,23 +111,52 @@ task 'test', 'Run unit tests', ->
               <pre class="code">
 {% highlight json %}
 {
-  "name": "TinyMockJS",
+  "name": "TinyMockJS.tutorial",
+  "description": "A TinyMockJS tutorial.",
+  "repository": "git://github.com/milewgit/TinyMockJS.doc",
   "scripts": {
     "test": "cake test"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*",
-    "coffee-script": "~1.6"
+    "mocha": "^1.18.2",
+    "chai": "^1.9.1",
+    "coffee-script": "^1.7.1",
+    "TinyMockJS": "https://github.com/milewgit/TinyMockJS/raw/v0.2.0/TinyMockJS-0.2.0.tgz"
   }
 }
 {% endhighlight %}</pre>
             </li>
             
             <li>
-              Use npm to install mocha, chai, and the coffee-script compiler:
+              Use npm to install mocha, chai, the coffee-script compiler, and TinyMockJS:
               <pre class="code">$ npm install
-...</pre>
+npm WARN package.json TinyMockJS.tutorial@ No README data
+npm http GET https://registry.npmjs.org/mocha
+npm http GET https://registry.npmjs.org/coffee-script
+
+...
+
+npm http 304 https://registry.npmjs.org/lru-cache
+npm http 304 https://registry.npmjs.org/sigmund
+TinyMockJS@0.2.0 node_modules/TinyMockJS
+
+chai@1.9.1 node_modules/chai
+├── assertion-error@1.0.0
+└── deep-eql@0.1.3 (type-detect@0.1.1)
+
+coffee-script@1.7.1 node_modules/coffee-script
+└── mkdirp@0.3.5
+
+mocha@1.18.2 node_modules/mocha
+├── diff@1.0.7
+├── debug@0.7.4
+├── growl@1.7.0
+├── commander@2.0.0
+├── mkdirp@0.3.5
+├── jade@0.26.3 (commander@0.6.1, mkdirp@0.3.0)
+└── glob@3.2.3 (inherits@2.0.1, graceful-fs@2.0.3, minimatch@0.2.14)
+$</pre>
+            Ignore the warning on the first line about 'No README data'; this is just a tutorial so we didn't create a readme file.
             </li>
             
             <li>
@@ -136,7 +165,7 @@ task 'test', 'Run unit tests', ->
 {% highlight coffeescript %}
 chai   = require("chai")
 should = chai.should()
-mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+mock   = require("TinyMockJS").mock
 Logger = require("../src/Logger").Logger
 {% endhighlight %}</pre>
             </li>
@@ -145,7 +174,7 @@ Logger = require("../src/Logger").Logger
               Add a test for Logger's constructor to test/Logger.test.coffee:
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+mock   = require("TinyMockJS").mock
 Logger = require("../src/Logger").Logger
 
 </span>{% highlight coffeescript %}
@@ -225,7 +254,7 @@ exports.Logger = Logger
               Add a test for a Logger.log() method:
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+mock   = require("TinyMockJS").mock
 Logger = require("../src/Logger").Logger
 </span>{% highlight coffeescript %}fs     = require("fs"){% endhighlight %}<span class="dim">
 describe "Logger", ->
@@ -311,7 +340,7 @@ exports.Logger = Logger
                log() should not eat exceptions thrown by fs.appendFileSync(), so write another test
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+mock   = require("TinyMockJS").mock
 Logger = require("../src/Logger").Logger
 fs     = require("fs")
 
@@ -367,7 +396,7 @@ describe "Logger", ->
               Refactor the tests to remove some duplication:
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("/Users/vagrant/Documents/TinyMockJS/src/TinyMockJS").mock
+mock   = require("TinyMockJS").mock
 Logger = require("../src/Logger").Logger
 fs     = require("fs")
 
