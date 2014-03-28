@@ -11,12 +11,13 @@
   </head>
     
   <body>
-    <div class="page-body-content fixed-width-800px">
+    <div>
       <section>
         
         
         <article>  
           <header><h1><a name="what-is-it" href="#what-is-it">What is TinyMockJS?</a></h1></header>
+          
           <p>
             TinyMockJS is a very small <a href="http://coffeescript.org">coffeescript</a> 
             <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework. &nbsp; For example:
@@ -41,25 +42,38 @@ describe "Sut.run(adder, x, y, z)", ->
         
         
         <article>
-          <header><h1><a name="#installation" href="#installation">Installation</a></h1></header>
+          <h1><a name="#installation" href="#installation">Installation</a></h1>
           
-          <p>
-            <h2>Requirements:</h2>
-          </p>
+          <h2>Requirements:</h2>
           <ul>
             <li><a href="http://nodejs.org">Node.js</a></li>
             <li>A testing framework, such as <a href="http://visionmedia.github.io/mocha/">mocha</a> and <a href="http://chaijs.com">chai</a>.</li>
           </ul>
           
-          <p>
-            <h2>Install:</h2>
-            ?
-          </p>
+          <h2>Install from the command line:</h2>
+          <pre class="code">$ npm install https://github.com/milewgit/TinyMockJS/raw/v0.2.0/TinyMockJS-0.2.0.tgz</pre>
           
-          <p>
-            <h2>Uninstall:</h2>
-            ?
-          </p>
+          <h2>Install via package.json:</h2>
+          <pre class="code">$ cat package.json
+{
+  "name": "My Project",
+  "description": "A description of My Project.",
+  "repository": "git://github.com/me/MyProject.git",
+  "scripts": {
+    "test": "cake test"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "chai": "^1.9.1",
+    "coffee-script": "^1.7.1",
+    "TinyMockJS": "https://github.com/milewgit/TinyMockJS/raw/v0.2.0/TinyMockJS-0.2.0.tgz"
+  }
+}
+
+$ npm install</pre>
+          
+          <h2>Uninstall:</h2>
+          <pre class="code">$ npm uninstall TinyMockJS</pre>
           
         </article>
 
@@ -113,7 +127,7 @@ task 'test', 'Run unit tests', ->
 {
   "name": "TinyMockJS.tutorial",
   "description": "A TinyMockJS tutorial.",
-  "repository": "git://github.com/milewgit/TinyMockJS.doc",
+  "repository": "git://github.com/milewgit/TinyMockJS.doc.git",
   "scripts": {
     "test": "cake test"
   },
@@ -185,10 +199,10 @@ describe "Logger", ->
         options.expects("get_log_filename")
         logger = new Logger(options)
 {% endhighlight %}</pre>
-              The mock() function takes a function argument.  mock() creates five mock objects and
-              then invokes the function argument, passing it the five mocks, which the function can
+              mock() takes a function argument;  it creates five mock objects and
+              then invokes the function argument passing it the five mocks which the function can
               then choose to use as it sees fit.  In our code above, we use just one of the mocks
-              and we refer to it as 'options'.  Here's how you might use all five mocks:
+              and we reference it with the variable 'options'.  Here's how you might use all five mocks:
               <pre class="code">
 {% highlight coffeescript %}
 mock (store, inventory, book1, book2, customer) ->
@@ -389,7 +403,7 @@ describe "Logger", ->
   3 passing (14ms)
 
 </pre>
-              They pass, so log() already does not eat exceptions.
+              They pass, so log() is already passing exceptions back up to its caller.
             </li>
             
             <li>
@@ -455,6 +469,7 @@ describe "Logger", ->
         
         <article>
           <header><h1><a name="#reference" href="#reference">Reference</a></h1></header>
+          
           <p>
             TODO
           </p>

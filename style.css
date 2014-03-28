@@ -1,94 +1,35 @@
 @import url(reset.css);
-/*
- * General.
- */
 body {
   font-family: "Optima", sans-serif;
-  font-size: 100%;
-  font-weight: 100; }
-
-/* link decorations */
-a, a:link, a:hover, a:visited, a:active {
-  color: #0000cc;
-  text-decoration: none; }
-
-a:hover {
-  color: #0000ff;
-  text-decoration: underline; }
-
-/* http://css-tricks.com/snippets/css/clear-fix/ */
-.clearfix:after {
-  visibility: hidden;
-  display: block;
-  content: "";
-  clear: both;
-  height: 0; }
-
-/* fixed-width page content */
-.fixed-width-800px {
+  font-weight: 100;
   margin: 0 auto;
-  width: 800px; }
-
-.center-content-horizontally {
-  width: inherit;
-  display: box;
-  box-pack: center;
-  display: -webkit-box;
-  -webkit-box-pack: center;
-  display: -moz-box;
-  -moz-box-pack: center; }
-
-.center-content-vertically {
-  height: inherit;
-  display: box;
-  box-align: center;
-  display: -webkit-box;
-  -webkit-box-align: center;
-  display: -moz-box;
-  -moz-box-align: center; }
-
-/*
- * Page header.
- */
-.page-header {
-  background-color: #c9bba3; }
-
-.page-header-content {
-  height: 6em;
-  /* require a height so that .center-content-vertically works */ }
-  .page-header-content .logo {
-    font-family: monospace;
-    font-size: 400%;
-    font-weight: 800;
-    letter-spacing: 0.2em; }
-  .page-header-content .version {
-    font-size: 80%; }
-  .page-header-content img {
-    position: relative;
-    left: 700px;
-    top: -50px; }
-
-/*
- * Page body.
- */
-.page-body-content {
+  /* center the page */
   margin-top: 4em;
   margin-bottom: 4em;
-  /* the headers are links to themselves so that users can save links to specific sections on the page, but they look better as normal text color */ }
-  .page-body-content article {
+  width: 800px; }
+  body a, body a:link, body a:hover, body a:visited, body a:active {
+    color: #0000cc;
+    text-decoration: none; }
+  body a:hover {
+    text-decoration: underline; }
+  body article {
     margin-bottom: 3em; }
-  .page-body-content h1 {
+  body h1 {
     font-family: "Palatino", serif;
     font-size: 130%;
     font-weight: bold;
     margin-bottom: 0.6em; }
-  .page-body-content h2 {
+  body h2 {
     font-weight: normal;
-    padding-top: 0.8em;
-    padding-bottom: 0.2em; }
-  .page-body-content h1 a, .page-body-content h1 a:link, .page-body-content h1 a:hover, .page-body-content h1 a:visited, .page-body-content h1 a:active, .page-body-content h2 a, .page-body-content h2 a:link, .page-body-content h2 a:hover, .page-body-content h2 a:visited, .page-body-content h2 a:active {
+    margin-top: 1.6em;
+    margin-bottom: 0.4em; }
+  body h1 + h2 {
+    margin-top: 0em;
+    /* we do not need as much space when an h2 is immediately below an h1 */ }
+  body h1 a, body h1 a:link, body h1 a:hover, body h1 a:visited, body h1 a:active, body h2 a, body h2 a:link, body h2 a:hover, body h2 a:visited, body h2 a:active {
+    /* self-referencing header links look better in normal text color */
     color: inherit; }
-  .page-body-content pre[class="code"] {
+  body pre[class="code"] {
     background-color: white;
     border: 1px solid #ddd;
     box-shadow: 0px 0px 6px #eee;
@@ -99,56 +40,26 @@ a:hover {
     margin-bottom: 0.8em;
     overflow: auto;
     /* make it easy to select code with mouse for copy & paste */
-    padding: 0.8em; }
-  .page-body-content span[class="dim"] {
+    padding: 0.8em;
+    /* space between the border and the contents */ }
+  body span[class="dim"] {
     color: #aaa;
     /* dim un-highlighted code */ }
-  .page-body-content div[class="highlight"] {
+  body div[class="highlight"] {
     /* inserted by {% highlight language %} */
     color: black;
     /* un-dim highlighted code */ }
-  .page-body-content ul {
+  body ul {
     list-style: disc outside none; }
-  .page-body-content ol {
+  body ol {
     list-style: decimal outside none; }
-  .page-body-content ul, .page-body-content ol {
+  body li {
+    margin-bottom: 0.6em; }
+  body ul, body ol {
     line-height: 1.1em;
-    margin-left: 2.4em;
-    margin-right: 2em; }
-    .page-body-content ul li, .page-body-content ol li {
-      padding-top: 0.4em; }
-  .page-body-content ul[class="steps"], .page-body-content ol[class="steps"] {
-    margin-left: 1.4em; }
-    .page-body-content ul[class="steps"] li, .page-body-content ol[class="steps"] li {
-      margin-bottom: 1.8em; }
-      .page-body-content ul[class="steps"] li p, .page-body-content ol[class="steps"] li p {
-        margin-bottom: 0.6em; }
-
-/*
- * Page footer.
- */
-.page-footer {
-  background-color: #ededed; }
-
-.page-footer-content {
-  color: #6a6a6a;
-  font-size: 90%;
-  padding-top: 1em;
-  padding-bottom: 1em; }
-  .page-footer-content nav div {
-    line-height: 1.5;
-    padding-top: 2em;
-    padding-bottom: 2em;
     margin-left: 2em;
-    margin-right: 2em;
-    width: 20em; }
-    .page-footer-content nav div h1 {
-      font-weight: 800;
-      margin-bottom: 0.4em; }
-  .page-footer-content nav div:first-child {
-    text-align: right; }
-  .page-footer-content .copyright {
-    font-size: 75%;
-    padding-top: 1em;
-    padding-bottom: 2em;
-    text-align: center; }
+    margin-right: 2em; }
+  body ul[class="steps"] li, body ol[class="steps"] li {
+    margin-bottom: 1.8em; }
+    body ul[class="steps"] li p, body ol[class="steps"] li p {
+      margin-bottom: 0.6em; }
