@@ -33,17 +33,17 @@ body {
     margin-top: 1.6em;
     margin-bottom: 0.4em;
   }
-  
+
   h1+h2 {
     margin-top: 0em;                            /* we do not need as much space when an h2 is immediately below an h1 */
   }
-  
+
   h1, h2 {
     a, a:link, a:hover, a:visited, a:active {   /* self-referencing header links look better in normal text color */
       color: inherit;
     }
   }
-  
+
   pre[class="code"] {
     background-color: white;
     border: 1px solid #ddd;
@@ -56,7 +56,7 @@ body {
     overflow: auto;                             /* make it easy to select code with mouse for copy & paste */
     padding: 0.8em;                             /* space between the border and the contents */
   }
-  
+
   span[class="dim"] {
     color: #aaa;                                /* dim un-highlighted code */
   }
@@ -64,15 +64,15 @@ body {
   div[class="highlight"] {                      /* inserted by {% highlight language %} */
     color: black;                               /* un-dim highlighted code */
   }
-  
+
   ul {
     list-style: disc outside none;
   }
-  
+
   ol {
     list-style: decimal outside none;
   }
-  
+
   li {
     margin-bottom: 0.6em;
   }
@@ -83,13 +83,40 @@ body {
     margin-right: 2em;
   }
 
-  ul[class="steps"], ol[class="steps"] {
+  /* an ordered list numbered as a, b, c, ... with circled white letters */
+  ol[class="steps"] {
+    counter-reset: li-counter;                /* every new list should start counting from 'a' */
+    line-height: 1.3em;
+    list-style-type: none;                    /* we'll do it ourselves using li:before */
+    margin-left: 0em;                         /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
+
     li {
-      margin-bottom: 1.8em;
+      margin-bottom: 4em;
+      position: relative;                     /* so that child li:before element can use absolute position */
 
       p {
-        margin-bottom: 0.6em;
+        margin-bottom: 0.6em;                 /* a bit of space between paragraphs in an li element */
       }
+    }
+
+    li:before {                               /* this is the circle with a, b, c, ... inside */
+      background-color: MidnightBlue;
+      border: 0;                              /* hide the border as it didn't look smooth in safari */
+      border-radius: 50%;                     /* use a circle to enclose the a, b, c, ... */
+      color: white;
+      content: counter(li-counter, lower-alpha);    /* use letters instead of numbers, i.e. a, b, c, ... */
+      counter-increment: li-counter;          /* otherwise we'll get a, a, a, ... */
+      font-family: "Lucida Console", Monaco5, monospace;
+      font-size: 1.5em;
+      height: 1.2em;
+      left: -4em;                             /* put the circled letters out in the left margin */
+      line-height: 1.1;                       /* bumps the letters down into the center of the circle (vertical-align had no effect) */
+      opacity: 0.4;
+      padding: 0.5em;                         /* allow space between the letter and the edges of the circle */
+      position: absolute;                     /* absolutely positioned relative to the associated li */
+      text-align: center;
+      top: 0em;
+      width: 1.2em;                           /* same as height so that we get a circle, not an oval */
     }
   }
 }

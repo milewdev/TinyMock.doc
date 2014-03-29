@@ -6,7 +6,8 @@ body {
   /* center the page */
   margin-top: 4em;
   margin-bottom: 4em;
-  width: 800px; }
+  width: 800px;
+  /* an ordered list numbered as a, b, c, ... with circled white letters */ }
   body a, body a:link, body a:hover, body a:visited, body a:active {
     color: #0000cc;
     text-decoration: none; }
@@ -59,7 +60,46 @@ body {
     line-height: 1.1em;
     margin-left: 2em;
     margin-right: 2em; }
-  body ul[class="steps"] li, body ol[class="steps"] li {
-    margin-bottom: 1.8em; }
-    body ul[class="steps"] li p, body ol[class="steps"] li p {
-      margin-bottom: 0.6em; }
+  body ol[class="steps"] {
+    counter-reset: li-counter;
+    /* every new list should start counting from 'a' */
+    line-height: 1.3em;
+    list-style-type: none;
+    /* we'll do it ourselves using li:before */
+    margin-left: 0em;
+    /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */ }
+    body ol[class="steps"] li {
+      margin-bottom: 4em;
+      position: relative;
+      /* so that child li:before element can use absolute position */ }
+      body ol[class="steps"] li p {
+        margin-bottom: 0.6em;
+        /* a bit of space between paragraphs in an li element */ }
+    body ol[class="steps"] li:before {
+      /* this is the circle with a, b, c, ... inside */
+      background-color: MidnightBlue;
+      border: 0;
+      /* hide the border as it didn't look smooth in safari */
+      border-radius: 50%;
+      /* use a circle to enclose the a, b, c, ... */
+      color: white;
+      content: counter(li-counter,lower-alpha);
+      /* use letters instead of numbers, i.e. a, b, c, ... */
+      counter-increment: li-counter;
+      /* otherwise we'll get a, a, a, ... */
+      font-family: "Lucida Console", Monaco5, monospace;
+      font-size: 1.5em;
+      height: 1.2em;
+      left: -4em;
+      /* put the circled letters out in the left margin */
+      line-height: 1.1;
+      /* bumps the letters down into the center of the circle (vertical-align had no effect) */
+      opacity: 0.4;
+      padding: 0.5em;
+      /* allow space between the letter and the edges of the circle */
+      position: absolute;
+      /* absolutely positioned relative to the associated li */
+      text-align: center;
+      top: 0em;
+      width: 1.2em;
+      /* same as height so that we get a circle, not an oval */ }
