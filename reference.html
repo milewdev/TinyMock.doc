@@ -39,7 +39,7 @@
               Optional.  Specifies expected arguments to the expectation.  One or more arg must be supplied; do not use arg(), instead simply do not use args at all.  Can be chained.  Can only be specified once.
             </p>
             <p>
-              Complete example:
+              Example:
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
@@ -61,7 +61,8 @@ describe "Chat", ->
 <span class="dim">a.expects("b")</span>.args( {name: "Aristotle"} )    # an object
 <span class="dim">a.expects("b")</span>.args()                         # incorrect: supply at least one arg
 <span class="dim">a.expects("b")</span>                                # correct
-<span class="dim">a.expects("b")</span>.args(1).args("two")            # incorrect: use args() only once per expectation</pre>
+<span class="dim">a.expects("b")</span>.args(1).args("two")            # incorrect: use args() only once per expectation
+<span class="dim">a</span>.args(1)<span class="dim">.expects("b")</span>                        # incorrect: must be called right after expects()</pre>
           </li>
         
         
@@ -69,20 +70,68 @@ describe "Chat", ->
             <p class="usage">
               <a name="expects" href="#expects">expects(method_name)</a>
             </p>
+            <p>
+              Can be chained.
+            </p>
+            <p>
+              Example:
+            </p>
+            <pre class="code"><span class="dim">chai   = require("chai")
+should = chai.should()
+mock   = require("TinyMockJS").mock
+Chat   = require("../src/Chat").Chat
+
+describe "Chat", ->
+  describe "greet(my_name)", ->
+    it "sends a greeting and returns the response", ->
+      mock (socket) ->
+        socket</span>.expects("write")<span class="dim">.args("Hello, my name is Aristotle.\n")
+        socket</span>.expects("read")<span class="dim">.returns("Greetings Aristotle!\n")
+        chat = new Chat(socket)
+        chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
+            <p>
+              Other examples:
+            </p>
+            <pre class="code"><span class="dim">a</span>.expects()                    # incorrect: supply a method name
+<span class="dim">a</span>.expects("a", "b")            # incorrect: one method name per call
+<span class="dim">a</span>.expects("a").expects("b")    # correct
+<span class="dim">a</span>.expects("a")                 # also correct
+<span class="dim">a</span>.expects("b")</pre>
           </li>
         
         
           <li>
             <p class="usage">
-              <a name="mock" href="#mock">mock([options, ] callback)</a>
+              <a name="mock" href="#mock">mock([options,] callback)</a>
+            </p>
+            <p>
+              
             </p>
           </li>
         
         
           <li>
             <p class="usage">
-              <a name="require" href="#require">require()</a>
+              <a name="require" href="#require">require</a>
             </p>
+            <p>
+              Use <a href="http://nodejs.org">Node.js's</a> 
+              <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require()</a> 
+              to gain access to TinyMockJS:
+            </p>
+            <pre class="code"><span class="dim">chai   = require("chai")
+should = chai.should()</span>
+mock   = require("TinyMockJS").mock
+<span class="dim">Chat   = require("../src/Chat").Chat
+
+describe "Chat", ->
+  describe "greet(my_name)", ->
+    it "sends a greeting and returns the response", ->
+      mock (socket) ->
+        socket.expects("write").args("Hello, my name is Aristotle.\n")
+        socket.expects("read").returns("Greetings Aristotle!\n")
+        chat = new Chat(socket)
+        chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
           </li>
         
         

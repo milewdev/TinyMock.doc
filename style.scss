@@ -113,6 +113,7 @@ body {
 
       li:nth-child(1) {                         /* all menu items will be on the right side except the first one */
         float: left;                            /* the first menu item, the home link, on the left */
+        font-weight: bold;                      /* bold the home button; maybe this looks better */
         margin-left: 0em;                       /* first item does not need a left margin, so counter-act margin-left: 2em in li {} above */
       }
 
