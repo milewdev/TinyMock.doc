@@ -99,11 +99,11 @@ body {
   body nav.common ul {
     border-bottom: 1px solid #eee;
     /* a fine horizontal line */
-    margin-top: 0.4em;
+    margin-top: 0.8em;
     /* gap between top of page and menu item texts */
     margin-bottom: 2em;
     /* gap between the menu and top-of-page content */
-    padding-bottom: 0.2em;
+    padding-bottom: 0.4em;
     /* space between bottom of menu items and horizontal separator line (bottom border of ul) */
     text-align: right;
     /* all menu items are on the right side (except the first one, the home link) */ }
@@ -160,7 +160,7 @@ body {
       /* shrink it as it is not the focus of the page */
       margin-top: 7em;
       /* gap between the bottom-of-page content and the copyright notice */
-      padding-top: 0.5em;
+      padding-top: 0.4em;
       /* gap between top of copyright notice and horizontal line */ }
 
 /* index.html styles */
