@@ -129,7 +129,7 @@ body {
     box-shadow: 0px 0px 6px #eee;
     font-family: monospace;
     /* so that things that should line up do */
-    font-size: 88%;
+    font-size: 90%;
     line-height: 1.3;
     /* make it a bit easier to read */
     margin-top: 0.8em;
@@ -181,7 +181,7 @@ body.index {
       /* make it a bit bigger as it's on the home page and the focus of attention */
       margin: 0 auto;
       /* center the pre box on the page */
-      width: 80%;
+      width: 85%;
       /* fit it's width to the code it displays */ }
   body.index nav.index ul {
     margin-top: 5em;
@@ -204,3 +204,17 @@ body.tutorial article {
   /* so that the bullets do not go beyond the left page margin */ }
 
 /* reference.html styles */
+body.reference article {
+  margin-left: 4.5em;
+  /* so that the bullets do not go beyond the left page margin */ }
+  body.reference article ul.fancy li {
+    margin-bottom: 3em;
+    /* allow lots of space between reference items */
+    /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */ }
+    body.reference article ul.fancy li p {
+      margin-top: 1.4em; }
+    body.reference article ul.fancy li p.usage {
+      font-family: "Lucida Console", Monaco5, monospace;
+      font-size: 110%;
+      font-weight: bold;
+      margin-bottom: 1em; }

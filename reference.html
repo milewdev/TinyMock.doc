@@ -23,14 +23,82 @@
     </nav>
       
     <section>
+      
+      <header>
+        <h1>Reference</h1>
+      </header>
+      
       <article>
-        <header>
-          <h1>Reference</h1>
-        </header>
+        <ul class="fancy">
         
-        <p>
-          TODO
-        </p>
+          <li>
+            <p class="usage">
+              <a name="args" href="#args">args(arg [, arg, ...])</a>
+            </p>
+            <p>
+              Optional.  Specifies expected arguments to the expectation.  One or more arg must be supplied; do not use arg(), instead simply do not use args at all.  Can be chained.  Can only be specified once.
+            </p>
+            <p>
+              Complete example:
+            </p>
+            <pre class="code"><span class="dim">chai   = require("chai")
+should = chai.should()
+mock   = require("TinyMockJS").mock
+Chat   = require("../src/Chat").Chat
+
+describe "Chat", ->
+  describe "greet(my_name)", ->
+    it "sends a greeting and returns the response", ->
+      mock (socket) ->
+        socket.expects("write")</span>.args("Hello, my name is Aristotle.\n")<span class="dim">
+        socket.expects("read").returns("Greetings Aristotle!\n")
+        chat = new Chat(socket)
+        chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
+            <p>
+              Other examples:
+            </p>
+            <pre class="code"><span class="dim">a.expects("b")</span>.args(1, 2, "three")            # many arguments
+<span class="dim">a.expects("b")</span>.args( {name: "Aristotle"} )    # an object
+<span class="dim">a.expects("b")</span>.args()                         # incorrect: you must supply at least one arg
+<span class="dim">a.expects("b")</span>                                # correct
+<span class="dim">a.expects("b")</span>.args(1).args("two")            # incorrect: use args() only once per expectation</pre>
+          </li>
+        
+        
+          <li>
+            <p class="usage">
+              <a name="expects" href="#expects">expects(method_name)</a>
+            </p>
+          </li>
+        
+        
+          <li>
+            <p class="usage">
+              <a name="mock" href="#mock">mock([options, ] callback)</a>
+            </p>
+          </li>
+        
+        
+          <li>
+            <p class="usage">
+              <a name="require" href="#require">require()</a>
+            </p>
+          </li>
+        
+        
+          <li>
+            <p class="usage">
+              <a name="returns" href="#returns">returns(value)</a>
+            </p>
+          </li>
+        
+        
+          <li>
+            <p class="usage">
+              <a name="throws" href="#throws">throws(error)</a>
+            </p>
+          </li>
+        </ul>
       </article>
     </section>
     

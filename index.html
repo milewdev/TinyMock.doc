@@ -33,14 +33,14 @@
       </p>
       
       <pre class="code"><span class="dim">describe "Chat", ->
-  describe "greet()", ->
+  describe "greet(my_name)", ->
     it "sends a greeting and returns the response", -></span>
 {% highlight coffeescript %}
       mock (socket) ->
-        socket.expects("write").args("Hello, my name is Test\n")
-        socket.expects("read").returns("Greetings Test!\n")
+        socket.expects("write").args("Hello, my name is Aristotle.\n")
+        socket.expects("read").returns("Greetings Aristotle!\n")
 {% endhighlight %}        <span class="dim">chat = new Chat(socket)
-        chat.greet("Test").should.equal("Greetings Test!\n")</a></pre>
+        chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
 
       <nav class="index">
   		  <ul>
