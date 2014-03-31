@@ -195,7 +195,12 @@ body.index {
 
 /* installation.html styles */
 body.installation article {
-  margin-bottom: 2em; }
+  margin-bottom: 2em;
+  /* some extra space between installation options */ }
 
 /* tutorial.html styles */
+body.tutorial article {
+  margin-left: 4.5em;
+  /* so that the bullets do not go beyond the left page margin */ }
+
 /* reference.html styles */
