@@ -1,0 +1,79 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>TinyMockJS Installation</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="syntax.css">
+  </head>
+    
+  <body class="installation">
+    
+    <nav class="common">
+      <ul>
+        <li><a href="index.html">TinyMockJS</a></li>
+        <li><a href="installation.html">Installation</a></li>
+        <li><a href="tutorial.html">Tutorial</a></li>
+        <li><a href="reference.html">Reference</a></li>
+        <li><a href="https://github.com/milewgit/TinyMockJS">Source</a></li>
+      </ul>
+    </nav>
+      
+    <section>
+
+      <header>
+        <h1>Installation</h1>
+      </header>
+      
+      <article>
+        <p>Requirements:</p>
+        <ul class="ordinary">
+          <li><a href="http://nodejs.org">Node.js</a></li>
+          <li>A testing framework, such as <a href="http://visionmedia.github.io/mocha/">mocha</a> and <a href="http://chaijs.com">chai</a>.</li>
+        </ul>
+      </article>
+
+      <article>
+        <p>Install from the command line:</p>
+        <pre class="code">$ npm install https://github.com/milewgit/TinyMockJS/raw/v0.2.0/TinyMockJS-0.2.0.tgz</pre>
+      </article>
+      
+      <article>
+        <p>Install via package.json:</p>
+        <pre class="code">$ cat package.json
+{
+  "name": "My Project",
+  "description": "A description of My Project.",
+  "repository": "git://github.com/me/MyProject.git",
+  "scripts": {
+    "test": "cake test"
+  },
+  "devDependencies": {
+    "mocha": "^1.18.2",
+    "chai": "^1.9.1",
+    "coffee-script": "^1.7.1",
+    "TinyMockJS": "https://github.com/milewgit/TinyMockJS/raw/v0.2.0/TinyMockJS-0.2.0.tgz"
+  }
+}
+
+$ npm install</pre>
+      </article>
+        
+      <article>
+        <p>Uninstall:</p>
+        <pre class="code">$ npm uninstall TinyMockJS</pre>          
+      </article>
+          
+    </section>
+    
+    <footer>
+      <article>
+        &copy; 2014 milewgit
+      </article>
+    </footer>
+
+  </body>
+</html>
