@@ -59,7 +59,7 @@ describe "Chat", ->
             </p>
             <pre class="code"><span class="dim">a.expects("b")</span>.args(1, 2, "three")            # many arguments
 <span class="dim">a.expects("b")</span>.args( {name: "Aristotle"} )    # an object
-<span class="dim">a.expects("b")</span>.args()                         # incorrect: you must supply at least one arg
+<span class="dim">a.expects("b")</span>.args()                         # incorrect: supply at least one arg
 <span class="dim">a.expects("b")</span>                                # correct
 <span class="dim">a.expects("b")</span>.args(1).args("two")            # incorrect: use args() only once per expectation</pre>
           </li>
