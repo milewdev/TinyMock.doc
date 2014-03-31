@@ -37,10 +37,10 @@
     it "sends a greeting and returns the response", -></span>
 {% highlight coffeescript %}
       mock (socket) ->
-        socket.expects("write").args("Hello, my name is Test")
-        socket.expects("read").returns("Greetings Test!")
+        socket.expects("write").args("Hello, my name is Test\n")
+        socket.expects("read").returns("Greetings Test!\n")
 {% endhighlight %}        <span class="dim">chat = new Chat(socket)
-        chat.greet("Test").should.equal("Greetings Test!")</a></pre>
+        chat.greet("Test").should.equal("Greetings Test!\n")</a></pre>
 
       <nav class="index">
   		  <ul>
