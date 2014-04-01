@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg 
+  version="1.1" 
+  xmlns="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink"  
+  viewBox="0, 0, 400, 400">
+  <g>
+    <circle cx="200" cy="200" r="200" fill="#001faa" />
+    <g transform="translate(94,150)">
+      <rect 
+        x="0" 
+        y="0" 
+        width="140" 
+        height="140" 
+        fill="#ffffff"
+        transform="translate(106,-78) scale(1,0.7) rotate(45)" />
+      <rect 
+        x="0" 
+        y="0" 
+        width="100" 
+        height="100" 
+        fill="#ffffff"
+        transform="skewY(35)" />
+      <rect 
+        x="0" 
+        y="0" 
+        width="100" 
+        height="100" 
+        fill="#ffffff"
+        transform="translate(112,70) skewY(-35)" />
+    </g>
+  </g>
+</svg>

@@ -65,7 +65,7 @@ body {
       }
 
       &:before {                              /* the fancy bullet is added separately (the original one was clobbered with list-style-type: none) */
-        background-color: #ccc;
+        background-color: #001faa;
         border: 0;                            /* hide the border as it didn't look smooth in safari */
         border-radius: 50%;                   /* create a circle */
         color: white;
@@ -202,6 +202,42 @@ body.installation {
     margin-bottom: 2em;                         /* some extra space between installation options */
     margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
   }
+
+  /* TODO: extract things in common with ul.fancy, if this makes sense; move this up into the common area */
+  ul.images, ol.images {
+    line-height: 1.3em;
+    list-style-type: none;                      /* we'll do it ourselves using li:before */
+    margin-left: 0em;                           /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
+
+    & > li {
+      margin-bottom: 4em;
+      position: relative;                       /* so that child li:before element can use absolute position */
+  
+      &:before {
+        height: 2.6em;                          /* keep the width and height the same, just to be consistent */
+        left: -4.5em;                           /* put the images out in the left margin */
+        position: absolute;                     /* absolutely positioned relative to the associated li */
+        top: 0em;
+        width: 2.6em;                           /* same as height, to be consistent */
+      }
+
+      &.requirements:before {
+        content: url("check.svg");
+      }
+
+      &.command-prompt:before {
+        content: url("command-prompt.svg");
+      }
+
+      &.package:before {
+        content: url("package.svg");
+      }
+
+      &.uninstall:before {
+        content: url("garbage-can.svg");
+      }
+    }
+  }
 }
 
 
@@ -220,7 +256,7 @@ body.reference {
     
     ul.fancy {
       li {
-        margin-bottom: 3em;                       /* allow lots of space between reference items */
+        margin-bottom: 3em;                     /* allow lots of space between reference items */
     
         p {
           margin-top: 1.4em;
