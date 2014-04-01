@@ -1,0 +1,5 @@
+- Move *.svg into site/images/
+- Move *.html into site/pages/
+- Move *.css and *.scss into site/styles
+- Rename build, run, and watch to _build, _run, and _watch
+
