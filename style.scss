@@ -19,7 +19,7 @@ body {
 
   /* links */
   a, a:link, a:hover, a:visited, a:active {
-    color: inherit;                             /* in general, links are indistinguishable from regular text ... */
+    color: #0000cc;
     text-decoration: none;
     
     &:hover {
@@ -268,6 +268,11 @@ body.reference {
           font-size: 110%;
           font-weight: bold;
           margin-bottom: 1em;
+          
+          /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */
+          a, a:link, a:hover, a:visited, a:active {
+            color: inherit;
+          }
         }
       }
     }

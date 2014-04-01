@@ -24,8 +24,7 @@ body {
   /* a box to display code samples */
   /* a horizontal line and copyright notice at the bottom of each page */ }
   body a, body a:link, body a:hover, body a:visited, body a:active {
-    color: inherit;
-    /* in general, links are indistinguishable from regular text ... */
+    color: #0000cc;
     text-decoration: none; }
     body a:hover, body a:link:hover, body a:hover:hover, body a:visited:hover, body a:active:hover {
       text-decoration: underline;
@@ -251,4 +250,7 @@ body.reference article {
       font-family: "Lucida Console", Monaco5, monospace;
       font-size: 110%;
       font-weight: bold;
-      margin-bottom: 1em; }
+      margin-bottom: 1em;
+      /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */ }
+      body.reference article ul.fancy li p.usage a, body.reference article ul.fancy li p.usage a:link, body.reference article ul.fancy li p.usage a:hover, body.reference article ul.fancy li p.usage a:visited, body.reference article ul.fancy li p.usage a:active {
+        color: inherit; }
