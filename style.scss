@@ -96,7 +96,7 @@ body {
     }
   }
 
-  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in child classes */
+  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in sub-classes */
   ul.images, ol.images {
     line-height: 1.3em;
     list-style-type: none;                      /* we'll do it ourselves using li:before */
@@ -111,6 +111,26 @@ body {
         left: -4.5em;                           /* put the images out in the left margin */
         position: absolute;                     /* absolutely positioned relative to the associated li */
         top: 0em;
+        width: 2.6em;                           /* same as height, to be consistent */
+      }
+    }
+  }
+
+  /* horizontal lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
+  ul.h-images, ol.h-images {
+    list-style-type: none;                      /* we'll do it ourselves using li:before */
+
+    & > li {
+      display: inline-block;                    /* list menu items horizontally */
+      margin-left: 4em;                         /* take into account the bullet image */
+      position: relative;                       /* so that child li:before element can use absolute position */
+      width: 6em;                               /* to be adjusted in sub-classes */
+  
+      &:before {
+        height: 2.6em;                          /* keep the width and height the same, just to be consistent */
+        left: -3.2em;                           /* put the images out in the left margin */
+        position: absolute;                     /* absolutely positioned relative to the associated li */
+        top: -0.8em;
         width: 2.6em;                           /* same as height, to be consistent */
       }
     }
@@ -203,14 +223,22 @@ body.index {
 
   /* navigation links that are part of the main page content */
   nav.index {
-    ul {
+    ul.h-images {
       margin-top: 5em;                          /* lots of space on the sparse home page */
+      margin-left: 3em;                         /* some things you just have to center by eye */
 
       li {
-        display: inline-block;                  /* list menu items horizontally */
-        margin-left: 2em;                       /* spacing between menu items */
-        margin-right: 2em;
+        text-align: left;                       /* to counter-act the text-align: center; of the body tag */
+
+        &:before {
+          content: url("book.svg");
+        }
       }
+    }
+
+    /* keep the links the same color as the rest of the text; it is obvious that they are links */
+    a, a:link, a:hover, a:visited, a:active {
+      color: inherit;
     }
   }
 }
@@ -221,23 +249,24 @@ body.installation {
   article {
     margin-bottom: 2em;                         /* some extra space between installation options */
     margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
-  }
 
-  ul.images > li {
-    &.requirements:before {
-      content: url("check.svg");
-    }
+    /* the images to use for the list bullets; each bullet has its own image */
+    ul.images > li {
+      &.requirements:before {
+        content: url("check.svg");
+      }
 
-    &.command-prompt:before {
-      content: url("command-prompt.svg");
-    }
+      &.command-prompt:before {
+        content: url("command-prompt.svg");
+      }
 
-    &.package:before {
-      content: url("package.svg");
-    }
+      &.package:before {
+        content: url("package.svg");
+      }
 
-    &.uninstall:before {
-      content: url("garbage-can.svg");
+      &.uninstall:before {
+        content: url("garbage-can.svg");
+      }
     }
   }
 }
@@ -267,7 +296,7 @@ body.reference {
         margin-bottom: 3em;                     /* allow lots of space between reference items */
 
         &:before {
-          content: url("book.svg");
+          content: url("book.svg");             /* the image to use for the list bullets; all bullets have the same image */
         }
     
         p {

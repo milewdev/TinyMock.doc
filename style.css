@@ -20,7 +20,8 @@ body {
   /* ordinary lists */
   /* fancy lists, which is to say they have a big circle instead of a dot */
   /* fancy ordered lists numbered with a, b, c, etc. */
-  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in child classes */
+  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in sub-classes */
+  /* horizontal lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
   /* a horizontal menu and a horizontal line at the top of the page */
   /* a box to display code samples */
   /* a horizontal line and copyright notice at the bottom of each page */ }
@@ -117,6 +118,28 @@ body {
         top: 0em;
         width: 2.6em;
         /* same as height, to be consistent */ }
+  body ul.h-images, body ol.h-images {
+    list-style-type: none;
+    /* we'll do it ourselves using li:before */ }
+    body ul.h-images > li, body ol.h-images > li {
+      display: inline-block;
+      /* list menu items horizontally */
+      margin-left: 4em;
+      /* take into account the bullet image */
+      position: relative;
+      /* so that child li:before element can use absolute position */
+      width: 6em;
+      /* to be adjusted in sub-classes */ }
+      body ul.h-images > li:before, body ol.h-images > li:before {
+        height: 2.6em;
+        /* keep the width and height the same, just to be consistent */
+        left: -3.2em;
+        /* put the images out in the left margin */
+        position: absolute;
+        /* absolutely positioned relative to the associated li */
+        top: -0.8em;
+        width: 2.6em;
+        /* same as height, to be consistent */ }
   body nav.common ul {
     border-bottom: 1px solid #eee;
     /* a fine horizontal line */
@@ -206,30 +229,36 @@ body.index {
       /* center the pre box on the page */
       width: 85%;
       /* fit it's width to the code it displays */ }
-  body.index nav.index ul {
-    margin-top: 5em;
-    /* lots of space on the sparse home page */ }
-    body.index nav.index ul li {
-      display: inline-block;
-      /* list menu items horizontally */
-      margin-left: 2em;
-      /* spacing between menu items */
-      margin-right: 2em; }
+  body.index nav.index {
+    /* keep the links the same color as the rest of the text; it is obvious that they are links */ }
+    body.index nav.index ul.h-images {
+      margin-top: 5em;
+      /* lots of space on the sparse home page */
+      margin-left: 3em;
+      /* some things you just have to center by eye */ }
+      body.index nav.index ul.h-images li {
+        text-align: left;
+        /* to counter-act the text-align: center; of the body tag */ }
+        body.index nav.index ul.h-images li:before {
+          content: url("book.svg"); }
+    body.index nav.index a, body.index nav.index a:link, body.index nav.index a:hover, body.index nav.index a:visited, body.index nav.index a:active {
+      color: inherit; }
 
 /* installation.html styles */
 body.installation article {
   margin-bottom: 2em;
   /* some extra space between installation options */
   margin-left: 4.5em;
-  /* so that the bullets do not go beyond the left page margin */ }
-body.installation ul.images > li.requirements:before {
-  content: url("check.svg"); }
-body.installation ul.images > li.command-prompt:before {
-  content: url("command-prompt.svg"); }
-body.installation ul.images > li.package:before {
-  content: url("package.svg"); }
-body.installation ul.images > li.uninstall:before {
-  content: url("garbage-can.svg"); }
+  /* so that the bullets do not go beyond the left page margin */
+  /* the images to use for the list bullets; each bullet has its own image */ }
+  body.installation article ul.images > li.requirements:before {
+    content: url("check.svg"); }
+  body.installation article ul.images > li.command-prompt:before {
+    content: url("command-prompt.svg"); }
+  body.installation article ul.images > li.package:before {
+    content: url("package.svg"); }
+  body.installation article ul.images > li.uninstall:before {
+    content: url("garbage-can.svg"); }
 
 /* tutorial.html styles */
 body.tutorial article {
@@ -249,7 +278,8 @@ body.reference article {
     /* allow lots of space between reference items */
     /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */ }
     body.reference article ul.images li:before {
-      content: url("book.svg"); }
+      content: url("book.svg");
+      /* the image to use for the list bullets; all bullets have the same image */ }
     body.reference article ul.images li p {
       margin-top: 1.4em; }
     body.reference article ul.images li p.usage {
