@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg 
+  version="1.1" 
+  xmlns="http://www.w3.org/2000/svg" 
+  xmlns:xlink="http://www.w3.org/1999/xlink"  
+  viewBox="0, 0, 100, 100">
+  <g>
+    <circle cx="50" cy="50" r="50" fill="#001faa" />
+
+    <!-- left page: width is 30, height is 40 -->
+    <path
+      fill="#ffffff"
+      d="M18,70 q15,-15,30,0, l0,-40 q-15,-15,-30,0 z" />
+      
+    <!-- left book cover -->
+    <path
+      fill="#ffffff"
+      d="M18,71 l30,0 0,4 -30,0 z" />
+    
+    <!-- right page -->
+    <path
+      fill="#ffffff"
+      d="M52,70 q15,-15,30,0, l0,-40 q-15,-15,-30,0 z" />
+      
+    <!-- right book cover -->
+    <path
+      fill="#ffffff"
+      d="M52,71 l30,0 0,4 -30,0 z" />
+
+  </g>
+</svg>

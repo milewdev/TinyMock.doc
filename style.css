@@ -20,12 +20,14 @@ body {
   /* ordinary lists */
   /* fancy lists, which is to say they have a big circle instead of a dot */
   /* fancy ordered lists numbered with a, b, c, etc. */
+  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in child classes */
   /* a horizontal menu and a horizontal line at the top of the page */
   /* a box to display code samples */
   /* a horizontal line and copyright notice at the bottom of each page */ }
   body a, body a:link, body a:hover, body a:visited, body a:active {
     color: #0000cc;
-    text-decoration: none; }
+    text-decoration: none;
+    /* no text decoration ... */ }
     body a:hover, body a:link:hover, body a:hover:hover, body a:visited:hover, body a:active:hover {
       text-decoration: underline;
       /* ... until you hover over them */ }
@@ -95,6 +97,26 @@ body {
       /* use letters instead of numbers, i.e. a, b, c, ... */
       counter-increment: li-counter;
       /* otherwise we'll get a, a, a, ... */ }
+  body ul.images, body ol.images {
+    line-height: 1.3em;
+    list-style-type: none;
+    /* we'll do it ourselves using li:before */
+    margin-left: 0em;
+    /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */ }
+    body ul.images > li, body ol.images > li {
+      margin-bottom: 4em;
+      position: relative;
+      /* so that child li:before element can use absolute position */ }
+      body ul.images > li:before, body ol.images > li:before {
+        height: 2.6em;
+        /* keep the width and height the same, just to be consistent */
+        left: -4.5em;
+        /* put the images out in the left margin */
+        position: absolute;
+        /* absolutely positioned relative to the associated li */
+        top: 0em;
+        width: 2.6em;
+        /* same as height, to be consistent */ }
   body nav.common ul {
     border-bottom: 1px solid #eee;
     /* a fine horizontal line */
@@ -195,41 +217,19 @@ body.index {
       margin-right: 2em; }
 
 /* installation.html styles */
-body.installation {
-  /* TODO: extract things in common with ul.fancy, if this makes sense; move this up into the common area */ }
-  body.installation article {
-    margin-bottom: 2em;
-    /* some extra space between installation options */
-    margin-left: 4.5em;
-    /* so that the bullets do not go beyond the left page margin */ }
-  body.installation ul.images, body.installation ol.images {
-    line-height: 1.3em;
-    list-style-type: none;
-    /* we'll do it ourselves using li:before */
-    margin-left: 0em;
-    /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */ }
-    body.installation ul.images > li, body.installation ol.images > li {
-      margin-bottom: 4em;
-      position: relative;
-      /* so that child li:before element can use absolute position */ }
-      body.installation ul.images > li:before, body.installation ol.images > li:before {
-        height: 2.6em;
-        /* keep the width and height the same, just to be consistent */
-        left: -4.5em;
-        /* put the images out in the left margin */
-        position: absolute;
-        /* absolutely positioned relative to the associated li */
-        top: 0em;
-        width: 2.6em;
-        /* same as height, to be consistent */ }
-      body.installation ul.images > li.requirements:before, body.installation ol.images > li.requirements:before {
-        content: url("check.svg"); }
-      body.installation ul.images > li.command-prompt:before, body.installation ol.images > li.command-prompt:before {
-        content: url("command-prompt.svg"); }
-      body.installation ul.images > li.package:before, body.installation ol.images > li.package:before {
-        content: url("package.svg"); }
-      body.installation ul.images > li.uninstall:before, body.installation ol.images > li.uninstall:before {
-        content: url("garbage-can.svg"); }
+body.installation article {
+  margin-bottom: 2em;
+  /* some extra space between installation options */
+  margin-left: 4.5em;
+  /* so that the bullets do not go beyond the left page margin */ }
+body.installation ul.images > li.requirements:before {
+  content: url("check.svg"); }
+body.installation ul.images > li.command-prompt:before {
+  content: url("command-prompt.svg"); }
+body.installation ul.images > li.package:before {
+  content: url("package.svg"); }
+body.installation ul.images > li.uninstall:before {
+  content: url("garbage-can.svg"); }
 
 /* tutorial.html styles */
 body.tutorial article {
@@ -240,17 +240,19 @@ body.tutorial article {
 body.reference article {
   margin-left: 4.5em;
   /* so that the bullets do not go beyond the left page margin */ }
-  body.reference article ul.fancy li {
+  body.reference article ul.images li {
     margin-bottom: 3em;
     /* allow lots of space between reference items */
     /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */ }
-    body.reference article ul.fancy li p {
+    body.reference article ul.images li:before {
+      content: url("book.svg"); }
+    body.reference article ul.images li p {
       margin-top: 1.4em; }
-    body.reference article ul.fancy li p.usage {
+    body.reference article ul.images li p.usage {
       font-family: "Lucida Console", Monaco5, monospace;
       font-size: 110%;
       font-weight: bold;
       margin-bottom: 1em;
       /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */ }
-      body.reference article ul.fancy li p.usage a, body.reference article ul.fancy li p.usage a:link, body.reference article ul.fancy li p.usage a:hover, body.reference article ul.fancy li p.usage a:visited, body.reference article ul.fancy li p.usage a:active {
+      body.reference article ul.images li p.usage a, body.reference article ul.images li p.usage a:link, body.reference article ul.images li p.usage a:hover, body.reference article ul.images li p.usage a:visited, body.reference article ul.images li p.usage a:active {
         color: inherit; }

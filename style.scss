@@ -20,7 +20,7 @@ body {
   /* links */
   a, a:link, a:hover, a:visited, a:active {
     color: #0000cc;
-    text-decoration: none;
+    text-decoration: none;                      /* no text decoration ... */
     
     &:hover {
       text-decoration: underline;               /* ... until you hover over them */
@@ -92,6 +92,26 @@ body {
       &:before {                              /* this is the circle with a, b, c, ... inside */
         content: counter(li-counter, lower-alpha);  /* use letters instead of numbers, i.e. a, b, c, ... */
         counter-increment: li-counter;        /* otherwise we'll get a, a, a, ... */
+      }
+    }
+  }
+
+  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in child classes */
+  ul.images, ol.images {
+    line-height: 1.3em;
+    list-style-type: none;                      /* we'll do it ourselves using li:before */
+    margin-left: 0em;                           /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
+
+    & > li {
+      margin-bottom: 4em;
+      position: relative;                       /* so that child li:before element can use absolute position */
+  
+      &:before {
+        height: 2.6em;                          /* keep the width and height the same, just to be consistent */
+        left: -4.5em;                           /* put the images out in the left margin */
+        position: absolute;                     /* absolutely positioned relative to the associated li */
+        top: 0em;
+        width: 2.6em;                           /* same as height, to be consistent */
       }
     }
   }
@@ -203,39 +223,21 @@ body.installation {
     margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
   }
 
-  /* TODO: extract things in common with ul.fancy, if this makes sense; move this up into the common area */
-  ul.images, ol.images {
-    line-height: 1.3em;
-    list-style-type: none;                      /* we'll do it ourselves using li:before */
-    margin-left: 0em;                           /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
+  ul.images > li {
+    &.requirements:before {
+      content: url("check.svg");
+    }
 
-    & > li {
-      margin-bottom: 4em;
-      position: relative;                       /* so that child li:before element can use absolute position */
-  
-      &:before {
-        height: 2.6em;                          /* keep the width and height the same, just to be consistent */
-        left: -4.5em;                           /* put the images out in the left margin */
-        position: absolute;                     /* absolutely positioned relative to the associated li */
-        top: 0em;
-        width: 2.6em;                           /* same as height, to be consistent */
-      }
+    &.command-prompt:before {
+      content: url("command-prompt.svg");
+    }
 
-      &.requirements:before {
-        content: url("check.svg");
-      }
+    &.package:before {
+      content: url("package.svg");
+    }
 
-      &.command-prompt:before {
-        content: url("command-prompt.svg");
-      }
-
-      &.package:before {
-        content: url("package.svg");
-      }
-
-      &.uninstall:before {
-        content: url("garbage-can.svg");
-      }
+    &.uninstall:before {
+      content: url("garbage-can.svg");
     }
   }
 }
@@ -254,9 +256,13 @@ body.reference {
   article {
     margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
     
-    ul.fancy {
+    ul.images {
       li {
         margin-bottom: 3em;                     /* allow lots of space between reference items */
+
+        &:before {
+          content: url("book.svg");
+        }
     
         p {
           margin-top: 1.4em;
