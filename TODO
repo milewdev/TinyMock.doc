@@ -3,3 +3,4 @@
 - Move *.css and *.scss into site/styles
 - Rename build, run, and watch to _build, _run, and _watch
 - Run the site through html and css linters
+- Cleanup ul/ol.images; rename to .v-images, etc.
