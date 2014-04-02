@@ -62,7 +62,8 @@ describe "Chat", ->
 <span class="dim">a.expects("b")</span>.args()                         # incorrect: supply at least one arg
 <span class="dim">a.expects("b")</span>                                # correct
 <span class="dim">a.expects("b")</span>.args(1).args("two")            # incorrect: use args() only once per expectation
-<span class="dim">a</span>.args(1)<span class="dim">.expects("b")</span>                        # incorrect: must be called right after expects()</pre>
+<span class="dim">a</span>.args(1)<span class="dim">.expects("b")</span>                        # incorrect: must be called right after expects()
+<span class="dim">a.expects("b").returns("c")</span>.args(1)           # incorrect: must be called right after expects()</pre>
           </li>
         
         
