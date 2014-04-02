@@ -247,6 +247,12 @@ body.installation {
 body.tutorial {
   article {
     margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
+    
+    aside {
+      display: inline;
+      font-size: 96%;
+      font-style: italic;
+    }
   }
 }
 

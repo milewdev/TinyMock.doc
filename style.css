@@ -235,6 +235,10 @@ body.installation ul.images > li.uninstall:before {
 body.tutorial article {
   margin-left: 4.5em;
   /* so that the bullets do not go beyond the left page margin */ }
+  body.tutorial article aside {
+    display: inline;
+    font-size: 96%;
+    font-style: italic; }
 
 /* reference.html styles */
 body.reference article {
