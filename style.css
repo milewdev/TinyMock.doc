@@ -235,12 +235,19 @@ body.index {
       margin-top: 5em;
       /* lots of space on the sparse home page */
       margin-left: 3em;
-      /* some things you just have to center by eye */ }
+      /* some things you just have to center by eye */
+      /* the images to use for the list bullets; each bullet has its own image */ }
       body.index nav.index ul.h-images li {
         text-align: left;
         /* to counter-act the text-align: center; of the body tag */ }
-        body.index nav.index ul.h-images li:before {
+        body.index nav.index ul.h-images li.install:before {
+          content: url("install.svg"); }
+        body.index nav.index ul.h-images li.tutorial:before {
+          content: url("tutorial.svg"); }
+        body.index nav.index ul.h-images li.reference:before {
           content: url("book.svg"); }
+        body.index nav.index ul.h-images li.source:before {
+          content: url("source.svg"); }
     body.index nav.index a, body.index nav.index a:link, body.index nav.index a:hover, body.index nav.index a:visited, body.index nav.index a:active {
       color: inherit; }
 

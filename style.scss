@@ -227,11 +227,24 @@ body.index {
       margin-top: 5em;                          /* lots of space on the sparse home page */
       margin-left: 3em;                         /* some things you just have to center by eye */
 
+      /* the images to use for the list bullets; each bullet has its own image */
       li {
         text-align: left;                       /* to counter-act the text-align: center; of the body tag */
 
-        &:before {
+        &.install:before {
+          content: url("install.svg");
+        }
+
+        &.tutorial:before {
+          content: url("tutorial.svg");
+        }
+
+        &.reference:before {
           content: url("book.svg");
+        }
+
+        &.source:before {
+          content: url("source.svg");
         }
       }
     }
