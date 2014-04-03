@@ -2,7 +2,7 @@
 /*
   The web site consists of only three pages so all styles are kept in this
   one style sheet.  There are a set of common styles and then a set of styles
-  for each page, identifies with a class on the body tag.  For example, the
+  for each page, identified with a class on the body tag.  For example, the
   installation.html page will have the tag <body class="installation">.
  */
 /* common styles */

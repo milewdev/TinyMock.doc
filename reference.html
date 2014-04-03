@@ -33,7 +33,7 @@
         
           <li>
             <p class="usage">
-              <a name="args" href="#args">args(arg [, arg, ...])</a>
+              <a name="args" href="#args">expectation.args(arg [, arg, ...]) => expectation</a>
             </p>
             <p>
               Optional.  Specifies expected arguments to the expectation.  One or more arg must be supplied; do not use arg(), instead simply do not use args at all.  Can be chained.  Can only be specified once.
@@ -59,21 +59,92 @@ describe "Chat", ->
             </p>
             <pre class="code"><span class="dim">a.expects("b")</span>.args(1, 2, "three")            # many arguments
 <span class="dim">a.expects("b")</span>.args( {name: "Aristotle"} )    # an object
-<span class="dim">a.expects("b")</span>.args()                         # incorrect: supply at least one arg
-<span class="dim">a.expects("b")</span>                                # correct
-<span class="dim">a.expects("b")</span>.args(1).args("two")            # incorrect: use args() only once per expectation
-<span class="dim">a</span>.args(1)<span class="dim">.expects("b")</span>                        # incorrect: must be called right after expects()
-<span class="dim">a.expects("b").returns("c")</span>.args(1)           # incorrect: must be called right after expects()</pre>
+<span class="dim">a.expects("b")</span>.args()                         # not ok: supply at least one arg
+<span class="dim">a.expects("b")</span>                                # ok
+<span class="dim">a.expects("b")</span>.args(1).args("two")            # not ok: use args() only once per expectation
+<span class="dim">a</span>.args(1)<span class="dim">.expects("b")</span>                        # not ok: must be called right after expects()
+<span class="dim">a.expects("b").returns("c")</span>.args(1)           # not ok: must be called right after expects()</pre>
           </li>
         
         
           <li>
             <p class="usage">
-              <a name="expects" href="#expects">expects(method_name)</a>
+              <a name="expects" href="#expects">object.expects(method_name) => expectation</a>
             </p>
             <p>
-              Can be chained.
+              Creates an expectation that method_name will be called on object.  For example, the following 
+              creates the expectation that the method appendFileAsync() will be called on the object fs:
             </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  fs.expects("appendFileAsync"){% endhighlight %}</pre>
+            <p>
+              expects() can be called on any class, on any instance of Object, or on anything that inherits from Object:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  Object.expects("toString")      # Object is a class
+  
+class MyClass
+  # empty
+mock ->
+  MyClass.expects("toString")     # any class that inherits from Object (i.e. any class)
+              
+mock ->
+  object = new Object()
+  object.expects("toString")      # object is an instance of Object
+  
+class MyClass
+  # empty
+mock ->
+  object = new MyClass()
+  object.expects("toString")      # object is an instance of MyClass, which inherits from Object
+
+mock ->
+  object = Object.create(null);
+  object.expects("my_method")     # not ok; object has no method 'expects'{% endhighlight %}</pre>
+            <p>
+              method_name must already exist unless expects() is called on a mock instance passed in by mock():
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+class MyClass
+  # empty
+mock ->
+  MyClass.expects("my_method")    # not ok; my_method() is not an existing method of MyClass
+
+class MyClass
+  # empty
+mock ->
+  object = new MyClass()
+  object.expects("my_method")     # not ok; my_method() is not an existing method of MyClass
+
+mock (object) ->
+  object.expects("my_method")     # ok; object was passed in by mock(){% endhighlight %}</pre>
+            <p>
+              expects() replaces an existing method_name with a mock method, therefore the original method_name's
+              functionality is 'lost':
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+class MyObject
+  my_method: -> console.log("hello")
+mock ->
+  object = new MyObject()
+  object.my_method()              # prints "hello" on the console
+  object.expects("my_method")
+  object.my_method()              # does nothing
+
+mock (object) ->
+  object.my_method()              # not ok: throws an unknown method error
+  object.expects("my_method")
+  object.my_method()              # ok (but does nothing)
+{% endhighlight %}</pre>
+            <p>
+              expects() returns an expectation object upon which the args(), returns(), or throws() methods can be called.
+              This allows for method chaining:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+my_object.expects("my_method").args(1,2,3).returns("something")
+{% endhighlight %}</pre>
             <p>
               Example:
             </p>
@@ -93,11 +164,12 @@ describe "Chat", ->
             <p>
               Other examples:
             </p>
-            <pre class="code"><span class="dim">a</span>.expects()                    # incorrect: supply a method name
-<span class="dim">a</span>.expects("a", "b")            # incorrect: one method name per call
-<span class="dim">a</span>.expects("a").expects("b")    # correct
-<span class="dim">a</span>.expects("a")                 # also correct
-<span class="dim">a</span>.expects("b")</pre>
+            <pre class="code">{% highlight coffeescript %}
+a.expects()                    # not ok: supply a method name
+a.expects("a", "b")            # not ok: one method name per call
+a.expects("a").expects("b")    # ok
+a.expects("a")                 # also ok
+a.expects("b"){% endhighlight %}</pre>
           </li>
         
         
@@ -106,7 +178,18 @@ describe "Chat", ->
               <a name="mock" href="#mock">mock [options,] callback</a>
             </p>
             <p>
-              
+              Use mock() to run a callback function that sets expectations and runs tests:
+            </p>
+            <pre class="code">{% highlight coffeescript %}describe "greet(name)", ->
+  mock
+    ->                                  # callback function
+      fs.expects("appendFileAsync")     # set an expectation
+      chat = new Chat()
+      chat.greet("Aristotle")           # run a test that should call fs.appendFileAsync(){% endhighlight %}</pre>
+            <p>
+              mock() adds expects() to Object.prototype so that you can add an expectation on anything that is an instance
+              of Object or that inherits from Object.  When the callback function finishes running, mock() verifies that all 
+              expectations were actually met.
             </p>
           </li>
         
@@ -117,7 +200,7 @@ describe "Chat", ->
             </p>
             <p>
               Use the Node.js <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require()</a> 
-              function to gain access to TinyMockJS:
+              function as follows to include TinyMockJS in your code:
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()</span>
@@ -137,14 +220,14 @@ describe "Chat", ->
         
           <li>
             <p class="usage">
-              <a name="returns" href="#returns">returns(value)</a>
+              <a name="returns" href="#returns">expectation.returns(value) => expectation</a>
             </p>
           </li>
         
         
           <li>
             <p class="usage">
-              <a name="throws" href="#throws">throws(error)</a>
+              <a name="throws" href="#throws">expectation.throws(error) => expectation</a>
             </p>
           </li>
         </ul>
