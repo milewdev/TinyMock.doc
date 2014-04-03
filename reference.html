@@ -280,7 +280,7 @@ mock ->
           </p>
           <pre class="code">{% highlight coffeescript %}
 mock ->
-  socket.expects("read").returns("a message").throws("an error")    # not ok
+  socket.expects("read").throws("an error").returns("a message")    # not ok
 {% endhighlight %}</pre>
             <p>
               Example:
@@ -305,6 +305,64 @@ describe "Chat", ->
             <p class="usage">
               <a name="throws" href="#throws">throws(error)</a>
             </p>
+            <p>
+              Specifies the error that a mock method installed by an expectation should throw.  For
+              example, the following creates an expectation for the method read() and that the 
+              mock read() installed by the expectation should throw "an error":
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("read").throws(new Error("an error"))
+{% endhighlight %}</pre>
+            <p>
+              throws() should be called with one argument.  Do not use throws() if the mocked 
+              method should not throw anything:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("close")             # ok; mocked close() does not throw anything
+  socket.expects("close").throws()    # not ok; do not use throws() with no arguments
+{% endhighlight %}</pre>
+            <p>
+              throws() should only be called once per expectation:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("read").throws("e")                  # ok
+  socket.expects("read").throws("e1").throws("e2")    # not ok
+  
+mock ->
+  socket.expects("read").throws("e1")
+  socket.expects("read").throws("e2")                 # not ok; TinyMockJS cannot handle this  
+{% endhighlight %}</pre>
+          <p>
+            throws() and returns() cannot be used on the same expectation:
+          </p>
+          <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket.expects("read").returns("a message").throws("an error")    # not ok
+{% endhighlight %}</pre>
+            <p>
+              Example:
+            </p>
+            <pre class="code"><span class="dim">chai   = require("chai")
+should = chai.should()
+mock   = require("TinyMockJS").mock
+Chat   = require("../src/Chat").Chat
+
+describe "Chat", ->
+  describe "greet(my_name)", ->
+    it "sends a greeting and returns the response", ->
+      mock (socket) ->
+        socket.expects("write").args("Hello, my name is Aristotle.\n")
+        socket.expects("read")</span>.throws(new Error("socket read error"))<span class="dim">
+        chat = new Chat(socket)
+        (-> chat.greet("Aristotle") ).should.throw("socket read error\n")</span></pre>
+
+
           </li>
         </ul>
       </article>
