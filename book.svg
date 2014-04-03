@@ -7,25 +7,25 @@
   <g>
     <circle cx="50" cy="50" r="50" fill="#001faa" />
 
-    <!-- left page: width is 30, height is 40 -->
+    <!-- left page: width is 30, height is 36 -->
     <path
       fill="#ffffff"
-      d="M18,70 q15,-15,30,0, l0,-40 q-15,-15,-30,0 z" />
+      d="M18,68 q15,-15,30,0, l0,-36 q-15,-15,-30,0 z" />
       
     <!-- left book cover -->
     <path
       fill="#ffffff"
-      d="M18,71 l30,0 0,4 -30,0 z" />
+      d="M18,69 l30,0 0,3 -30,0 z" />
     
     <!-- right page -->
     <path
       fill="#ffffff"
-      d="M52,70 q15,-15,30,0, l0,-40 q-15,-15,-30,0 z" />
+      d="M52,68 q15,-15,30,0, l0,-36 q-15,-15,-30,0 z" />
       
     <!-- right book cover -->
     <path
       fill="#ffffff"
-      d="M52,71 l30,0 0,4 -30,0 z" />
+      d="M52,69 l30,0 0,3 -30,0 z" />
 
   </g>
 </svg>
