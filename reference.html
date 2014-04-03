@@ -242,6 +242,62 @@ describe "Chat", ->
             <p class="usage">
               <a name="returns" href="#returns">returns(value)</a>
             </p>
+            <p>
+              Specifies the value that a mock method installed by an expectation should return.  For
+              example, the following creates an expectation for the method read() and that the 
+              mock read() installed by the expectation should return "a message":
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("read").returns("a message")
+{% endhighlight %}</pre>
+            <p>
+              returns() should be called with one argument.  Do not use returns() if the mocked 
+              method should not return anything:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("close")             # ok; mocked close() does not return anything
+  socket.expects("close").returns()   # not ok; do not use returns() with no arguments
+{% endhighlight %}</pre>
+            <p>
+              returns() should only be called once per expectation:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("read").returns("a message")           # ok
+  socket.expects("read").returns("m1").returns("m2")    # not ok
+  
+mock ->
+  socket.expects("read").returns("m1")
+  socket.expects("read").returns("m2")                  # not ok; TinyMockJS cannot handle this  
+{% endhighlight %}</pre>
+          <p>
+            returns() and throws() cannot be used on the same expectation:
+          </p>
+          <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket.expects("read").returns("a message").throws("an error")    # not ok
+{% endhighlight %}</pre>
+            <p>
+              Example:
+            </p>
+            <pre class="code"><span class="dim">chai   = require("chai")
+should = chai.should()
+mock   = require("TinyMockJS").mock
+Chat   = require("../src/Chat").Chat
+
+describe "Chat", ->
+  describe "greet(my_name)", ->
+    it "sends a greeting and returns the response", ->
+      mock (socket) ->
+        socket.expects("write").args("Hello, my name is Aristotle.\n")
+        socket.expects("read")</span>.returns("Greetings Aristotle!\n")<span class="dim">
+        chat = new Chat(socket)
+        chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
           </li>
         
         
