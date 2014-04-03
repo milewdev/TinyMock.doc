@@ -33,11 +33,50 @@
         
           <li>
             <p class="usage">
-              <a name="args" href="#args">expectation.args(arg [, arg, ...]) => expectation</a>
+              <a name="args" href="#args">args(arg [, arg, ...])</a>
             </p>
             <p>
-              Optional.  Specifies expected arguments to the expectation.  One or more arg must be supplied; do not use arg(), instead simply do not use args at all.  Can be chained.  Can only be specified once.
+              Specifies the arguments of an expected method call.  For example, the following creates
+              the expectation that the method appendFileSync() will be called with the arguments 
+              "log.txt" and "This is a log entry.":
             </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  fs.expects("appendFileSync").args("log.txt", "This is a log entry.")
+{% endhighlight %}</pre>
+            <p>
+              args() should be called with one or more arguments.  Do not use args() if an expected 
+              method is to be called with no arguments:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("close")           # ok; no arguments expected (e.g. socket.close() )
+  socket.expects("close").args()    # not ok; do not use args() with no arguments
+{% endhighlight %}</pre>              
+            <p>
+              args() should only be called once per expectation:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  fs.expects("appendFileSync").args("l.txt", "x")                         # ok
+  fs.expects("appendFileSync").args("l.txt").args("x")                    # not ok
+  fs.expects("appendFileSync").args("l1.txt", "x1").args("l2.txt", "x2")  # not ok ...
+  fs.expects("appendFileSync").args("l1.txt", "x1")                       # ... do this instead
+  fs.expects("appendFileSync").args("l2.txt", "x2")
+{% endhighlight %}</pre>
+            <p>
+              args() returns an expectation upon which either returns() or throws() can be
+              called.  args() should not be called after returns() or throws():
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  socket = new Socket()
+  socket.expects("greet").args("hello").returns("hi")     # ok
+  socket.expects("greet").returns("hi").args("hello")     # not ok
+  socket.expects("greet").args(null).throws("error")      # ok
+  socket.expects("greet").throws("error").args(null)      # not ok
+{% endhighlight %}</pre>
             <p>
               Example:
             </p>
@@ -54,30 +93,20 @@ describe "Chat", ->
         socket.expects("read").returns("Greetings Aristotle!\n")
         chat = new Chat(socket)
         chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
-            <p>
-              Other examples:
-            </p>
-            <pre class="code"><span class="dim">a.expects("b")</span>.args(1, 2, "three")            # many arguments
-<span class="dim">a.expects("b")</span>.args( {name: "Aristotle"} )    # an object
-<span class="dim">a.expects("b")</span>.args()                         # not ok: supply at least one arg
-<span class="dim">a.expects("b")</span>                                # ok
-<span class="dim">a.expects("b")</span>.args(1).args("two")            # not ok: use args() only once per expectation
-<span class="dim">a</span>.args(1)<span class="dim">.expects("b")</span>                        # not ok: must be called right after expects()
-<span class="dim">a.expects("b").returns("c")</span>.args(1)           # not ok: must be called right after expects()</pre>
           </li>
         
         
           <li>
             <p class="usage">
-              <a name="expects" href="#expects">object.expects(method_name) => expectation</a>
+              <a name="expects" href="#expects">object.expects(method_name)</a>
             </p>
             <p>
               Creates an expectation that method_name will be called on object.  For example, the following 
-              creates the expectation that the method appendFileAsync() will be called on the object fs:
+              creates the expectation that the method appendFileSync() will be called on the object fs:
             </p>
             <pre class="code">{% highlight coffeescript %}
 mock ->
-  fs.expects("appendFileAsync"){% endhighlight %}</pre>
+  fs.expects("appendFileSync"){% endhighlight %}</pre>
             <p>
               expects() can be called on any class, on any instance of Object, or on anything that inherits from Object:
             </p>
@@ -161,15 +190,6 @@ describe "Chat", ->
         socket</span>.expects("read")<span class="dim">.returns("Greetings Aristotle!\n")
         chat = new Chat(socket)
         chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
-            <p>
-              Other examples:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
-a.expects()                    # not ok: supply a method name
-a.expects("a", "b")            # not ok: one method name per call
-a.expects("a").expects("b")    # ok
-a.expects("a")                 # also ok
-a.expects("b"){% endhighlight %}</pre>
           </li>
         
         
@@ -183,9 +203,9 @@ a.expects("b"){% endhighlight %}</pre>
             <pre class="code">{% highlight coffeescript %}describe "greet(name)", ->
   mock
     ->                                  # callback function
-      fs.expects("appendFileAsync")     # set an expectation
+      fs.expects("appendFileSync")      # set an expectation
       chat = new Chat()
-      chat.greet("Aristotle")           # run a test that should call fs.appendFileAsync(){% endhighlight %}</pre>
+      chat.greet("Aristotle")           # run a test that should call fs.appendFileSync(){% endhighlight %}</pre>
             <p>
               mock() adds expects() to Object.prototype so that you can add an expectation on anything that is an instance
               of Object or that inherits from Object.  When the callback function finishes running, mock() verifies that all 
@@ -220,14 +240,14 @@ describe "Chat", ->
         
           <li>
             <p class="usage">
-              <a name="returns" href="#returns">expectation.returns(value) => expectation</a>
+              <a name="returns" href="#returns">returns(value)</a>
             </p>
           </li>
         
         
           <li>
             <p class="usage">
-              <a name="throws" href="#throws">expectation.throws(error) => expectation</a>
+              <a name="throws" href="#throws">throws(error)</a>
             </p>
           </li>
         </ul>
