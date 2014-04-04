@@ -14,7 +14,7 @@ body {
   font-family: "Optima", sans-serif;
   font-weight: 100;
   margin: 0 auto;                             /* center the page */
-  margin-bottom: 1em;                         /* so that when you scroll to the bottom of the page, there is a nice gap below the last content of the page */
+  margin-bottom: 1em;                         /* when scrolling to the bottom of the page, ensure there is a nice gap below the last content of the page */
   width: 800px;                               /* a fixed width page (we are not responsive at this time) */
 
   /* links */
@@ -58,7 +58,7 @@ body {
 
     & > li {
       margin-bottom: 4em;
-      position: relative;                     /* so that child li:before element can use absolute position */
+      position: relative;                     /* needed so that child li:before element can use absolute position */
 
       p {
         margin-bottom: 0.6em;                 /* a bit of space between paragraphs in an li element */
@@ -96,15 +96,15 @@ body {
     }
   }
 
-  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in sub-classes */
-  ul.images, ol.images {
+  /* vertical lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
+  ul.v-images, ol.v-images {
     line-height: 1.3em;
     list-style-type: none;                    /* we'll do it ourselves using li:before */
     margin-left: 0em;                         /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
 
     & > li {
       margin-bottom: 4em;
-      position: relative;                     /* so that child li:before element can use absolute position */
+      position: relative;                     /* needed so that child li:before element can use absolute position */
 
       &:before {
         height: 2.6em;                        /* keep the width and height the same, just to be consistent */
@@ -123,7 +123,7 @@ body {
     & > li {
       display: inline-block;                  /* list menu items horizontally */
       margin-left: 4em;                       /* take into account the bullet image */
-      position: relative;                     /* so that child li:before element can use absolute position */
+      position: relative;                     /* needed so that child li:before element can use absolute position */
       width: 6em;                             /* to be adjusted in sub-classes */
 
       &:before {
@@ -167,7 +167,7 @@ body {
   pre.code {
     border: 1px solid #ddd;                   /* a delicately raised box with a whisper of shadow */
     box-shadow: 0px 0px 6px #eee;
-    font-family: monospace;                   /* so that things that should line up do */
+    font-family: monospace;                   /* needed so that things that should line up do */
     font-size: 90%;
     line-height: 1.3;                         /* make it a bit easier to read */
     margin-top: 0.8em;                        /* a nice gap above and below the border+shadow */
@@ -261,10 +261,10 @@ body.index {
 body.installation {
   article {
     margin-bottom: 2em;                       /* some extra space between installation options */
-    margin-left: 4.5em;                       /* so that the bullets do not go beyond the left page margin */
+    margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
 
     /* the images to use for the list bullets; each bullet has its own image */
-    ul.images > li {
+    ul.v-images > li {
       &.requirements:before {
         content: url("/images/check.svg");
       }
@@ -288,7 +288,7 @@ body.installation {
 /* tutorial.html styles */
 body.tutorial {
   article {
-    margin-left: 4.5em;                       /* so that the bullets do not go beyond the left page margin */
+    margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
 
     aside {
       display: inline;
@@ -302,9 +302,9 @@ body.tutorial {
 /* reference.html styles */
 body.reference {
   article {
-    margin-left: 4.5em;                       /* so that the bullets do not go beyond the left page margin */
+    margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
 
-    ul.images {
+    ul.v-images {
       li {
         margin-bottom: 3em;                   /* allow lots of space between reference items */
 

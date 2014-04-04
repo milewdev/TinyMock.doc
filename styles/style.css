@@ -12,7 +12,7 @@ body {
   margin: 0 auto;
   /* center the page */
   margin-bottom: 1em;
-  /* so that when you scroll to the bottom of the page, there is a nice gap below the last content of the page */
+  /* when scrolling to the bottom of the page, ensure there is a nice gap below the last content of the page */
   width: 800px;
   /* a fixed width page (we are not responsive at this time) */
   /* links */
@@ -20,7 +20,7 @@ body {
   /* ordinary lists */
   /* fancy lists, which is to say they have a big circle instead of a dot */
   /* fancy ordered lists numbered with a, b, c, etc. */
-  /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in sub-classes */
+  /* vertical lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
   /* horizontal lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
   /* a horizontal menu and a horizontal line at the top of the page */
   /* a box to display code samples */
@@ -60,7 +60,7 @@ body {
     body ul.fancy > li, body ol.fancy > li {
       margin-bottom: 4em;
       position: relative;
-      /* so that child li:before element can use absolute position */ }
+      /* needed so that child li:before element can use absolute position */ }
       body ul.fancy > li p, body ol.fancy > li p {
         margin-bottom: 0.6em;
         /* a bit of space between paragraphs in an li element */ }
@@ -98,17 +98,17 @@ body {
       /* use letters instead of numbers, i.e. a, b, c, ... */
       counter-increment: li-counter;
       /* otherwise we'll get a, a, a, ... */ }
-  body ul.images, body ol.images {
+  body ul.v-images, body ol.v-images {
     line-height: 1.3em;
     list-style-type: none;
     /* we'll do it ourselves using li:before */
     margin-left: 0em;
     /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */ }
-    body ul.images > li, body ol.images > li {
+    body ul.v-images > li, body ol.v-images > li {
       margin-bottom: 4em;
       position: relative;
-      /* so that child li:before element can use absolute position */ }
-      body ul.images > li:before, body ol.images > li:before {
+      /* needed so that child li:before element can use absolute position */ }
+      body ul.v-images > li:before, body ol.v-images > li:before {
         height: 2.6em;
         /* keep the width and height the same, just to be consistent */
         left: -4.5em;
@@ -127,7 +127,7 @@ body {
       margin-left: 4em;
       /* take into account the bullet image */
       position: relative;
-      /* so that child li:before element can use absolute position */
+      /* needed so that child li:before element can use absolute position */
       width: 6em;
       /* to be adjusted in sub-classes */ }
       body ul.h-images > li:before, body ol.h-images > li:before {
@@ -174,7 +174,7 @@ body {
     /* a delicately raised box with a whisper of shadow */
     box-shadow: 0px 0px 6px #eee;
     font-family: monospace;
-    /* so that things that should line up do */
+    /* needed so that things that should line up do */
     font-size: 90%;
     line-height: 1.3;
     /* make it a bit easier to read */
@@ -256,21 +256,21 @@ body.installation article {
   margin-bottom: 2em;
   /* some extra space between installation options */
   margin-left: 4.5em;
-  /* so that the bullets do not go beyond the left page margin */
+  /* keep the bullets from going beyond the left page margin */
   /* the images to use for the list bullets; each bullet has its own image */ }
-  body.installation article ul.images > li.requirements:before {
+  body.installation article ul.v-images > li.requirements:before {
     content: url("/images/check.svg"); }
-  body.installation article ul.images > li.command-prompt:before {
+  body.installation article ul.v-images > li.command-prompt:before {
     content: url("/images/command-prompt.svg"); }
-  body.installation article ul.images > li.package:before {
+  body.installation article ul.v-images > li.package:before {
     content: url("/images/package.svg"); }
-  body.installation article ul.images > li.uninstall:before {
+  body.installation article ul.v-images > li.uninstall:before {
     content: url("/images/garbage-can.svg"); }
 
 /* tutorial.html styles */
 body.tutorial article {
   margin-left: 4.5em;
-  /* so that the bullets do not go beyond the left page margin */ }
+  /* keep the bullets from going beyond the left page margin */ }
   body.tutorial article aside {
     display: inline;
     font-size: 96%;
@@ -279,21 +279,21 @@ body.tutorial article {
 /* reference.html styles */
 body.reference article {
   margin-left: 4.5em;
-  /* so that the bullets do not go beyond the left page margin */ }
-  body.reference article ul.images li {
+  /* keep the bullets from going beyond the left page margin */ }
+  body.reference article ul.v-images li {
     margin-bottom: 3em;
     /* allow lots of space between reference items */
     /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */ }
-    body.reference article ul.images li:before {
+    body.reference article ul.v-images li:before {
       content: url("/images/book.svg");
       /* the image to use for the list bullets; all bullets have the same image */ }
-    body.reference article ul.images li p {
+    body.reference article ul.v-images li p {
       margin-top: 1.4em; }
-    body.reference article ul.images li p.usage {
+    body.reference article ul.v-images li p.usage {
       font-family: "Lucida Console", Monaco5, monospace;
       font-size: 110%;
       font-weight: bold;
       margin-bottom: 1em;
       /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */ }
-      body.reference article ul.images li p.usage a, body.reference article ul.images li p.usage a:link, body.reference article ul.images li p.usage a:hover, body.reference article ul.images li p.usage a:visited, body.reference article ul.images li p.usage a:active {
+      body.reference article ul.v-images li p.usage a, body.reference article ul.v-images li p.usage a:link, body.reference article ul.v-images li p.usage a:hover, body.reference article ul.v-images li p.usage a:visited, body.reference article ul.v-images li p.usage a:active {
         color: inherit; }
