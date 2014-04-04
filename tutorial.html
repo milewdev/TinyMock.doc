@@ -97,25 +97,24 @@ task 'test', 'Run unit tests', ->
               Use npm to install mocha, chai, the coffee-script compiler, and TinyMockJS:
               <pre class="code">$ npm install
 npm WARN package.json TinyMockJS.tutorial@ No README data
-npm http GET https://registry.npmjs.org/mocha
 npm http GET https://registry.npmjs.org/coffee-script
+npm http GET https://github.com/milewgit/TinyMockJS/raw/master/TinyMockJS-0.2.0.tgz
 
 ...
 
+npm http 200 https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.0.tgz
 npm http 304 https://registry.npmjs.org/lru-cache
-npm http 304 https://registry.npmjs.org/sigmund
 TinyMockJS@0.2.0 node_modules/TinyMockJS
+
+coffee-script@1.6.3 node_modules/coffee-script
 
 chai@1.9.1 node_modules/chai
 ├── assertion-error@1.0.0
 └── deep-eql@0.1.3 (type-detect@0.1.1)
 
-coffee-script@1.7.1 node_modules/coffee-script
-└── mkdirp@0.3.5
-
 mocha@1.18.2 node_modules/mocha
+├── debug@0.8.0
 ├── diff@1.0.7
-├── debug@0.7.4
 ├── growl@1.7.0
 ├── commander@2.0.0
 ├── mkdirp@0.3.5

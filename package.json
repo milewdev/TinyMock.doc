@@ -18,8 +18,8 @@
     "url": "https://github.com/milewgit/TinyMockJS.doc/issues"
   },
   "devDependencies": {
-    "mocha": "^1.18.0",
-    "chai": "^1.9.0",
-    "coffee-script": "^1.7.1"
+      "mocha": "*",
+      "chai": "*",
+      "coffee-script": "~1.6"
   }
 }
