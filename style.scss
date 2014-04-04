@@ -13,17 +13,17 @@
 body {
   font-family: "Optima", sans-serif;
   font-weight: 100;
-  margin: 0 auto;                               /* center the page */
-  margin-bottom: 1em;                           /* so that when you scroll to the bottom of the page, there is a nice gap below the last content of the page */
-  width: 800px;                                 /* a fixed width page (we are not responsive at this time) */
+  margin: 0 auto;                             /* center the page */
+  margin-bottom: 1em;                         /* so that when you scroll to the bottom of the page, there is a nice gap below the last content of the page */
+  width: 800px;                               /* a fixed width page (we are not responsive at this time) */
 
   /* links */
   a, a:link, a:hover, a:visited, a:active {
     color: #0000cc;
-    text-decoration: none;                      /* no text decoration ... */
-    
+    text-decoration: none;                    /* no text decoration ... */
+
     &:hover {
-      text-decoration: underline;               /* ... until you hover over them */
+      text-decoration: underline;             /* ... until you hover over them */
     }
   }
 
@@ -83,7 +83,7 @@ body {
       }
     }
   }
-  
+
   /* fancy ordered lists numbered with a, b, c, etc. */
   ol.fancy {
     counter-reset: li-counter;                /* every new list should start counting from 'a' */
@@ -99,39 +99,39 @@ body {
   /* more fancy lists, but here the bullet is an image; this is the 'base class' - images need to be added in sub-classes */
   ul.images, ol.images {
     line-height: 1.3em;
-    list-style-type: none;                      /* we'll do it ourselves using li:before */
-    margin-left: 0em;                           /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
+    list-style-type: none;                    /* we'll do it ourselves using li:before */
+    margin-left: 0em;                         /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
 
     & > li {
       margin-bottom: 4em;
-      position: relative;                       /* so that child li:before element can use absolute position */
-  
+      position: relative;                     /* so that child li:before element can use absolute position */
+
       &:before {
-        height: 2.6em;                          /* keep the width and height the same, just to be consistent */
-        left: -4.5em;                           /* put the images out in the left margin */
-        position: absolute;                     /* absolutely positioned relative to the associated li */
+        height: 2.6em;                        /* keep the width and height the same, just to be consistent */
+        left: -4.5em;                         /* put the images out in the left margin */
+        position: absolute;                   /* absolutely positioned relative to the associated li */
         top: 0em;
-        width: 2.6em;                           /* same as height, to be consistent */
+        width: 2.6em;                         /* same as height, to be consistent */
       }
     }
   }
 
   /* horizontal lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
   ul.h-images, ol.h-images {
-    list-style-type: none;                      /* we'll do it ourselves using li:before */
+    list-style-type: none;                    /* we'll do it ourselves using li:before */
 
     & > li {
-      display: inline-block;                    /* list menu items horizontally */
-      margin-left: 4em;                         /* take into account the bullet image */
-      position: relative;                       /* so that child li:before element can use absolute position */
-      width: 6em;                               /* to be adjusted in sub-classes */
-  
+      display: inline-block;                  /* list menu items horizontally */
+      margin-left: 4em;                       /* take into account the bullet image */
+      position: relative;                     /* so that child li:before element can use absolute position */
+      width: 6em;                             /* to be adjusted in sub-classes */
+
       &:before {
-        height: 2.6em;                          /* keep the width and height the same, just to be consistent */
-        left: -3.2em;                           /* put the images out in the left margin */
-        position: absolute;                     /* absolutely positioned relative to the associated li */
+        height: 2.6em;                        /* keep the width and height the same, just to be consistent */
+        left: -3.2em;                         /* put the images out in the left margin */
+        position: absolute;                   /* absolutely positioned relative to the associated li */
         top: -0.8em;
-        width: 2.6em;                           /* same as height, to be consistent */
+        width: 2.6em;                         /* same as height, to be consistent */
       }
     }
   }
@@ -139,61 +139,61 @@ body {
   /* a horizontal menu and a horizontal line at the top of the page */
   nav.common {
     ul {
-      border-bottom: 1px solid #eee;            /* a fine horizontal line */
-      margin-top: 0.8em;                        /* gap between top of page and menu item texts */
-      margin-bottom: 2em;                       /* gap between the menu and top-of-page content */
-      padding-bottom: 0.4em;                    /* space between bottom of menu items and horizontal separator line (bottom border of ul) */
-      text-align: right;                        /* all menu items are on the right side (except the first one, the home link) */
+      border-bottom: 1px solid #eee;          /* a fine horizontal line */
+      margin-top: 0.8em;                      /* gap between top of page and menu item texts */
+      margin-bottom: 2em;                     /* gap between the menu and top-of-page content */
+      padding-bottom: 0.4em;                  /* space between bottom of menu items and horizontal separator line (bottom border of ul) */
+      text-align: right;                      /* all menu items are on the right side (except the first one, the home link) */
 
       li {
-        display: inline-block;                  /* display the li items horizontally rather than vertically */
-        font-size: 90%;                         /* shrink it as it is not the focus of the page */
-        margin-left: 2em;                       /* spacing between menu items; use -left so that the rightmost item does not have a right margin */
+        display: inline-block;                /* display the li items horizontally rather than vertically */
+        font-size: 90%;                       /* shrink it as it is not the focus of the page */
+        margin-left: 2em;                     /* spacing between menu items; use -left so that the rightmost item does not have a right margin */
       }
 
-      li:nth-child(1) {                         /* all menu items will be on the right side except the first one */
-        float: left;                            /* the first menu item, the home link, on the left */
-        font-weight: bold;                      /* bold the home button; maybe this looks better */
-        margin-left: 0em;                       /* first item does not need a left margin, so counter-act margin-left: 2em in li {} above */
+      li:nth-child(1) {                       /* all menu items will be on the right side except the first one */
+        float: left;                          /* the first menu item, the home link, on the left */
+        font-weight: bold;                    /* bold the home button; maybe this looks better */
+        margin-left: 0em;                     /* first item does not need a left margin, so counter-act margin-left: 2em in li {} above */
       }
 
       a, a:link, a:hover, a:visited, a:active {
-        color: #999;                            /* dim the menu items as they are not the focus of the page */
+        color: #999;                          /* dim the menu items as they are not the focus of the page */
       }
     }
   }
 
   /* a box to display code samples */
   pre.code {
-    border: 1px solid #ddd;                     /* a delicately raised box with a whisper of shadow */
+    border: 1px solid #ddd;                   /* a delicately raised box with a whisper of shadow */
     box-shadow: 0px 0px 6px #eee;
-    font-family: monospace;                     /* so that things that should line up do */
+    font-family: monospace;                   /* so that things that should line up do */
     font-size: 90%;
-    line-height: 1.3;                           /* make it a bit easier to read */
-    margin-top: 0.8em;                          /* a nice gap above and below the border+shadow */
+    line-height: 1.3;                         /* make it a bit easier to read */
+    margin-top: 0.8em;                        /* a nice gap above and below the border+shadow */
     margin-bottom: 0.8em;
-    overflow: auto;                             /* make it easier to select code with mouse for copy & paste */
-    padding: 0.8em;                             /* space between the border and the contents */
-    text-align: left;                           /* in case the parent is not left-aligned */
+    overflow: auto;                           /* make it easier to select code with mouse for copy & paste */
+    padding: 0.8em;                           /* space between the border and the contents */
+    text-align: left;                         /* in case the parent is not left-aligned */
 
     span.dim {
-      color: #aaa;                              /* dim contextual code that is otherwise not of interest */
+      color: #aaa;                            /* dim contextual code that is otherwise not of interest */
     }
   }
 
 
   /* a horizontal line and copyright notice at the bottom of each page */
   footer {
-    margin: 0 auto;                             /* horizontally center the line */
-    text-align: center;                         /* horizontally center the copyright text */
-    width: 30%;                                 /* a short line seems to look better than one the full width of the page */
+    margin: 0 auto;                           /* horizontally center the line */
+    text-align: center;                       /* horizontally center the copyright text */
+    width: 30%;                               /* a short line seems to look better than one the full width of the page */
 
     article {
-      border-top: 1px solid #eee;               /* a fine horizontal line */
-      color: #999;                              /* dim it so that it is not distracting */
-      font-size: 75%;                           /* shrink it as it is not the focus of the page */
-      margin-top: 7em;                          /* gap between the bottom-of-page content and the copyright notice */
-      padding-top: 0.4em;                       /* gap between top of copyright notice and horizontal line */
+      border-top: 1px solid #eee;             /* a fine horizontal line */
+      color: #999;                            /* dim it so that it is not distracting */
+      font-size: 75%;                         /* shrink it as it is not the focus of the page */
+      margin-top: 7em;                        /* gap between the bottom-of-page content and the copyright notice */
+      padding-top: 0.4em;                     /* gap between top of copyright notice and horizontal line */
     }
   }
 }
@@ -202,11 +202,11 @@ body {
 /* index.html styles */
 /* This is the home page; it is sparse and everything is bigger than the rest of the site to make things stand out */
 body.index {
-  text-align: center;                           /* horizontally center all main content on the home page */
+  text-align: center;                         /* horizontally center all main content on the home page */
 
   /* could also use an article or a div instead of section; just separates main content from header menu and footer copyright */
   section {
-    
+
     /* allows us to increase white space for text on the home page */
     p {
       margin-top: 3em;
@@ -215,36 +215,36 @@ body.index {
 
     /* increase the size of the code sample on the home page */
     pre.code {
-      font-size: 120%;                          /* make it a bit bigger as it's on the home page and the focus of attention */
-      margin: 0 auto;                           /* center the pre box on the page */
-      width: 85%;                               /* fit it's width to the code it displays */
+      font-size: 120%;                        /* make it a bit bigger as it's on the home page and the focus of attention */
+      margin: 0 auto;                         /* center the pre box on the page */
+      width: 85%;                             /* fit it's width to the code it displays */
     }
   }
 
   /* navigation links that are part of the main page content */
   nav.index {
     ul.h-images {
-      margin-top: 5em;                          /* lots of space on the sparse home page */
-      margin-left: 3em;                         /* some things you just have to center by eye */
+      margin-top: 5em;                        /* lots of space on the sparse home page */
+      margin-left: 3em;                       /* some things you just have to center by eye */
 
       /* the images to use for the list bullets; each bullet has its own image */
       li {
-        text-align: left;                       /* to counter-act the text-align: center; of the body tag */
+        text-align: left;                     /* to counter-act the text-align: center; of the body tag */
 
         &.install:before {
-          content: url("install.svg");
+          content: url("images/install.svg");
         }
 
         &.tutorial:before {
-          content: url("tutorial.svg");
+          content: url("images/tutorial.svg");
         }
 
         &.reference:before {
-          content: url("book.svg");
+          content: url("images/book.svg");
         }
 
         &.source:before {
-          content: url("source.svg");
+          content: url("images/source.svg");
         }
       }
     }
@@ -260,25 +260,25 @@ body.index {
 /* installation.html styles */
 body.installation {
   article {
-    margin-bottom: 2em;                         /* some extra space between installation options */
-    margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
+    margin-bottom: 2em;                       /* some extra space between installation options */
+    margin-left: 4.5em;                       /* so that the bullets do not go beyond the left page margin */
 
     /* the images to use for the list bullets; each bullet has its own image */
     ul.images > li {
       &.requirements:before {
-        content: url("check.svg");
+        content: url("images/check.svg");
       }
 
       &.command-prompt:before {
-        content: url("command-prompt.svg");
+        content: url("images/command-prompt.svg");
       }
 
       &.package:before {
-        content: url("package.svg");
+        content: url("images/package.svg");
       }
 
       &.uninstall:before {
-        content: url("garbage-can.svg");
+        content: url("images/garbage-can.svg");
       }
     }
   }
@@ -288,8 +288,8 @@ body.installation {
 /* tutorial.html styles */
 body.tutorial {
   article {
-    margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
-    
+    margin-left: 4.5em;                       /* so that the bullets do not go beyond the left page margin */
+
     aside {
       display: inline;
       font-size: 96%;
@@ -302,27 +302,27 @@ body.tutorial {
 /* reference.html styles */
 body.reference {
   article {
-    margin-left: 4.5em;                         /* so that the bullets do not go beyond the left page margin */
-    
+    margin-left: 4.5em;                       /* so that the bullets do not go beyond the left page margin */
+
     ul.images {
       li {
-        margin-bottom: 3em;                     /* allow lots of space between reference items */
+        margin-bottom: 3em;                   /* allow lots of space between reference items */
 
         &:before {
-          content: url("book.svg");             /* the image to use for the list bullets; all bullets have the same image */
+          content: url("images/book.svg");    /* the image to use for the list bullets; all bullets have the same image */
         }
-    
+
         p {
           margin-top: 1.4em;
         }
-    
+
         /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */
         p.usage {
           font-family: "Lucida Console", Monaco5, monospace;
           font-size: 110%;
           font-weight: bold;
           margin-bottom: 1em;
-          
+
           /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */
           a, a:link, a:hover, a:visited, a:active {
             color: inherit;
