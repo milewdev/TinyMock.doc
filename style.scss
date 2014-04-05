@@ -38,8 +38,8 @@ body {
     text-align: center;
   }
 
-  /* ordinary lists */
-  ul.ordinary {
+  /* standard lists */
+  ul.standard {
     list-style: disc outside none;
     margin-left: 2em;                         /* indent the bullets so that they are not up against the left margin */
     margin-right: 2em;                        /* same indent on the right side to keep it balanced */
@@ -50,8 +50,8 @@ body {
     }
   }
 
-  /* fancy lists, which is to say they have a big circle instead of a dot */
-  ul.fancy, ol.fancy {
+  /* lists with a big dot instead of the standard small one */
+  ul.big-dot, ol.big-dot {
     line-height: 1.3em;
     list-style-type: none;                    /* we'll do it ourselves using li:before */
     margin-left: 0em;                         /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */
@@ -64,7 +64,7 @@ body {
         margin-bottom: 0.6em;                 /* a bit of space between paragraphs in an li element */
       }
 
-      &:before {                              /* the fancy bullet is added separately (the original one was clobbered with list-style-type: none) */
+      &:before {                              /* the big dot is added separately (the original one was clobbered with list-style-type: none) */
         background-color: #001faa;
         border: 0;                            /* hide the border as it didn't look smooth in safari */
         border-radius: 50%;                   /* create a circle */
@@ -84,8 +84,8 @@ body {
     }
   }
 
-  /* fancy ordered lists numbered with a, b, c, etc. */
-  ol.fancy {
+  /* big dot ordered lists numbered with a, b, c, etc. */
+  ol.big-dot {
     counter-reset: li-counter;                /* every new list should start counting from 'a' */
 
     & > li {
@@ -290,7 +290,7 @@ body.tutorial {
   article {
     margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
 
-    aside {
+    aside {                                   /* sometimes we note the purpose of a tutorial step, e.g. 'demonstrates throws()' */
       display: inline;
       font-size: 96%;
       font-style: italic;
@@ -309,11 +309,11 @@ body.reference {
         margin-bottom: 3em;                   /* allow lots of space between reference items */
 
         &:before {
-          content: url("book.svg");   /* the image to use for the list bullets; all bullets have the same image */
+          content: url("book.svg");           /* the image to use for the list bullets; all bullets have the same image */
         }
 
         p {
-          margin-top: 1.4em;
+          margin-top: 1.4em;                  /* a bit of space between paragraphs */
         }
 
         /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */

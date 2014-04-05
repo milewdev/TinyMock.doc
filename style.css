@@ -17,9 +17,9 @@ body {
   /* a fixed width page (we are not responsive at this time) */
   /* links */
   /* use the same header styles on all pages */
-  /* ordinary lists */
-  /* fancy lists, which is to say they have a big circle instead of a dot */
-  /* fancy ordered lists numbered with a, b, c, etc. */
+  /* standard lists */
+  /* lists with a big dot instead of the standard small one */
+  /* big dot ordered lists numbered with a, b, c, etc. */
   /* vertical lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
   /* horizontal lists that use images for bullets; this is a 'base class' - images need to be added in sub-classes */
   /* a horizontal menu and a horizontal line at the top of the page */
@@ -40,7 +40,7 @@ body {
     margin-top: 1.5em;
     margin-bottom: 1em;
     text-align: center; }
-  body ul.ordinary {
+  body ul.standard {
     list-style: disc outside none;
     margin-left: 2em;
     /* indent the bullets so that they are not up against the left margin */
@@ -48,24 +48,24 @@ body {
     /* same indent on the right side to keep it balanced */
     margin-top: 0.4em;
     /* set off the list a bit from whatever is above it */ }
-    body ul.ordinary li {
+    body ul.standard li {
       margin-bottom: 0.4em;
       /* a bit of a gap between list items so that they do not run together */ }
-  body ul.fancy, body ol.fancy {
+  body ul.big-dot, body ol.big-dot {
     line-height: 1.3em;
     list-style-type: none;
     /* we'll do it ourselves using li:before */
     margin-left: 0em;
     /* content of li aligns with left border of page; the a, b, c, ... appear in the left margin */ }
-    body ul.fancy > li, body ol.fancy > li {
+    body ul.big-dot > li, body ol.big-dot > li {
       margin-bottom: 4em;
       position: relative;
       /* needed so that child li:before element can use absolute position */ }
-      body ul.fancy > li p, body ol.fancy > li p {
+      body ul.big-dot > li p, body ol.big-dot > li p {
         margin-bottom: 0.6em;
         /* a bit of space between paragraphs in an li element */ }
-      body ul.fancy > li:before, body ol.fancy > li:before {
-        /* the fancy bullet is added separately (the original one was clobbered with list-style-type: none) */
+      body ul.big-dot > li:before, body ol.big-dot > li:before {
+        /* the big dot is added separately (the original one was clobbered with list-style-type: none) */
         background-color: #001faa;
         border: 0;
         /* hide the border as it didn't look smooth in safari */
@@ -89,10 +89,10 @@ body {
         top: 0em;
         width: 1.2em;
         /* same as height so that we get a circle, not an oval */ }
-  body ol.fancy {
+  body ol.big-dot {
     counter-reset: li-counter;
     /* every new list should start counting from 'a' */ }
-    body ol.fancy > li:before {
+    body ol.big-dot > li:before {
       /* this is the circle with a, b, c, ... inside */
       content: counter(li-counter,lower-alpha);
       /* use letters instead of numbers, i.e. a, b, c, ... */
@@ -272,6 +272,7 @@ body.tutorial article {
   margin-left: 4.5em;
   /* keep the bullets from going beyond the left page margin */ }
   body.tutorial article aside {
+    /* sometimes we note the purpose of a tutorial step, e.g. 'demonstrates throws()' */
     display: inline;
     font-size: 96%;
     font-style: italic; }
@@ -288,7 +289,8 @@ body.reference article {
       content: url("book.svg");
       /* the image to use for the list bullets; all bullets have the same image */ }
     body.reference article ul.v-images li p {
-      margin-top: 1.4em; }
+      margin-top: 1.4em;
+      /* a bit of space between paragraphs */ }
     body.reference article ul.v-images li p.usage {
       font-family: "Lucida Console", Monaco5, monospace;
       font-size: 110%;
