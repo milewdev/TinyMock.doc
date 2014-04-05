@@ -1,4 +1,3 @@
 - [done] Rename build, run, and watch to _build, _run, and _watch
 - [done] Cleanup ul/ol.images; rename to .v-images, etc.
-- Links to sections on the Reference page should point slightly above the heading so that it does not appear jammed at the top of the page when accessed by the link
 - Run the site through html and css linters
