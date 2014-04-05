@@ -232,19 +232,19 @@ body.index {
         text-align: left;                     /* to counter-act the text-align: center; of the body tag */
 
         &.install:before {
-          content: url("/images/install.svg");
+          content: url("install.svg");
         }
 
         &.tutorial:before {
-          content: url("/images/tutorial.svg");
+          content: url("tutorial.svg");
         }
 
         &.reference:before {
-          content: url("/images/book.svg");
+          content: url("book.svg");
         }
 
         &.source:before {
-          content: url("/images/source.svg");
+          content: url("source.svg");
         }
       }
     }
@@ -266,19 +266,19 @@ body.installation {
     /* the images to use for the list bullets; each bullet has its own image */
     ul.v-images > li {
       &.requirements:before {
-        content: url("/images/check.svg");
+        content: url("check.svg");
       }
 
       &.command-prompt:before {
-        content: url("/images/command-prompt.svg");
+        content: url("command-prompt.svg");
       }
 
       &.package:before {
-        content: url("/images/package.svg");
+        content: url("package.svg");
       }
 
       &.uninstall:before {
-        content: url("/images/garbage-can.svg");
+        content: url("garbage-can.svg");
       }
     }
   }
@@ -309,7 +309,7 @@ body.reference {
         margin-bottom: 3em;                   /* allow lots of space between reference items */
 
         &:before {
-          content: url("/images/book.svg");   /* the image to use for the list bullets; all bullets have the same image */
+          content: url("book.svg");   /* the image to use for the list bullets; all bullets have the same image */
         }
 
         p {

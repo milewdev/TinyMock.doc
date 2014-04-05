@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Start SASS in the background, in watch mode, and capture its PID.
-sass --watch styles/style.scss:styles/style.css 2>&1 > /dev/null &
+sass --watch style.scss:style.css 2>&1 > /dev/null &
 sass_pid=$!
 
 # Start Jekyll in the background, in watch mode, and capture its PID.

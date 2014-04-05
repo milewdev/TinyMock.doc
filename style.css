@@ -241,13 +241,13 @@ body.index {
         text-align: left;
         /* to counter-act the text-align: center; of the body tag */ }
         body.index nav.index ul.h-images li.install:before {
-          content: url("/images/install.svg"); }
+          content: url("install.svg"); }
         body.index nav.index ul.h-images li.tutorial:before {
-          content: url("/images/tutorial.svg"); }
+          content: url("tutorial.svg"); }
         body.index nav.index ul.h-images li.reference:before {
-          content: url("/images/book.svg"); }
+          content: url("book.svg"); }
         body.index nav.index ul.h-images li.source:before {
-          content: url("/images/source.svg"); }
+          content: url("source.svg"); }
     body.index nav.index a, body.index nav.index a:link, body.index nav.index a:hover, body.index nav.index a:visited, body.index nav.index a:active {
       color: inherit; }
 
@@ -259,13 +259,13 @@ body.installation article {
   /* keep the bullets from going beyond the left page margin */
   /* the images to use for the list bullets; each bullet has its own image */ }
   body.installation article ul.v-images > li.requirements:before {
-    content: url("/images/check.svg"); }
+    content: url("check.svg"); }
   body.installation article ul.v-images > li.command-prompt:before {
-    content: url("/images/command-prompt.svg"); }
+    content: url("command-prompt.svg"); }
   body.installation article ul.v-images > li.package:before {
-    content: url("/images/package.svg"); }
+    content: url("package.svg"); }
   body.installation article ul.v-images > li.uninstall:before {
-    content: url("/images/garbage-can.svg"); }
+    content: url("garbage-can.svg"); }
 
 /* tutorial.html styles */
 body.tutorial article {
@@ -285,7 +285,7 @@ body.reference article {
     /* allow lots of space between reference items */
     /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */ }
     body.reference article ul.v-images li:before {
-      content: url("/images/book.svg");
+      content: url("book.svg");
       /* the image to use for the list bullets; all bullets have the same image */ }
     body.reference article ul.v-images li p {
       margin-top: 1.4em; }
