@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 sass styles/style.scss styles/style.css
-jekyll build
+bundle exec jekyll build
