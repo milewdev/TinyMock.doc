@@ -1,5 +1,4 @@
 - [done] Move *.svg into ./images/
-- [done] Move *.html into ./pages/
 - [done] Move *.css and *.scss into ./styles/
 - [done] Rename build, run, and watch to _build, _run, and _watch
 - Cleanup ul/ol.images; rename to .v-images, etc.
