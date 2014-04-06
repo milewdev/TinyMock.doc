@@ -31,6 +31,8 @@
       <article>
         <ul class="v-images">
 
+
+          <!-- args -->
           <li>
             <p class="usage">
               <a name="args" href="#args">args(arg [, arg, ...])</a>
@@ -43,6 +45,13 @@
             <pre class="code">{% highlight coffeescript %}
 mock ->
   fs.expects("appendFileSync").args("log.txt", "This is a log entry.")
+{% endhighlight %}</pre>
+            <p>
+              arg can be of any type:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock ->
+  my_object.expects("my_method").args("string", 123, {an_object: "an_object"})
 {% endhighlight %}</pre>
             <p>
               args() should be called with one or more arguments.  Do not use args() if an expected
@@ -59,14 +68,14 @@ mock ->
             </p>
             <pre class="code">{% highlight coffeescript %}
 mock ->
-  fs.expects("appendFileSync").args("l.txt", "x")                         # ok
-  fs.expects("appendFileSync").args("l.txt").args("x")                    # not ok
-  fs.expects("appendFileSync").args("l1.txt", "x1").args("l2.txt", "x2")  # not ok ...
-  fs.expects("appendFileSync").args("l1.txt", "x1")                       # ... do this instead
-  fs.expects("appendFileSync").args("l2.txt", "x2")
+  fs.expects("appendFileSync").args("l.txt", 0)                     # ok
+  fs.expects("appendFileSync").args("l.txt").args(0)                # not ok
+  fs.expects("appendFileSync").args("l1.txt", 1).args("l2.txt", 2)  # not ok ...
+  fs.expects("appendFileSync").args("l1.txt", 1)                    # ... do this instead
+  fs.expects("appendFileSync").args("l2.txt", 2)
 {% endhighlight %}</pre>
             <p>
-              args() returns an expectation upon which either returns() or throws() can be
+              args() returns an expectation object upon which either returns() or throws() can be
               called.  args() should not be called after returns() or throws():
             </p>
             <pre class="code">{% highlight coffeescript %}
@@ -96,9 +105,10 @@ describe "Chat", ->
           </li>
 
 
+          <!-- expects -->
           <li>
             <p class="usage">
-              <a name="expects" href="#expects">object.expects(method_name)</a>
+              <a name="expects" href="#expects">expects(method_name)</a>
             </p>
             <p>
               Creates an expectation that method_name will be called on object.  For example, the following
@@ -133,7 +143,7 @@ mock ->
   object = Object.create(null);
   object.expects("my_method")     # not ok; object has no method 'expects'{% endhighlight %}</pre>
             <p>
-              method_name must already exist unless expects() is called on a mock instance passed in by mock():
+              method_name must already exist unless expects() is called on a mock object passed in by mock():
             </p>
             <pre class="code">{% highlight coffeescript %}
 class MyClass
@@ -150,26 +160,24 @@ mock ->
 mock (object) ->
   object.expects("my_method")     # ok; object was passed in by mock(){% endhighlight %}</pre>
             <p>
-              expects() replaces an existing method_name with a mock method, therefore the original method_name's
-              functionality is 'lost':
+              For mock objects not passed in by mock, expects() replaces the existing method_name with
+              a mock method, therefore the original method_name's functionality is lost from the point
+              the expects() was called to the end of the callback function:
             </p>
             <pre class="code">{% highlight coffeescript %}
 class MyObject
   my_method: -> console.log("hello")
+
+object = new MyObject()
 mock ->
-  object = new MyObject()
   object.my_method()              # prints "hello" on the console
   object.expects("my_method")
   object.my_method()              # does nothing
-
-mock (object) ->
-  object.my_method()              # not ok: throws an unknown method error
-  object.expects("my_method")
-  object.my_method()              # ok (but does nothing)
+object.my_method()                # prints "hello" on the console
 {% endhighlight %}</pre>
             <p>
               expects() returns an expectation object upon which the args(), returns(), or throws() methods can be called.
-              This allows for method chaining:
+              This allows for a bit of <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluency</a>:
             </p>
             <pre class="code">{% highlight coffeescript %}
 my_object.expects("my_method").args(1,2,3).returns("something")
@@ -193,6 +201,7 @@ describe "Chat", ->
           </li>
 
 
+          <!-- mock -->
           <li>
             <p class="usage">
               <a name="mock" href="#mock">mock [options,] callback</a>
@@ -201,11 +210,23 @@ describe "Chat", ->
               Use mock() to run a callback function that sets expectations and runs tests:
             </p>
             <pre class="code">{% highlight coffeescript %}
-describe "greet(name)", ->
-  mock ->                             # callback function
-    fs.expects("appendFileSync")      # set an expectation
-    chat = new Chat()
-    chat.greet("Aristotle")           # run a test that should call fs.appendFileSync(){% endhighlight %}</pre>
+mock ->                                     # callback function
+  fs.expects("appendFileSync")              # set an expectation
+  ...
+  
+mock mock_count: 100, (books...) ->         # the number of mock objects to create (default 5)
+  book.expects("rate") for book in books
+  ...
+  
+class MyClass
+  start:   -> "something"
+  expects: -> "anything"
+
+mock expects_method_name: "expects2", ->    # use expects2() instead of expects() ...
+  obj = new MyClass()
+  obj.expects2("start")                     # ... because MyClass already has an expects()
+  ...
+{% endhighlight %}</pre>
             <p>
               mock() adds expects() to Object.prototype so that you can add an expectation on anything that is an instance
               of Object or that inherits from Object.  When the callback function finishes running, mock() verifies that all
@@ -216,39 +237,68 @@ describe "greet(name)", ->
               mock() also pre-creates mock objects and passes them to the callback function:
             </p>
             <pre class="code">{% highlight coffeescript %}
-describe "save(name, profession)", ->
-  mock (db)->
-    db.expects("save").args("Aristotle", "philosopher")
-    person = new Person("Aristotle", "philosopher")
-    person.save(db)
+mock (db) ->
+  db.expects("save").args("Aristotle", "philosopher")
+  person = new Person("Aristotle", "philosopher")
+  person.save(db)
 {% endhighlight %}</pre>
             <p>
               Note that you can only add an expectation for a non-existent method to the mock objects passed in by mock().
-              The following will not work because "save" is not an existing method of db (Object), and db was not passed in
-              by mock():
+              The following will not work because "my_method" is not an existing method of obj (an Object), and obj was
+              not passed in by mock():
             </p>
             <pre class="code">{% highlight coffeescript %}
-describe "save(name, profession)", ->
-  mock ->
-    db = new Object()
-    db.expects("save").args("Aristotle", "philosopher")
-    person = new Person("Aristotle", "philosopher")
-    person.save(db)
+mock ->
+  obj = new Object()
+  obj.expects("my_method")          # throws "'my_method' not an existing method" error
+  ...
 {% endhighlight %}</pre>
             <p>
-              The thinking behind this 'feature' is that it prevents you from accidentally mocking a non-existing method on
-              an existing object, which could be painful to track down:
+              This prevents you from accidentally mocking a non-existing method on
+              an existing object, which can be painful to track down:
             </p>
             <pre class="code">{% highlight coffeescript %}
-describe "greet(name)", ->
-  mock ->
-    fs.expects("appnedFileSync")      # spelling mistake ('append' not 'appned')
-    fs.expects("noSuchMethod")        # method does not exist on fs
-    chat = new Chat()
-    chat.greet("Aristotle")
+mock ->
+  fs.expects("appnedFileSync")      # spelling mistake ('append' not 'appned')
+  fs.expects("noSuchMethod")        # method does not exist on fs
+  chat = new Chat()
+  chat.greet("Aristotle")
 {% endhighlight %}</pre>
             <p>
-              WIP: options (give example of parenthesis paralysis: mock()-> is wrong, should be mock ()->, with options do: mock(options, ()->) => mock options, ()-> )
+              By default mock() creates five mock objects and passes them to the callback function.  You can use
+              as few or as many of them as appropriate, and of course you can name them any way you like:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock (store, inventory, book1, book2, customer) ->
+  store.expects("get_inventory").returns(inventory)
+  inventory.expects("get_books").returns( [book1, book2] )
+  customer.expects ...
+{% endhighlight %}</pre>
+            <p>
+              You can have mock() create more than five mock objects by specifying a mock_count option:
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+mock mock_count: 101, (cat, dogs...) ->
+  dog.expects("chase") for dog in dogs
+  kennel = new Kennel(dogs)
+  kennel.board(cat)
+{% endhighlight %}</pre>
+            <p>
+              Sometimes you may find you want to set expectations on an object that already has an expects()
+              method.  In such cases, you can tell mock to use a different name for expects():
+            </p>
+            <pre class="code">{% highlight coffeescript %}
+class MyClass
+  start:   -> "something"
+  expects: -> "anything"
+  
+mock expects_method_name: "expects2", ->
+  obj = new MyClass()
+  obj.expects2("start")
+  ...
+{% endhighlight %}</pre>
+            <p>
+              WIP: options (give example of parenthesis paralysis: mock() -> is wrong, should be mock () ->, with options do: mock(options, () ->) => mock options, () -> )
             </p>
             <p>
               In summary, mock() creates mock objects, does verification, and cleans up so that you don't have to.
@@ -257,18 +307,26 @@ describe "greet(name)", ->
           </li>
 
 
+          <!-- require -->
           <li>
             <p class="usage">
               <a name="require" href="#require">require</a>
             </p>
             <p>
               Use the Node.js <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require()</a>
-              function as follows to include TinyMockJS in your code:
+              function to make TinyMockJS available in code:
             </p>
-            <pre class="code"><span class="dim">chai   = require("chai")
-should = chai.should()</span>
+            <pre class="code">{% highlight coffeescript %}
+mock = require("TinyMockJS").mock
+{% endhighlight %}</pre>
+            <p>
+              Example:
+            </p>
+            <pre class="code"><span class="dim">
+chai   = require("chai")
+should = chai.should()</span>{% highlight coffeescript %}
 mock   = require("TinyMockJS").mock
-<span class="dim">Chat   = require("../src/Chat").Chat
+{% endhighlight %}<span class="dim">Chat   = require("../src/Chat").Chat
 
 describe "Chat", ->
   describe "greet(my_name)", ->
@@ -281,6 +339,7 @@ describe "Chat", ->
           </li>
 
 
+          <!-- returns -->
           <li>
             <p class="usage">
               <a name="returns" href="#returns">returns(value)</a>
@@ -344,6 +403,7 @@ describe "Chat", ->
           </li>
 
 
+          <!-- throws -->
           <li>
             <p class="usage">
               <a name="throws" href="#throws">throws(error)</a>
