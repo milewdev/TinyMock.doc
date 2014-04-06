@@ -289,7 +289,7 @@ body.reference article {
       content: url("book.svg");
       /* the image to use for the list bullets; all bullets have the same image */ }
     body.reference article ul.v-images li p {
-      margin-top: 1.4em;
+      margin-top: 1em;
       /* a bit of space between paragraphs */ }
     body.reference article ul.v-images li p.usage {
       font-family: "Lucida Console", Monaco5, monospace;
