@@ -214,17 +214,13 @@ mock ->                                     # callback function
   fs.expects("appendFileSync")              # set an expectation
   ...
   
-mock mock_count: 100, (books...) ->         # the number of mock objects to create (default 5)
+mock mock_count: 100, (books...) ->         # the number of mock objects to create (default is 5)
   book.expects("rate") for book in books
   ...
   
-class MyClass
-  start:   -> "something"
-  expects: -> "anything"
-
-mock expects_method_name: "expects2", ->    # use expects2() instead of expects() ...
+mock expects_method_name: "expects2", ->    # use a different name for expects()
   obj = new MyClass()
-  obj.expects2("start")                     # ... because MyClass already has an expects()
+  obj.expects2("start")
   ...
 {% endhighlight %}</pre>
             <p>
@@ -279,9 +275,9 @@ mock (store, inventory, book1, book2, customer) ->
             </p>
             <pre class="code">{% highlight coffeescript %}
 mock mock_count: 101, (cat, dogs...) ->
+  cat.expects("meow")
   dog.expects("chase") for dog in dogs
-  kennel = new Kennel(dogs)
-  kennel.board(cat)
+  ...
 {% endhighlight %}</pre>
             <p>
               Sometimes you may find you want to set expectations on an object that already has an expects()
@@ -292,14 +288,23 @@ class MyClass
   start:   -> "something"
   expects: -> "anything"
   
-mock expects_method_name: "expects2", ->
+mock expects_method_name: "expects2", ->    # use expects2() instead of expects() ...
   obj = new MyClass()
-  obj.expects2("start")
+  obj.expects2("start")                     # ... because MyClass already has an expects() method
   ...
 {% endhighlight %}</pre>
             <p>
-              WIP: options (give example of parenthesis paralysis: mock() -> is wrong, should be mock () ->, with options do: mock(options, () ->) => mock options, () -> )
+              <strong>WARNING</strong>: watch the space before the callback argument list's opening parenthesis:
             </p>
+            <pre class="code">{% highlight coffeescript %}
+# this is correct
+mock (m1) ->
+  ...
+  
+# but this is not
+mock(m1) ->
+  ...
+{% endhighlight %}</pre>
             <p>
               In summary, mock() creates mock objects, does verification, and cleans up so that you don't have to.
               The price is an extra level of indentation.
