@@ -1,3 +1,4 @@
 - [done] Rename build, run, and watch to _build, _run, and _watch
 - [done] Cleanup ul/ol.images; rename to .v-images, etc.
+- write a pre-processor so that embedded code can be indented in the html source; having code over to the left makes the page source illegible
 - Run the site through html and css linters
