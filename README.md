@@ -66,7 +66,7 @@ files will get out of sync with the .scss files.
 
 - All html, css, and svg files are in the root directory of the project.  Tried putting these files in
 subdirectories (pages/, styles/, and images/) and while this worked locally it caused grief on
-GitHub (result was a page 404 and no error messages or emails).
+GitHub (result was a page 404 and no error messages or error emails).
   
 - If you wish to modify the Vagrantfile, it is best to do so on the host machine (~/work/TinyMockJS.doc/Vagrantfile) 
 so that you can easily do an edit/vagrant up/vagrant destroy cycle.  Once you have finished making 
