@@ -1,6 +1,6 @@
 chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
+mock   = require("TinyMockJS")
 Logger = require("../src/Logger").Logger
 fs     = require("fs")
 
