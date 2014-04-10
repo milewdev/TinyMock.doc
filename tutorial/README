@@ -1,0 +1,4 @@
+To run the tutorial, do:
+
+  $ npm install
+  $ npm test
