@@ -1,7 +1,7 @@
 chai   = require("chai")
 should = chai.should()
 mock   = require("TinyMockJS")
-Logger = require("../src/Logger").Logger
+Logger = require("../src/Logger")
 fs     = require("fs")
 
 describe "Logger", ->

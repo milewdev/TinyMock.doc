@@ -131,8 +131,8 @@ $</pre>
 {% highlight coffeescript %}
 chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Logger = require("../src/Logger").Logger
+mock   = require("TinyMockJS")
+Logger = require("../src/Logger")
 {% endhighlight %}</pre>
             </li>
             
@@ -140,8 +140,8 @@ Logger = require("../src/Logger").Logger
               Add a test for Logger's constructor to test/Logger.test.coffee (<aside>demonstrates mock(), expects(), and returns()</aside>):
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Logger = require("../src/Logger").Logger
+mock   = require("TinyMockJS")
+Logger = require("../src/Logger")
 
 </span>{% highlight coffeescript %}
 describe "Logger", ->
@@ -220,8 +220,8 @@ exports.Logger = Logger
               Write a test for a Logger.log() method (<aside>demonstrates args()</aside>):
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Logger = require("../src/Logger").Logger
+mock   = require("TinyMockJS")
+Logger = require("../src/Logger")
 </span>{% highlight coffeescript %}fs     = require("fs"){% endhighlight %}<span class="dim">
 describe "Logger", ->
   describe "constructor(options)", ->
@@ -307,8 +307,8 @@ exports.Logger = Logger
                log() should not eat exceptions thrown by fs.appendFileSync(), so write another test (<aside>demonstrates throws()</aside>):
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Logger = require("../src/Logger").Logger
+mock   = require("TinyMockJS")
+Logger = require("../src/Logger")
 fs     = require("fs")
 
 describe "Logger", ->
@@ -362,8 +362,8 @@ describe "Logger", ->
               Refactor the tests to remove some duplication:
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Logger = require("../src/Logger").Logger
+mock   = require("TinyMockJS")
+Logger = require("../src/Logger")
 fs     = require("fs")
 
 describe "Logger", ->

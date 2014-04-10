@@ -8,4 +8,4 @@ class Logger
   log: (message) ->
     fs.appendFileSync(@log_filename, message)
 
-exports.Logger = Logger
+module.exports = Logger

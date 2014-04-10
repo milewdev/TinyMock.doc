@@ -91,8 +91,8 @@ mock ->
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Chat   = require("../src/Chat").Chat
+mock   = require("TinyMockJS")
+Chat   = require("../src/Chat")
 
 describe "Chat", ->
   describe "greet(my_name)", ->
@@ -187,8 +187,8 @@ my_object.expects("my_method").args(1,2,3).returns("something")
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Chat   = require("../src/Chat").Chat
+mock   = require("TinyMockJS")
+Chat   = require("../src/Chat")
 
 describe "Chat", ->
   describe "greet(my_name)", ->
@@ -322,7 +322,7 @@ mock(m1) ->
               function to make TinyMockJS available in code:
             </p>
             <pre class="code">{% highlight coffeescript %}
-mock = require("TinyMockJS").mock
+mock = require("TinyMockJS")
 {% endhighlight %}</pre>
             <p>
               Example:
@@ -330,8 +330,8 @@ mock = require("TinyMockJS").mock
             <pre class="code"><span class="dim">
 chai   = require("chai")
 should = chai.should()</span>{% highlight coffeescript %}
-mock   = require("TinyMockJS").mock
-{% endhighlight %}<span class="dim">Chat   = require("../src/Chat").Chat
+mock   = require("TinyMockJS")
+{% endhighlight %}<span class="dim">Chat   = require("../src/Chat")
 
 describe "Chat", ->
   describe "greet(my_name)", ->
@@ -394,8 +394,8 @@ mock ->
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Chat   = require("../src/Chat").Chat
+mock   = require("TinyMockJS")
+Chat   = require("../src/Chat")
 
 describe "Chat", ->
   describe "greet(my_name)", ->
@@ -458,8 +458,8 @@ mock ->
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS").mock
-Chat   = require("../src/Chat").Chat
+mock   = require("TinyMockJS")
+Chat   = require("../src/Chat")
 
 describe "Chat", ->
   describe "greet(my_name)", ->
