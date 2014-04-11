@@ -95,7 +95,6 @@ def install_project(config)
   run_script config, <<-"EOF"
     git clone #{PROJECT_SCC_URL} #{PROJECT_VM_PATH}
     cd #{PROJECT_VM_PATH}
-    npm install
     sudo gem install bundler
     sudo bundle install
   EOF
