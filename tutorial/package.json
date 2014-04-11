@@ -1,7 +1,7 @@
 {
-  "name": "TinyMockJS.tutorial",
-  "description": "A TinyMockJS tutorial.",
-  "repository": "git://github.com/milewgit/TinyMockJS.doc.git",
+  "name": "TinyMock.tutorial",
+  "description": "A TinyMock tutorial.",
+  "repository": "git://github.com/milewgit/TinyMock.doc.git",
   "scripts": {
     "test": "cake test"
   },
@@ -9,6 +9,6 @@
     "mocha": "*",
     "chai": "*",
     "coffee-script": "~1.6",
-    "TinyMockJS": "https://github.com/milewgit/TinyMockJS/raw/master/TinyMockJS-0.2.0.tgz"
+    "TinyMock": "https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.2.0.tgz"
   }
 }

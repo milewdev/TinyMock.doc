@@ -5,7 +5,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>TinyMockJS Reference</title>
+    <title>TinyMock Reference</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="syntax.css">
   </head>
@@ -14,11 +14,11 @@
 
     <nav class="common">
       <ul>
-        <li><a href="index.html">TinyMockJS</a></li>
+        <li><a href="index.html">TinyMock</a></li>
         <li><a href="installation.html">Installation</a></li>
         <li><a href="tutorial.html">Tutorial</a></li>
         <li><a href="reference.html">Reference</a></li>
-        <li><a href="https://github.com/milewgit/TinyMockJS">Source</a></li>
+        <li><a href="https://github.com/milewgit/TinyMock">Source</a></li>
       </ul>
     </nav>
 
@@ -91,7 +91,7 @@ mock ->
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Chat   = require("../src/Chat")
 
 describe "Chat", ->
@@ -187,7 +187,7 @@ my_object.expects("my_method").args(1,2,3).returns("something")
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Chat   = require("../src/Chat")
 
 describe "Chat", ->
@@ -319,10 +319,10 @@ mock(m1) ->
             </p>
             <p>
               Use the Node.js <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require()</a>
-              function to make TinyMockJS available in code:
+              function to make TinyMock available in code:
             </p>
             <pre class="code">{% highlight coffeescript %}
-mock = require("TinyMockJS")
+mock = require("TinyMock")
 {% endhighlight %}</pre>
             <p>
               Example:
@@ -330,7 +330,7 @@ mock = require("TinyMockJS")
             <pre class="code"><span class="dim">
 chai   = require("chai")
 should = chai.should()</span>{% highlight coffeescript %}
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 {% endhighlight %}<span class="dim">Chat   = require("../src/Chat")
 
 describe "Chat", ->
@@ -380,7 +380,7 @@ mock ->
 
 mock ->
   socket.expects("read").returns("m1")
-  socket.expects("read").returns("m2")                  # not ok; TinyMockJS cannot handle this
+  socket.expects("read").returns("m2")                  # not ok; TinyMock cannot handle this
 {% endhighlight %}</pre>
           <p>
             returns() and throws() cannot be used on the same expectation:
@@ -394,7 +394,7 @@ mock ->
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Chat   = require("../src/Chat")
 
 describe "Chat", ->
@@ -444,7 +444,7 @@ mock ->
 
 mock ->
   socket.expects("read").throws("e1")
-  socket.expects("read").throws("e2")                 # not ok; TinyMockJS cannot handle this
+  socket.expects("read").throws("e2")                 # not ok; TinyMock cannot handle this
 {% endhighlight %}</pre>
           <p>
             throws() and returns() cannot be used on the same expectation:
@@ -458,7 +458,7 @@ mock ->
             </p>
             <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Chat   = require("../src/Chat")
 
 describe "Chat", ->

@@ -1,10 +1,10 @@
 {
-  "name": "TinyMockJS.doc",
+  "name": "TinyMock.doc",
   "version": "0.2.0",
-  "description": "documentation for TinyMockJS",
+  "description": "documentation for TinyMock",
   "repository": {
     "type": "git",
-    "url": "https://github.com/milewgit/TinyMockJS.doc.git"
+    "url": "https://github.com/milewgit/TinyMock.doc.git"
   },
   "keywords": [
     "test",
@@ -15,7 +15,7 @@
   "author": "Michael Lewandowski",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/milewgit/TinyMockJS.doc/issues"
+    "url": "https://github.com/milewgit/TinyMock.doc/issues"
   },
   "devDependencies": {
       "mocha": "*",

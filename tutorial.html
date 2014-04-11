@@ -5,7 +5,7 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>TinyMockJS Tutorial</title>
+    <title>TinyMock Tutorial</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="syntax.css">
   </head>
@@ -14,11 +14,11 @@
     
     <nav class="common">
       <ul>
-        <li><a href="index.html">TinyMockJS</a></li>
+        <li><a href="index.html">TinyMock</a></li>
         <li><a href="installation.html">Installation</a></li>
         <li><a href="tutorial.html">Tutorial</a></li>
         <li><a href="reference.html">Reference</a></li>
-        <li><a href="https://github.com/milewgit/TinyMockJS">Source</a></li>
+        <li><a href="https://github.com/milewgit/TinyMock">Source</a></li>
       </ul>
     </nav>
       
@@ -34,18 +34,18 @@
             <li>
               <p>
         			  In this tutorial we'll create a simplistic Logger class to demonstrate how to use 
-        			  TinyMockJS.  We'll write code in <a href="http://coffeescript.org">coffeescript</a>, run 
+        			  TinyMock.  We'll write code in <a href="http://coffeescript.org">coffeescript</a>, run 
         			  everything on <a href="http://nodejs.org">Node.js</a>, and use <a href="http://visionmedia.github.io/mocha/">mocha</a> 
         			  and <a href="http://chaijs.com">chai</a> for our testing framework.  
               </p>
               <p>
                 Ensure that you have <a href="http://nodejs.org">Node.js</a> installed 
-                before proceeding; mocha, chai, coffeescript, and TinyMockJS will be
+                before proceeding; mocha, chai, coffeescript, and TinyMock will be
                 installed in the steps below.
               </p>
               <p>
                 All of the files for this tutorial can be found 
-                <a href="https://github.com/milewgit/TinyMockJS.doc/tree/gh-pages/tutorial">here</a>.
+                <a href="https://github.com/milewgit/TinyMock.doc/tree/gh-pages/tutorial">here</a>.
               </p>
             </li>
             
@@ -73,13 +73,13 @@ task 'test', 'Run unit tests', ->
             </li>
             
             <li>
-              Also create a minimal package.json (<aside>demonstrates how to reference TinyMockJS in package.json</aside>):
+              Also create a minimal package.json (<aside>demonstrates how to reference TinyMock in package.json</aside>):
               <pre class="code">
 {% highlight json %}
 {
-  "name": "TinyMockJS.tutorial",
-  "description": "A TinyMockJS tutorial.",
-  "repository": "git://github.com/milewgit/TinyMockJS.doc.git",
+  "name": "TinyMock.tutorial",
+  "description": "A TinyMock tutorial.",
+  "repository": "git://github.com/milewgit/TinyMock.doc.git",
   "scripts": {
     "test": "cake test"
   },
@@ -87,24 +87,24 @@ task 'test', 'Run unit tests', ->
     "mocha": "*",
     "chai": "*",
     "coffee-script": "~1.6",
-    "TinyMockJS": "https://github.com/milewgit/TinyMockJS/raw/master/TinyMockJS-0.2.0.tgz"
+    "TinyMock": "https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.2.0.tgz"
   }
 }
 {% endhighlight %}</pre>
             </li>
             
             <li>
-              Use npm to install mocha, chai, the coffee-script compiler, and TinyMockJS:
+              Use npm to install mocha, chai, the coffee-script compiler, and TinyMock:
               <pre class="code">$ npm install
-npm WARN package.json TinyMockJS.tutorial@ No README data
+npm WARN package.json TinyMock.tutorial@ No README data
 npm http GET https://registry.npmjs.org/coffee-script
-npm http GET https://github.com/milewgit/TinyMockJS/raw/master/TinyMockJS-0.2.0.tgz
+npm http GET https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.2.0.tgz
 
 ...
 
 npm http 200 https://registry.npmjs.org/mkdirp/-/mkdirp-0.3.0.tgz
 npm http 304 https://registry.npmjs.org/lru-cache
-TinyMockJS@0.2.0 node_modules/TinyMockJS
+TinyMock@0.2.0 node_modules/TinyMock
 
 coffee-script@1.6.3 node_modules/coffee-script
 
@@ -125,13 +125,13 @@ $</pre>
             </li>
             
             <li>
-              Create the test code file test/Logger.test.coffee; start by requiring chai, TinyMockJS, 
-              and our yet-to-be-written Logger class (<aside>demonstrates how to require TinyMockJS</aside>):
+              Create the test code file test/Logger.test.coffee; start by requiring chai, TinyMock, 
+              and our yet-to-be-written Logger class (<aside>demonstrates how to require TinyMock</aside>):
               <pre class="code">
 {% highlight coffeescript %}
 chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Logger = require("../src/Logger")
 {% endhighlight %}</pre>
             </li>
@@ -140,7 +140,7 @@ Logger = require("../src/Logger")
               Add a test for Logger's constructor to test/Logger.test.coffee (<aside>demonstrates mock(), expects(), and returns()</aside>):
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Logger = require("../src/Logger")
 
 </span>{% highlight coffeescript %}
@@ -169,7 +169,7 @@ mock (store, inventory, book1, book2, customer) ->
               Run the tests.  They fail as we do not yet have a Logger class:
               <pre class="code">$ npm test
 
-> TinyMockJS@ test /Users/vagrant/tutorial
+> TinyMock@ test /Users/vagrant/tutorial
 > cake test
 
 
@@ -202,7 +202,7 @@ exports.Logger = Logger
               Run the tests again.  This time they pass:
               <pre class="code">$ npm test
 
-> TinyMockJS@ test /Users/vagrant/tutorial
+> TinyMock@ test /Users/vagrant/tutorial
 > cake test
 
 
@@ -220,7 +220,7 @@ exports.Logger = Logger
               Write a test for a Logger.log() method (<aside>demonstrates args()</aside>):
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Logger = require("../src/Logger")
 </span>{% highlight coffeescript %}fs     = require("fs"){% endhighlight %}<span class="dim">
 describe "Logger", ->
@@ -249,7 +249,7 @@ describe "Logger", ->
               Run the tests:
               <pre class="code">$ node test
 
-> TinyMockJS@ test /Users/vagrant/tutorial
+> TinyMock@ test /Users/vagrant/tutorial
 > cake test
 
 
@@ -287,7 +287,7 @@ exports.Logger = Logger
               Run the tests:
               <pre class="code">$ node test
 
-> TinyMockJS@ test /Users/vagrant/tutorial
+> TinyMock@ test /Users/vagrant/tutorial
 > cake test
 
 
@@ -307,7 +307,7 @@ exports.Logger = Logger
                log() should not eat exceptions thrown by fs.appendFileSync(), so write another test (<aside>demonstrates throws()</aside>):
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Logger = require("../src/Logger")
 fs     = require("fs")
 
@@ -340,7 +340,7 @@ describe "Logger", ->
               Run the tests:
               <pre class="code">$ node test
 
-> TinyMockJS@ test /Users/vagrant/tutorial
+> TinyMock@ test /Users/vagrant/tutorial
 > cake test
 
 
@@ -362,7 +362,7 @@ describe "Logger", ->
               Refactor the tests to remove some duplication:
               <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
-mock   = require("TinyMockJS")
+mock   = require("TinyMock")
 Logger = require("../src/Logger")
 fs     = require("fs")
 
@@ -397,7 +397,7 @@ describe "Logger", ->
               Run the tests one last time:
               <pre class="code">$ node test
 
-> TinyMockJS@ test /Users/vagrant/tutorial
+> TinyMock@ test /Users/vagrant/tutorial
 > cake test
 
 
