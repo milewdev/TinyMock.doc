@@ -23,50 +23,56 @@
     </nav>
 
     <section>
-
       <header>
         <h1>Reference</h1>
       </header>
+      
+      <!-- links -->
+      <nav class="referencelinks">
+        <ul>
+          <li><a href="#args">args</a></li>
+          <li><a href="#expects">expects</a></li>
+          <li><a href="#mock">mock</a></li>
+          <li><a href="#require">require</a></li>
+          <li><a href="#returns">returns</a></li>
+          <li><a href="#throws">throws</a></li>
+        </ul>
+      </nav>
 
+      <!-- args -->
       <article>
-        <ul class="v-images">
+        <h2><a name="args" href="#args">args(arg [, arg, ...])</a></h2>
 
-
-          <!-- args -->
-          <li>
-            <p class="usage">
-              <a name="args" href="#args">args(arg [, arg, ...])</a>
-            </p>
-            <p>
-              Specifies the arguments of an expected method call.  For example, the following creates
-              the expectation that the method appendFileSync() will be called with the arguments
-              "log.txt" and "This is a log entry.":
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          Specifies the arguments of an expected method call.  For example, the following creates
+          the expectation that the method appendFileSync() will be called with the arguments
+          "log.txt" and "This is a log entry.":
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   fs.expects("appendFileSync").args("log.txt", "This is a log entry.")
 {% endhighlight %}</pre>
-            <p>
-              arg can be of any type:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          arg can be of any type:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   my_object.expects("my_method").args("string", 123, {an_object: "an_object"})
 {% endhighlight %}</pre>
-            <p>
-              args() should be called with one or more arguments.  Do not use args() if an expected
-              method is to be called with no arguments:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          args() should be called with one or more arguments.  Do not use args() if an expected
+          method is to be called with no arguments:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("close")           # ok; no arguments expected (e.g. socket.close() )
   socket.expects("close").args()    # not ok; do not use args() with no arguments
 {% endhighlight %}</pre>
-            <p>
-              args() should only be called once per expectation:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          args() should only be called once per expectation:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   fs.expects("appendFileSync").args("l.txt", 0)                     # ok
   fs.expects("appendFileSync").args("l.txt").args(0)                # not ok
@@ -74,11 +80,11 @@ mock ->
   fs.expects("appendFileSync").args("l1.txt", 1)                    # ... do this instead
   fs.expects("appendFileSync").args("l2.txt", 2)
 {% endhighlight %}</pre>
-            <p>
-              args() returns an expectation object upon which either returns() or throws() can be
-              called.  args() should not be called after returns() or throws():
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          args() returns an expectation object upon which either returns() or throws() can be
+          called.  args() should not be called after returns() or throws():
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("greet").args("hello").returns("hi")     # ok
@@ -86,10 +92,10 @@ mock ->
   socket.expects("greet").args(null).throws("error")      # ok
   socket.expects("greet").throws("error").args(null)      # not ok
 {% endhighlight %}</pre>
-            <p>
-              Example:
-            </p>
-            <pre class="code"><span class="dim">chai   = require("chai")
+        <p>
+          Example:
+        </p>
+        <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
 mock   = require("TinyMock")
 Chat   = require("../src/Chat")
@@ -102,25 +108,23 @@ describe "Chat", ->
         socket.expects("read").returns("Greetings Aristotle!\n")
         chat = new Chat(socket)
         chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
-          </li>
+      </article>
 
 
-          <!-- expects -->
-          <li>
-            <p class="usage">
-              <a name="expects" href="#expects">expects(method_name)</a>
-            </p>
-            <p>
-              Creates an expectation that method_name will be called on object.  For example, the following
-              creates the expectation that the method appendFileSync() will be called on the object fs:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+      <!-- expects -->
+      <article>
+        <h2><a name="expects" href="#expects">expects(method_name)</a></h2>
+        <p>
+          Creates an expectation that method_name will be called on object.  For example, the following
+          creates the expectation that the method appendFileSync() will be called on the object fs:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   fs.expects("appendFileSync"){% endhighlight %}</pre>
-            <p>
-              expects() can be called on any class, on any instance of Object, or on anything that inherits from Object:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          expects() can be called on any class, on any instance of Object, or on anything that inherits from Object:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   Object.expects("toString")      # Object is a class
 
@@ -142,10 +146,10 @@ mock ->
 mock ->
   object = Object.create(null);
   object.expects("my_method")     # not ok; object has no method 'expects'{% endhighlight %}</pre>
-            <p>
-              method_name must already exist unless expects() is called on a mock object passed in by mock():
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          method_name must already exist unless expects() is called on a mock object passed in by mock():
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 class MyClass
   # empty
 mock ->
@@ -159,12 +163,12 @@ mock ->
 
 mock (object) ->
   object.expects("my_method")     # ok; object was passed in by mock(){% endhighlight %}</pre>
-            <p>
-              For mock objects not passed in by mock, expects() replaces the existing method_name with
-              a mock method, therefore the original method_name's functionality is lost from the point
-              the expects() was called to the end of the callback function:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          For mock objects not passed in by mock, expects() replaces the existing method_name with
+          a mock method, therefore the original method_name's functionality is lost from the point
+          the expects() was called to the end of the callback function:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 class MyObject
   my_method: -> console.log("hello")
 
@@ -175,17 +179,17 @@ mock ->
   object.my_method()              # does nothing
 object.my_method()                # prints "hello" on the console
 {% endhighlight %}</pre>
-            <p>
-              expects() returns an expectation object upon which the args(), returns(), or throws() methods can be called.
-              This allows for a bit of <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluency</a>:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          expects() returns an expectation object upon which the args(), returns(), or throws() methods can be called.
+          This allows for a bit of <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluency</a>:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 my_object.expects("my_method").args(1,2,3).returns("something")
 {% endhighlight %}</pre>
-            <p>
-              Example:
-            </p>
-            <pre class="code"><span class="dim">chai   = require("chai")
+        <p>
+          Example:
+        </p>
+        <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
 mock   = require("TinyMock")
 Chat   = require("../src/Chat")
@@ -198,18 +202,16 @@ describe "Chat", ->
         socket</span>.expects("read")<span class="dim">.returns("Greetings Aristotle!\n")
         chat = new Chat(socket)
         chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
-          </li>
+      </article>
 
 
-          <!-- mock -->
-          <li>
-            <p class="usage">
-              <a name="mock" href="#mock">mock [options,] callback</a>
-            </p>
-            <p>
-              Use mock() to run a callback function that sets expectations and runs tests:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+      <!-- mock -->
+      <article>
+        <h2><a name="mock" href="#mock">mock [options,] callback</a></h2>
+        <p>
+          Use mock() to run a callback function that sets expectations and runs tests:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->                                     # callback function
   fs.expects("appendFileSync")              # set an expectation
   ...
@@ -223,67 +225,67 @@ mock expects_method_name: "expects2", ->    # use a different name for expects()
   obj.expects2("start")
   ...
 {% endhighlight %}</pre>
-            <p>
-              mock() adds expects() to Object.prototype so that you can add an expectation on anything that is an instance
-              of Object or that inherits from Object.  When the callback function finishes running, mock() verifies that all
-              expectations were actually met.  It also restores all original methods that were replaced with mock methods
-              by calls to expects(), and removes expects() from Object.prototype.
-            </p>
-            <p>
-              mock() also pre-creates mock objects and passes them to the callback function:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          mock() adds expects() to Object.prototype so that you can add an expectation on anything that is an instance
+          of Object or that inherits from Object.  When the callback function finishes running, mock() verifies that all
+          expectations were actually met.  It also restores all original methods that were replaced with mock methods
+          by calls to expects(), and removes expects() from Object.prototype.
+        </p>
+        <p>
+          mock() also pre-creates mock objects and passes them to the callback function:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock (db) ->
   db.expects("save").args("Aristotle", "philosopher")
   person = new Person("Aristotle", "philosopher")
   person.save(db)
 {% endhighlight %}</pre>
-            <p>
-              Note that you can only add an expectation for a non-existent method to the mock objects passed in by mock().
-              The following will not work because "my_method" is not an existing method of obj (an Object), and obj was
-              not passed in by mock():
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          Note that you can only add an expectation for a non-existent method to the mock objects passed in by mock().
+          The following will not work because "my_method" is not an existing method of obj (an Object), and obj was
+          not passed in by mock():
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   obj = new Object()
   obj.expects("my_method")          # throws "'my_method' not an existing method" error
   ...
 {% endhighlight %}</pre>
-            <p>
-              This prevents you from accidentally mocking a non-existing method on
-              an existing object, which can be painful to track down:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          This prevents you from accidentally mocking a non-existing method on
+          an existing object, which can be painful to track down:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   fs.expects("appnedFileSync")      # spelling mistake ('append' not 'appned')
   fs.expects("noSuchMethod")        # method does not exist on fs
   chat = new Chat()
   chat.greet("Aristotle")
 {% endhighlight %}</pre>
-            <p>
-              By default mock() creates five mock objects and passes them to the callback function.  You can use
-              as few or as many of them as appropriate, and of course you can name them any way you like:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          By default mock() creates five mock objects and passes them to the callback function.  You can use
+          as few or as many of them as appropriate, and of course you can name them any way you like:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock (store, inventory, book1, book2, customer) ->
   store.expects("get_inventory").returns(inventory)
   inventory.expects("get_books").returns( [book1, book2] )
   customer.expects ...
 {% endhighlight %}</pre>
-            <p>
-              You can have mock() create more than five mock objects by specifying a mock_count option:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          You can have mock() create more than five mock objects by specifying a mock_count option:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock mock_count: 101, (cat, dogs...) ->
   cat.expects("meow")
   dog.expects("chase") for dog in dogs
   ...
 {% endhighlight %}</pre>
-            <p>
-              Sometimes you may find you want to set expectations on an object that already has an expects()
-              method.  In such cases, you can tell mock to use a different name for expects():
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          Sometimes you may find you want to set expectations on an object that already has an expects()
+          method.  In such cases, you can tell mock to use a different name for expects():
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 class MyClass
   start:   -> "something"
   expects: -> "anything"
@@ -293,10 +295,10 @@ mock expects_method_name: "expects2", ->    # use expects2() instead of expects(
   obj.expects2("start")                     # ... because MyClass already has an expects() method
   ...
 {% endhighlight %}</pre>
-            <p>
-              <strong>WARNING</strong>: watch the space before the callback argument list's opening parenthesis:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          <strong>WARNING</strong>: watch the space before the callback argument list's opening parenthesis:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 # this is correct
 mock (m1) ->
   ...
@@ -305,29 +307,27 @@ mock (m1) ->
 mock(m1) ->
   ...
 {% endhighlight %}</pre>
-            <p>
-              In summary, mock() creates mock objects, does verification, and cleans up so that you don't have to.
-              The price is an extra level of indentation.
-            </p>
-          </li>
+        <p>
+          In summary, mock() creates mock objects, does verification, and cleans up so that you don't have to.
+          The price is an extra level of indentation.
+        </p>
+      </article>
 
 
-          <!-- require -->
-          <li>
-            <p class="usage">
-              <a name="require" href="#require">require</a>
-            </p>
-            <p>
-              Use the Node.js <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require()</a>
-              function to make TinyMock available in code:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+      <!-- require -->
+      <article>
+        <h2><a name="require" href="#require">require</a></h2>
+        <p>
+          Use the Node.js <a href="http://openmymind.net/2012/2/3/Node-Require-and-Exports/">require()</a>
+          function to make TinyMock available in code:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock = require("TinyMock")
 {% endhighlight %}</pre>
-            <p>
-              Example:
-            </p>
-            <pre class="code"><span class="dim">
+        <p>
+          Example:
+        </p>
+        <pre class="code"><span class="dim">
 chai   = require("chai")
 should = chai.should()</span>{% highlight coffeescript %}
 mock   = require("TinyMock")
@@ -341,38 +341,36 @@ describe "Chat", ->
         socket.expects("read").returns("Greetings Aristotle!\n")
         chat = new Chat(socket)
         chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
-          </li>
+      </article>
 
 
-          <!-- returns -->
-          <li>
-            <p class="usage">
-              <a name="returns" href="#returns">returns(value)</a>
-            </p>
-            <p>
-              Specifies the value that a mock method installed by an expectation should return.  For
-              example, the following creates an expectation for the method read() and that the
-              mock read() installed by the expectation should return "a message":
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+      <!-- returns -->
+      <article>
+        <h2><a name="returns" href="#returns">returns(value)</a></h2>
+        <p>
+          Specifies the value that a mock method installed by an expectation should return.  For
+          example, the following creates an expectation for the method read() and that the
+          mock read() installed by the expectation should return "a message":
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("read").returns("a message")
 {% endhighlight %}</pre>
-            <p>
-              returns() should be called with one argument.  Do not use returns() if the mocked
-              method should not return anything:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          returns() should be called with one argument.  Do not use returns() if the mocked
+          method should not return anything:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("close")             # ok; mocked close() does not return anything
   socket.expects("close").returns()   # not ok; do not use returns() with no arguments
 {% endhighlight %}</pre>
-            <p>
-              returns() should only be called once per expectation:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          returns() should only be called once per expectation:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("read").returns("a message")           # ok
@@ -382,17 +380,17 @@ mock ->
   socket.expects("read").returns("m1")
   socket.expects("read").returns("m2")                  # not ok; TinyMock cannot handle this
 {% endhighlight %}</pre>
-          <p>
-            returns() and throws() cannot be used on the same expectation:
-          </p>
-          <pre class="code">{% highlight coffeescript %}
+        <p>
+          returns() and throws() cannot be used on the same expectation:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket.expects("read").throws("an error").returns("a message")    # not ok
 {% endhighlight %}</pre>
-            <p>
-              Example:
-            </p>
-            <pre class="code"><span class="dim">chai   = require("chai")
+        <p>
+          Example:
+        </p>
+        <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
 mock   = require("TinyMock")
 Chat   = require("../src/Chat")
@@ -405,38 +403,36 @@ describe "Chat", ->
         socket.expects("read")</span>.returns("Greetings Aristotle!\n")<span class="dim">
         chat = new Chat(socket)
         chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
-          </li>
+      </article>
 
 
-          <!-- throws -->
-          <li>
-            <p class="usage">
-              <a name="throws" href="#throws">throws(error)</a>
-            </p>
-            <p>
-              Specifies the error that a mock method installed by an expectation should throw.  For
-              example, the following creates an expectation for the method read() and that the
-              mock read() installed by the expectation should throw "an error":
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+      <!-- throws -->
+      <article>
+        <h2><a name="throws" href="#throws">throws(error)</a></h2>
+        <p>
+          Specifies the error that a mock method installed by an expectation should throw.  For
+          example, the following creates an expectation for the method read() and that the
+          mock read() installed by the expectation should throw "an error":
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("read").throws(new Error("an error"))
 {% endhighlight %}</pre>
-            <p>
-              throws() should be called with one argument.  Do not use throws() if the mocked
-              method should not throw anything:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          throws() should be called with one argument.  Do not use throws() if the mocked
+          method should not throw anything:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("close")             # ok; mocked close() does not throw anything
   socket.expects("close").throws()    # not ok; do not use throws() with no arguments
 {% endhighlight %}</pre>
-            <p>
-              throws() should only be called once per expectation:
-            </p>
-            <pre class="code">{% highlight coffeescript %}
+        <p>
+          throws() should only be called once per expectation:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket = new Socket()
   socket.expects("read").throws("e")                  # ok
@@ -446,17 +442,17 @@ mock ->
   socket.expects("read").throws("e1")
   socket.expects("read").throws("e2")                 # not ok; TinyMock cannot handle this
 {% endhighlight %}</pre>
-          <p>
-            throws() and returns() cannot be used on the same expectation:
-          </p>
-          <pre class="code">{% highlight coffeescript %}
+        <p>
+          throws() and returns() cannot be used on the same expectation:
+        </p>
+        <pre class="code">{% highlight coffeescript %}
 mock ->
   socket.expects("read").returns("a message").throws("an error")    # not ok
 {% endhighlight %}</pre>
-            <p>
-              Example:
-            </p>
-            <pre class="code"><span class="dim">chai   = require("chai")
+        <p>
+          Example:
+        </p>
+        <pre class="code"><span class="dim">chai   = require("chai")
 should = chai.should()
 mock   = require("TinyMock")
 Chat   = require("../src/Chat")
@@ -469,10 +465,6 @@ describe "Chat", ->
         socket.expects("read")</span>.throws(new Error("socket read error"))<span class="dim">
         chat = new Chat(socket)
         (-> chat.greet("Aristotle") ).should.throw("socket read error\n")</span></pre>
-
-
-          </li>
-        </ul>
       </article>
     </section>
 

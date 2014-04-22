@@ -11,52 +11,78 @@
   </head>
 
   <body class="index">
-    
+
     <nav class="common">
       <ul>
-        <li><a href="index.html">TinyMock</a></li>
+        <li><a href="index.html">TinyMock</a> <span class="version">v0.3.0</span></li>
         <li><a href="installation.html">Installation</a></li>
         <li><a href="tutorial.html">Tutorial</a></li>
         <li><a href="reference.html">Reference</a></li>
         <li><a href="https://github.com/milewgit/TinyMock">Source</a></li>
       </ul>
     </nav>
-      
+
     <section>
       <header>
         <h1>TinyMock</h1>
       </header>
-      
-      <p>
-        TinyMock is a very small <a href="http://coffeescript.org">coffeescript</a>
-        <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework:
-      </p>
-      
-      <pre class="code"><span class="dim">describe "Chat", ->
-  describe "greet(my_name)", ->
-    it "sends a greeting and returns the response", -></span>
-{% highlight coffeescript %}
-      mock (socket) ->
-        socket.expects("write").args("Hello, my name is Aristotle.\n")
-        socket.expects("read").returns("Greetings Aristotle!\n")
-{% endhighlight %}        <span class="dim">chat = new Chat(socket)
-        chat.greet("Aristotle").should.equal("Greetings Aristotle!\n")</span></pre>
 
-      <nav class="index">
-  		  <ul class="h-images">
-  		    <li class="install"><a href="installation.html">Installation</a></li>
-  		    <li class="tutorial"><a href="tutorial.html">Tutorial</a></li>
-  		    <li class="reference"><a href="reference.html">Reference</a></li>
-  		    <li class="source"><a href="https://github.com/milewgit/TinyMock">Source</a></li>
-  		  </ul>
-      </nav>
+      <article>
+        <h2>What</h2>
+        <p>
+          A very small <a href="http://coffeescript.org">coffeescript</a>
+          <a href="http://en.wikipedia.org/wiki/Mock_object">mocking</a> framework.
+        </p>
+      </article>
+
+      <article>
+        <h2>Install</h2>
+        <p>
+          <pre class="code">$ npm install https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.3.0.tgz</pre>
+        </p>
+      </article>
+
+      <article>
+        <h2>Use</h2>
+        <pre class="code"><span class="dim">chai   = require("chai")
+should = chai.should()
+Copier = require("../src/Copier")</span>
+{% highlight coffeescript %}mock   = require("TinyMock"){% endhighlight %}
+<span class="dim">describe "Copier", ->
+      
+  it "copies streams", -></span>{% highlight coffeescript %}
+    mock (mocked_input, mocked_output) ->
+      mocked_input.expects("read").returns("a message in a stream")
+      mocked_output.expects("write").args("a message in a stream"){% endhighlight %}<span class="dim">      Copier.copy_stream(mocked_input, mocked_output)
+
+  it "copies files", -></span>{% highlight coffeescript %}
+    mock ->
+      fs.expects("readFileSync").args("source.txt").returns("a message in a file")
+      fs.expects("writeFileSync").args("target.txt", "a message in a file"){% endhighlight %}<span class="dim">      Copier.copy_file("source.txt", "target.txt")
+      
+  it "throws an error if the source file does not exist", -></span>{% highlight coffeescript %}
+    mock ->
+      fs.expects("readFileSync").args("source.txt").throws(new Error("'unknown.txt' does not exist")){% endhighlight %}<span class="dim">      (-> Copier.copy_file("unknown.txt", "target.txt") ).should.throw("'unknown.txt' does not exist")</span></pre>
+      </article>
+
+      <article>
+        <h2>Further Reading</h2>
+        <nav class="index">
+          <ul class="h-images">
+            <li class="install"><a href="installation.html">Installation</a></li>
+            <li class="tutorial"><a href="tutorial.html">Tutorial</a></li>
+            <li class="reference"><a href="reference.html">Reference</a></li>
+            <li class="source"><a href="https://github.com/milewgit/TinyMock">Source</a></li>
+          </ul>
+        </nav>
+      </article>
     </section>
-    
+
     <footer>
       <article>
         &copy; 2014 milewgit
       </article>
     </footer>
-    
+
   </body>
 </html>

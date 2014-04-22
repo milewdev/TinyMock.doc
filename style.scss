@@ -1,6 +1,14 @@
 @import "reset.css";
 
 
+$general-font-family:         "Optima", sans-serif;
+$header-font-family:          "Palatino", serif;
+$subheader-font-family:       "Palatino", serif;
+$ul-big-dot-font-family:      "Lucida Console", Monaco5, monospace;
+$code-font-family:            monospace;                              /* so that things that should line up do */
+$reference-title-font-family: "Lucida Console", Monaco5, monospace;
+
+
 /*
   The web site consists of only three pages so all styles are kept in this
   one style sheet.  There are a set of common styles and then a set of styles
@@ -11,8 +19,9 @@
 
 /* common styles */
 body {
-  font-family: "Optima", sans-serif;
+  font-family: $general-font-family;
   font-weight: 100;
+  line-height: 1.3em;
   margin: 0 auto;                             /* center the page */
   margin-bottom: 1em;                         /* when scrolling to the bottom of the page, ensure there is a nice gap below the last content of the page */
   width: 800px;                               /* a fixed width page (we are not responsive at this time) */
@@ -27,14 +36,38 @@ body {
     }
   }
 
+  header {
+    text-align: center;                       /* center headers horizontally on the page */
+  }
+  
   /* use the same header styles on all pages */
   h1 {
-    font-family: "Palatino", serif;
+    display: inline-block;                    /* force width to fit so that the image appears immediately to the left */
+    font-family: $header-font-family;
     font-size: 200%;
     font-weight: bold;
     letter-spacing: 0.08em;
     margin-top: 1.5em;
-    margin-bottom: 1em;
+    margin-bottom: 2em;
+    position: relative;                       /* needed so that child h1:before element can use absolute position */
+    
+    &:before {
+      content: "";
+      height: 1.3em;
+      left: -1.8em;
+      position: absolute;                     /* absolutely positioned relative to the associated h1 */
+      top: -0.4em;
+      width: 1.3em;
+    }
+  }
+
+  h2 {
+    color: #996;
+    font-family: $subheader-font-family;
+    font-size: 120%;
+    font-weight: light;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.8em;
     text-align: center;
   }
 
@@ -44,6 +77,7 @@ body {
     margin-left: 2em;                         /* indent the bullets so that they are not up against the left margin */
     margin-right: 2em;                        /* same indent on the right side to keep it balanced */
     margin-top: 0.4em;                        /* set off the list a bit from whatever is above it */
+    text-align: left;
 
     li {
       margin-bottom: 0.4em;                   /* a bit of a gap between list items so that they do not run together */
@@ -70,7 +104,7 @@ body {
         border-radius: 50%;                   /* create a circle */
         color: white;
         content: "";
-        font-family: "Lucida Console", Monaco5, monospace;
+        font-family: $ul-big-dot-font-family;
         font-size: 1.5em;
         height: 1.2em;                        /* need to specify the (same) width and height so that we get a circle, not an oval */
         left: -3em;                           /* put the circles out in the left margin */
@@ -140,6 +174,7 @@ body {
   nav.common {
     ul {
       border-bottom: 1px solid #eee;          /* a fine horizontal line */
+      color: #999;                            /* dim the menu items as they are not the focus of the page */
       margin-top: 0.8em;                      /* gap between top of page and menu item texts */
       margin-bottom: 2em;                     /* gap between the menu and top-of-page content */
       padding-bottom: 0.4em;                  /* space between bottom of menu items and horizontal separator line (bottom border of ul) */
@@ -153,12 +188,16 @@ body {
 
       li:nth-child(1) {                       /* all menu items will be on the right side except the first one */
         float: left;                          /* the first menu item, the home link, on the left */
-        font-weight: bold;                    /* bold the home button; maybe this looks better */
         margin-left: 0em;                     /* first item does not need a left margin, so counter-act margin-left: 2em in li {} above */
       }
 
       a, a:link, a:hover, a:visited, a:active {
-        color: #999;                          /* dim the menu items as they are not the focus of the page */
+        color: inherit;
+      }
+
+      .version {
+        font-size: 70%;
+        margin-left: 0.4em;
       }
     }
   }
@@ -167,7 +206,7 @@ body {
   pre.code {
     border: 1px solid #ddd;                   /* a delicately raised box with a whisper of shadow */
     box-shadow: 0px 0px 6px #eee;
-    font-family: monospace;                   /* needed so that things that should line up do */
+    font-family: $code-font-family;
     font-size: 90%;
     line-height: 1.3;                         /* make it a bit easier to read */
     margin-top: 0.8em;                        /* a nice gap above and below the border+shadow */
@@ -200,32 +239,23 @@ body {
 
 
 /* index.html styles */
-/* This is the home page; it is sparse and everything is bigger than the rest of the site to make things stand out */
 body.index {
-  text-align: center;                         /* horizontally center all main content on the home page */
+  text-align: center;                         /* horizontally center all main content on the page */
 
-  /* could also use an article or a div instead of section; just separates main content from header menu and footer copyright */
-  section {
-
-    /* allows us to increase white space for text on the home page */
-    p {
-      margin-top: 3em;
-      margin-bottom: 1em;
-    }
-
-    /* increase the size of the code sample on the home page */
+  article {
+    margin-bottom: 3em;                       /* leave lots of space so that it does not look crowded */
+  
     pre.code {
-      font-size: 120%;                        /* make it a bit bigger as it's on the home page and the focus of attention */
       margin: 0 auto;                         /* center the pre box on the page */
-      width: 85%;                             /* fit it's width to the code it displays */
+      display: inline-block;                  /* so that the width adjusts to fit its contents */
     }
   }
 
   /* navigation links that are part of the main page content */
   nav.index {
     ul.h-images {
-      margin-top: 5em;                        /* lots of space on the sparse home page */
-      margin-left: 3em;                       /* some things you just have to center by eye */
+      margin-top: 2.6em;                      /* adjusted by eye */
+      margin-left: 3em;                       /* adjusted by eye */
 
       /* the images to use for the list bullets; each bullet has its own image */
       li {
@@ -259,27 +289,22 @@ body.index {
 
 /* installation.html styles */
 body.installation {
+  text-align: center;                         /* horizontally center all main content on the page */
+
+  h1:before {
+    content: url("install.svg");
+  }
+  
   article {
-    margin-bottom: 2em;                       /* some extra space between installation options */
-    margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
-
-    /* the images to use for the list bullets; each bullet has its own image */
-    ul.v-images > li {
-      &.requirements:before {
-        content: url("check.svg");
-      }
-
-      &.command-prompt:before {
-        content: url("command-prompt.svg");
-      }
-
-      &.package:before {
-        content: url("package.svg");
-      }
-
-      &.uninstall:before {
-        content: url("garbage-can.svg");
-      }
+    margin-bottom: 3em;                       /* some extra space between installation options */
+    
+    ul.standard {
+      display: inline-block;                  /* so that the width adjusts to fit its contents */
+    }
+  
+    pre.code {
+      margin: 0 auto;                         /* center the pre box on the page */
+      display: inline-block;                  /* so that the width adjusts to fit its contents */
     }
   }
 }
@@ -287,6 +312,10 @@ body.installation {
 
 /* tutorial.html styles */
 body.tutorial {
+  h1:before {
+    content: url("tutorial.svg");
+  }
+  
   article {
     margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
 
@@ -301,34 +330,59 @@ body.tutorial {
 
 /* reference.html styles */
 body.reference {
-  article {
-    margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
-
-    ul.v-images {
+  h1:before {
+    content: url("book.svg");
+  }
+  
+  nav.referencelinks {
+    margin-bottom: 3em;                       /* puts some space below the list so that it stands out */
+    text-align: center;                       /* center the list horizontally */
+    
+    ul {
+      list-style-type: none;                  /* no bullets */
+      
       li {
-        margin-bottom: 3em;                   /* allow lots of space between reference items */
-
-        &:before {
-          content: url("book.svg");           /* the image to use for the list bullets; all bullets have the same image */
-        }
-
-        p {
-          margin-top: 1em;                    /* a bit of space between paragraphs */
-        }
-
-        /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */
-        p.usage {
-          font-family: "Lucida Console", Monaco5, monospace;
-          font-size: 110%;
-          font-weight: bold;
-          margin-bottom: 1em;
-
-          /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */
-          a, a:link, a:hover, a:visited, a:active {
-            color: inherit;
-          }
-        }
+        display: inline-block;                /* list links horizontally */
+        margin-left: 1em;                     /* spread the items out horizontally */
+        margin-right: 1em;
       }
     }
+  }
+  
+  article {
+    border-top: 1px solid #eee;
+    margin-top: 2em;
+    margin-bottom: 4em;
+    padding-top: 3em;
+    padding-left: 1.6em;
+    padding-right: 1.6em;
+    
+    h2 {
+      margin-bottom: 2em;
+    }
+  
+    p {
+      margin-top: 1em;                        /* a bit of space between paragraphs */
+    }
+    
+    p.error {
+      font-size: 90%;
+      font-style: italic;
+      margin-left: 5em;
+      margin-right: 5em;
+    }
+
+    /* make the title, which is the usage (e.g. args(arg [, arg, ...]) ), stand out */
+    p.usage {
+      font-family: $reference-title-font-family;
+      font-size: 110%;
+      font-weight: bold;
+      margin-bottom: 1em;
+    }
+  }
+
+  /* the title links to itself to make it easy to save links to a particular item, but leaving the link text in the link color looks a bit garish */
+  a, a:link, a:hover, a:visited, a:active {
+    color: inherit;
   }
 }
