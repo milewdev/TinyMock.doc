@@ -10,7 +10,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   select_box                      config
   configure_provider              config
   setup_synced_folders            config  # easy way to copy gpg keys and git config from host to vm
-  install_osx_command_line_tools  config  # needed by git
   install_gpg                     config  # needed in order to sign git commits
   install_git                     config  # source is on github
   install_git_gui                 config  # sometimes gui diff is handy
@@ -36,15 +35,6 @@ end
 
 def setup_synced_folders(config)
   config.vm.synced_folder "~/", "/.vagrant_host_home"
-end
-
-
-def install_osx_command_line_tools(config)
-  say config, "Installing OS X command line tools"
-  install_dmg config, 
-    'https://s3.amazonaws.com/OHSNAP/command_line_tools_os_x_mavericks_for_xcode__late_october_2013.dmg', 
-    'Command Line Developer Tools',
-    'Command Line Tools (OS X 10.9).pkg'
 end
 
 
