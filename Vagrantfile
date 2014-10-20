@@ -1,134 +1,53 @@
-VM_NAME                           = "TinyMock.doc"
-VAGRANTFILE_API_VERSION           = "2"
-PROJECT_SCC_URL                   = "https://github.com/milewgit/TinyMock.doc.git"
-PROJECT_VM_PATH                   = "/Users/vagrant/Documents/TinyMock.doc"
-PROVIDER                          = "vmware_fusion"
-BOX                               = "OSX109"
+#
+# Vagrantfile to create milewdev.github.io development environment.
+#
 
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  select_box                      config
-  configure_provider              config
-  setup_synced_folders            config  # easy way to copy gpg keys and git config from host to vm
-  install_gpg                     config  # needed in order to sign git commits
-  install_git                     config  # source is on github
-  install_git_gui                 config  # sometimes gui diff is handy
-  install_node                    config
-  install_editor                  config
-  install_project                 config
-  reboot                          config
-end
+VAGRANTFILE_API_VERSION   = "2"
+BOX                       = "OSX109"
+PROVIDER_NAME             = "vmware_fusion"
+PROJECT_NAME              = "TinyMock.doc"
+VM_NAME                   = PROJECT_NAME
+PROJECT_GITHUB_URL        = "https://github.com/milewdev/#{PROJECT_NAME}.git"
+PROJECT_VM_DIR            = "/Users/vagrant/Documents/#{PROJECT_NAME}"
+PROVISIONER_URL           = "https://raw.githubusercontent.com/milewdev/vm-provisioner/v2/Provisioner.rb"
 
 
-def select_box(config)
-  config.vm.box = BOX
-end
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |vagrant_config|
 
+  vagrant_config.vm.box = BOX
 
-def configure_provider(config)
-  config.vm.provider(PROVIDER) do |vb|
+  vagrant_config.vm.provider(PROVIDER_NAME) do |vb|
     vb.name = VM_NAME
     vb.gui = true
   end
+
+  with vagrant_config do
+    install_atom
+    install_iterm2
+    install_gpg                                         # needed to sign git commits
+    install_git                                         # source is on github
+    install_github_for_mac
+    install_homebrew                                    # needed to install ruby
+    install_ruby '2.1.2'
+    install_bundler
+    install_node
+    git_clone PROJECT_GITHUB_URL, PROJECT_VM_DIR
+    cd PROJECT_VM_DIR do
+      bundle_install
+      # npm_install
+    end
+    add_to_path "#{PROJECT_VM_DIR}/node_modules/.bin"
+    reboot_vm
+  end
+
 end
 
 
-def setup_synced_folders(config)
-  config.vm.synced_folder "~/", "/.vagrant_host_home"
-end
-
-
-def install_gpg(config)  
-  say config, "Installing gpg, gpg-agent, and copying gpg keys from vm host"
-  install_dmg config,
-    'https://releases.gpgtools.org/GPG%20Suite%20-%202013.10.22.dmg',
-    'GPG Suite', 
-    'Install.pkg'
-  run_script config, <<-'EOF'
-    sudo rm -rf /Users/vagrant/.gnupg
-    sudo rsync -r --exclude '.gnupg/S.gpg-agent' /.vagrant_host_home/.gnupg /Users/vagrant
-    sudo chown -R vagrant /Users/vagrant/.gnupg
-  EOF
-end
-
-
-def install_git(config)
-  say config, "Installing git and copying .gitconfig from vm host"
-  install_dmg config,
-    'https://git-osx-installer.googlecode.com/files/git-1.8.4.2-intel-universal-snow-leopard.dmg',
-    'Git 1.8.4.2 Snow Leopard Intel Universal',
-    'git-1.8.4.2-intel-universal-snow-leopard.pkg'
-  run_script config, "cp /.vagrant_host_home/.gitconfig /Users/vagrant/.gitconfig"
-end
-
-
-def install_git_gui(config)
-  say config, "Installing GitHub for Mac"
-  run_script config, "curl -fsSL https://central.github.com/mac/latest | sudo tar -x -C /Applications -f -"
-end
-
-
-def install_node(config)
-  say config, "Installing nodejs"
-  install_pkg config, 'http://nodejs.org/dist/v0.10.26/node-v0.10.26.pkg'
-end
-
-
-def install_editor(config)
-  say config, "Installing editor (TextMate)"
-  run_script config, "curl -fsSL https://api.textmate.org/downloads/release | sudo tar -x -C /Applications -f -"
-end
-
-
-def install_project(config)
-  say config, "Installing project sources and dependencies"
-  run_script config, <<-"EOF"
-    git clone #{PROJECT_SCC_URL} #{PROJECT_VM_PATH}
-    cd #{PROJECT_VM_PATH}
-    sudo gem install bundler
-    sudo bundle install
-  EOF
-end
-
-
-def reboot(config)
-  say config, "Rebooting"
-  run_script config, "sudo reboot"
-end
-
-
-def install_dmg(config, url, path, pkg)
-  path = '/Volumes/' + escape_shell_special_chars(path)
-  pkg = escape_shell_special_chars(pkg)
-  run_script config, <<-"EOF"
-    curl -o vm_install.dmg #{url}
-    hdiutil attach vm_install.dmg
-    sudo installer -pkg #{path}/#{pkg} -target /
-    hdiutil detach #{path}
-    rm -f vm_install.dmg
-  EOF
-end
-
-
-def install_pkg(config, url)
-  run_script config, <<-"EOF"
-    curl -o vm_install.pkg #{url}
-    sudo installer -pkg vm_install.pkg -target /
-    rm -f vm_install.pkg
-  EOF
-end
-
-
-def escape_shell_special_chars(string)
-  string.gsub(/([ ()])/, '\\\\\1')        # "my product (v1)" => "my\ product\ \(v1\)"
-end
-
-
-def say(config, message)
-  run_script config, "echo '--------------- #{message} ---------------'"
-end
-
-
-def run_script(config, script)
-  config.vm.provision :shell, privileged: false, inline: script
+def with(vagrant_config, &block)
+  require "open-uri"
+  File.write "Provisioner.rb", open(PROVISIONER_URL).read
+  require_relative "Provisioner"
+  Provisioner.provision(vagrant_config, &block)
+  File.delete "Provisioner.rb"
 end
