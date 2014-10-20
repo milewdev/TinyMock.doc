@@ -1,5 +1,5 @@
 #
-# Vagrantfile to create milewdev.github.io development environment.
+# Vagrantfile to create TinyMock.doc development environment.
 #
 
 
