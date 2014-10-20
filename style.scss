@@ -39,7 +39,7 @@ body {
   header {
     text-align: center;                       /* center headers horizontally on the page */
   }
-  
+
   /* use the same header styles on all pages */
   h1 {
     display: inline-block;                    /* force width to fit so that the image appears immediately to the left */
@@ -50,7 +50,7 @@ body {
     margin-top: 1.5em;
     margin-bottom: 2em;
     position: relative;                       /* needed so that child h1:before element can use absolute position */
-    
+
     &:before {
       content: "";
       height: 1.3em;
@@ -244,7 +244,7 @@ body.index {
 
   article {
     margin-bottom: 3em;                       /* leave lots of space so that it does not look crowded */
-  
+
     pre.code {
       margin: 0 auto;                         /* center the pre box on the page */
       display: inline-block;                  /* so that the width adjusts to fit its contents */
@@ -266,7 +266,7 @@ body.index {
         }
 
         &.tutorial:before {
-          content: url("tutorial.svg");
+          content: url("tutorial_.svg");
         }
 
         &.reference:before {
@@ -294,14 +294,14 @@ body.installation {
   h1:before {
     content: url("install.svg");
   }
-  
+
   article {
     margin-bottom: 3em;                       /* some extra space between installation options */
-    
+
     ul.standard {
       display: inline-block;                  /* so that the width adjusts to fit its contents */
     }
-  
+
     pre.code {
       margin: 0 auto;                         /* center the pre box on the page */
       display: inline-block;                  /* so that the width adjusts to fit its contents */
@@ -310,12 +310,12 @@ body.installation {
 }
 
 
-/* tutorial.html styles */
+/* tutorial_.html styles */
 body.tutorial {
   h1:before {
-    content: url("tutorial.svg");
+    content: url("tutorial_.svg");
   }
-  
+
   article {
     margin-left: 4.5em;                       /* keep the bullets from going beyond the left page margin */
 
@@ -333,14 +333,14 @@ body.reference {
   h1:before {
     content: url("book.svg");
   }
-  
+
   nav.referencelinks {
     margin-bottom: 3em;                       /* puts some space below the list so that it stands out */
     text-align: center;                       /* center the list horizontally */
-    
+
     ul {
       list-style-type: none;                  /* no bullets */
-      
+
       li {
         display: inline-block;                /* list links horizontally */
         margin-left: 1em;                     /* spread the items out horizontally */
@@ -348,7 +348,7 @@ body.reference {
       }
     }
   }
-  
+
   article {
     border-top: 1px solid #eee;
     margin-top: 2em;
@@ -356,15 +356,15 @@ body.reference {
     padding-top: 0.6em;
     padding-left: 1.6em;
     padding-right: 1.6em;
-    
+
     h2 {
       margin-bottom: 2em;
     }
-  
+
     p {
       margin-top: 1em;                        /* a bit of space between paragraphs */
     }
-    
+
     p.error {
       font-size: 90%;
       font-style: italic;
