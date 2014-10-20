@@ -262,7 +262,7 @@ body.index {
         body.index nav.index ul.h-images li.install:before {
           content: url("install.svg"); }
         body.index nav.index ul.h-images li.tutorial:before {
-          content: url("tutorial_.svg"); }
+          content: url("tutorl.svg"); }
         body.index nav.index ul.h-images li.reference:before {
           content: url("book.svg"); }
         body.index nav.index ul.h-images li.source:before {
@@ -288,9 +288,9 @@ body.installation {
       display: inline-block;
       /* so that the width adjusts to fit its contents */ }
 
-/* tutorial_.html styles */
+/* tutorl.html styles */
 body.tutorial h1:before {
-  content: url("tutorial_.svg"); }
+  content: url("tutorl.svg"); }
 body.tutorial article {
   margin-left: 4.5em;
   /* keep the bullets from going beyond the left page margin */ }

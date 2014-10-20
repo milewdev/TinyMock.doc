@@ -266,7 +266,7 @@ body.index {
         }
 
         &.tutorial:before {
-          content: url("tutorial_.svg");
+          content: url("tutorl.svg");
         }
 
         &.reference:before {
@@ -310,10 +310,10 @@ body.installation {
 }
 
 
-/* tutorial_.html styles */
+/* tutorl.html styles */
 body.tutorial {
   h1:before {
-    content: url("tutorial_.svg");
+    content: url("tutorl.svg");
   }
 
   article {
