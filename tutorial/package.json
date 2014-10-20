@@ -9,6 +9,6 @@
     "mocha": "*",
     "chai": "*",
     "coffee-script": "~1.6",
-    "TinyMock": "https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.3.0.tgz"
+    "TinyMock": "https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.4.0.tgz"
   }
 }

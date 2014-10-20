@@ -14,7 +14,7 @@
 
     <nav class="common">
       <ul>
-        <li><a href="index.html">TinyMock</a> <span class="version">v0.3.0</span></li>
+        <li><a href="index.html">TinyMock</a> <span class="version">v0.4.0</span></li>
         <li><a href="installation.html">Installation</a></li>
         <li><a href="tutorial.html">Tutorial</a></li>
         <li><a href="reference.html">Reference</a></li>
@@ -38,7 +38,7 @@
       <article>
         <h2>Install</h2>
         <p>
-          <pre class="code">$ npm install https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.3.0.tgz</pre>
+          <pre class="code">$ npm install https://github.com/milewgit/TinyMock/raw/master/TinyMock-0.4.0.tgz</pre>
         </p>
       </article>
 
@@ -49,7 +49,7 @@ should = chai.should()
 Copier = require("../src/Copier")</span>
 {% highlight coffeescript %}mock   = require("TinyMock"){% endhighlight %}
 <span class="dim">describe "Copier", ->
-      
+
   it "copies streams", -></span>{% highlight coffeescript %}
     mock (mocked_input, mocked_output) ->
       mocked_input.expects("read").returns("a message in a stream")
@@ -59,7 +59,7 @@ Copier = require("../src/Copier")</span>
     mock ->
       fs.expects("readFileSync").args("source.txt").returns("a message in a file")
       fs.expects("writeFileSync").args("target.txt", "a message in a file"){% endhighlight %}<span class="dim">      Copier.copy_file("source.txt", "target.txt")
-      
+
   it "throws an error if the source file does not exist", -></span>{% highlight coffeescript %}
     mock ->
       fs.expects("readFileSync").args("source.txt").throws(new Error("'unknown.txt' does not exist")){% endhighlight %}<span class="dim">      (-> Copier.copy_file("unknown.txt", "target.txt") ).should.throw("'unknown.txt' does not exist")</span></pre>
