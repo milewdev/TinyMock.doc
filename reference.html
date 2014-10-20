@@ -18,7 +18,7 @@
         <li><a href="installation.html">Installation</a></li>
         <li><a href="tutorial.html">Tutorial</a></li>
         <li><a href="reference.html">Reference</a></li>
-        <li><a href="https://github.com/milewgit/TinyMock">Source</a></li>
+        <li><a href="https://github.com/milewdev/TinyMock">Source</a></li>
       </ul>
     </nav>
 
@@ -26,7 +26,7 @@
       <header>
         <h1>Reference</h1>
       </header>
-      
+
       <!-- links -->
       <nav class="referencelinks">
         <ul>
@@ -215,11 +215,11 @@ describe "Chat", ->
 mock ->                                     # callback function
   fs.expects("appendFileSync")              # set an expectation
   ...
-  
+
 mock mock_count: 100, (books...) ->         # the number of mock objects to create (default is 5)
   book.expects("rate") for book in books
   ...
-  
+
 mock expects_method_name: "expects2", ->    # use a different name for expects()
   obj = new MyClass()
   obj.expects2("start")
@@ -289,7 +289,7 @@ mock mock_count: 101, (cat, dogs...) ->
 class MyClass
   start:   -> "something"
   expects: -> "anything"
-  
+
 mock expects_method_name: "expects2", ->    # use expects2() instead of expects() ...
   obj = new MyClass()
   obj.expects2("start")                     # ... because MyClass already has an expects() method
@@ -302,7 +302,7 @@ mock expects_method_name: "expects2", ->    # use expects2() instead of expects(
 # this is correct
 mock (m1) ->
   ...
-  
+
 # but this is not
 mock(m1) ->
   ...
@@ -470,7 +470,7 @@ describe "Chat", ->
 
     <footer>
       <article>
-        &copy; 2014 milewgit
+        &copy; 2014 Michael Lewandowski
       </article>
     </footer>
 
