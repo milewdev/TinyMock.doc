@@ -51,8 +51,7 @@ Copier = require("../src/Copier")</span>
 <span class="dim">describe "Copier", ->
 
   it "copies streams", -></span>{% highlight coffeescript %}
-
-    mock (mocked_input, mocked_output) ->
+{% raw %}    {% endraw %}mock (mocked_input, mocked_output) ->
       mocked_input.expects("read").returns("a message in a stream")
       mocked_output.expects("write").args("a message in a stream"){% endhighlight %}<span class="dim">      Copier.copy_stream(mocked_input, mocked_output)
 
